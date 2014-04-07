@@ -1,5 +1,6 @@
 FamilyTreeAnalyzer::Application.routes.draw do
-  get "static_pages/home"
+  match '/', to: 'static_pages#home', via: 'get'
+  
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
