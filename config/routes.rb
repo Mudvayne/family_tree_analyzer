@@ -1,6 +1,5 @@
 FamilyTreeAnalyzer::Application.routes.draw do
   match '/', to: 'static_pages#home', via: 'get'
-  match '/dashboard', to: 'static_pages#dashboard', via: 'get'
   
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

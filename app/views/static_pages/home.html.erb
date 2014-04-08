@@ -1,14 +1,25 @@
-<div class="center hero-unit">
-  <h1>Welcome to a </h1>
-  <h1>Family Tree Analyzer </h1>
-
-  <h2>
-	You can upload a 
-	<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
-	and analyze your family tree! 
-  </h2>
-
-  <%= link_to "Sign up", new_user_registration_path, class: "btn btn-large btn-primary" %>
+<% if !user_signed_in? %>
+	<div class="center hero-unit">
+	  	<h1>Welcome to a </h1>
+	  	<h1>Family Tree Analyzer </h1>
+	  	<h2>
+			You can upload a 
+			<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
+			and analyze your family tree! 
+	  	</h2>
+		<%= link_to "Sign up", new_user_registration_path, class: "btn btn-large btn-primary" %>
+	</div>
+<% else %>
+	<div align="right"> 
+		Logged in as <strong><%= current_user.email %></strong>
+	</div>
+	<div class="center hero-unit">
+		<h1> Dashboard </h1>
+		<h2>
+			Here you can upload a 
+			<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
+			and analyze your family tree! 
+		</h2>
 </div>
-
+<% end %>
 <%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
