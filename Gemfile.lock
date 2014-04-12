@@ -34,9 +34,9 @@ GEM
     arel (4.0.2)
     bcrypt (3.1.7-x86-mingw32)
     bcrypt-ruby (3.1.2-x86-mingw32)
-    bootstrap-sass (2.3.2.0)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
-    bootstrap-will_paginate (0.0.9)
+    bootstrap-will_paginate (0.0.10)
       will_paginate
     builder (3.1.4)
     capybara (2.1.0)
@@ -185,8 +185,8 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt-ruby (= 3.1.2)
-  bootstrap-sass (= 2.3.2.0)
-  bootstrap-will_paginate (= 0.0.9)
+  bootstrap-sass
+  bootstrap-will_paginate
   capybara (= 2.1.0)
   coffee-rails (~> 4.0.0)
   cucumber-rails (= 1.4.0)

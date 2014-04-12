@@ -2,53 +2,20 @@
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
-
 /* universal */
 
-html {
-  overflow-y: scroll;
-}
-
 body {
-  padding-top: 60px;
-}
-
-section {
-  overflow: auto;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.center {
-  text-align: center;
-  h1 {
-    margin-bottom: 10px;
-  }
+  padding-top: 60px; /* caused by bootstrap navbar */
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* typography */
-
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
 
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
-}
-
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: $grayLight;
 }
 
 p {
@@ -58,6 +25,13 @@ p {
 
 
 /* header */
+
+.navbar-inverse .navbar-brand {
+  color: #ddd;
+  font-weight: bold;
+  padding-left: 0;
+  text-transform: uppercase;
+}
 
 #logo {
   float: left;
@@ -80,12 +54,12 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  border-top: 1px solid $gray-lighter;
+  color: $gray-light;
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
+      color: $gray-darker;
     }
   }
   small {
