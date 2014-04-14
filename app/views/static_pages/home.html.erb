@@ -20,9 +20,20 @@
 	</h1>
 
 	<div class="jumbotron">
-		<p class="text-left">Add a new GEDCOM-file</p>
-		<button type="submit" class="btn btn-lg btn-primary">Add a GEDCOM-file</button>
+		<%#= form_tag({action: :select_tree}, multipart: true) do %>
+			<p class="text-left">Analyze your tree</p>
+			<%#= select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
+			<button type="submit" class="btn btn-lg btn-primary">Add a GEDCOM-file</button>
+		<%# end %>
+	</div>
+	
+	<div class="jumbotron">
+		<%#= form_for @gedcomfile do |f| %>
+			<p class="text-left">Add a new GEDCOM-file</p>
+			<%#= f.file_field :data %>
+			<input type="file" name="file">
+			<button type="submit" class="btn btn-lg btn-primary">Add a GEDCOM-file</button>
+		<%# end %>
 	</div>
 <% end %>
 </div>
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
