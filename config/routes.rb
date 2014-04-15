@@ -1,5 +1,6 @@
 FamilyTreeAnalyzer::Application.routes.draw do
   match '/', to: 'static_pages#home', via: 'get'
+  match '/filters', to: 'static_pages#filters', via: 'get'
   post '/upload' => 'static_pages#upload'
   get '/select_tree' => 'static_pages#select_tree'
   devise_for :users

@@ -3,6 +3,9 @@ class StaticPagesController < ApplicationController
 		@gedcomfile = GedcomFile.new
 	end
 
+	def filters
+	end
+
 	def select_tree
 	end
 

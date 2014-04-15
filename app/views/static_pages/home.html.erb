@@ -1,39 +1,35 @@
 <div class="text-center">
-<% if !user_signed_in? %>
-	<div class="jumbotron">
-	  	<h1>Welcome to a Family Tree Analyzer </h1>
-	  	<p class="text-muted">
-			You can upload a 
-			<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
-			and analyze your family tree! 
-	  	</p>
-		<%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-	</div>
-<% else %>
-	<h1>Dashboard
-		<br />
-		<small>
-		Here you can upload a 
-		<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
-		and analyze your family tree!
-		</small>
-	</h1>
+	<% if !user_signed_in? %>
+		<div class="jumbotron">
+		  	<h1>Welcome to a Family Tree Analyzer </h1>
+		  	<p class="text-muted">
+				You can upload a 
+				<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
+				and analyze your family tree! 
+		  	</p>
+			<%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+		</div>
+	<% else %>
+		<h1>Dashboard
+			<br />
+			<small>
+				Here you can upload a 
+				<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
+				and analyze your family tree!
+			</small>
+		</h1>
 
-	<div class="jumbotron">
-		<%#= form_tag({action: :select_tree}, multipart: true) do %>
-			<p class="text-left">Analyze your tree</p>
-			<%#= select("post", "person_id", Person.all.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
-			<button type="submit" class="btn btn-lg btn-primary">Add a GEDCOM-file</button>
-		<%# end %>
-	</div>
-	
-	<div class="jumbotron">
-		<%#= form_for @gedcomfile do |f| %>
-			<p class="text-left">Add a new GEDCOM-file</p>
-			<%#= f.file_field :data %>
-			<input type="file" name="file">
-			<button type="submit" class="btn btn-lg btn-primary">Add a GEDCOM-file</button>
-		<%# end %>
-	</div>
-<% end %>
+		<h3>
+			Add a new GEDCOM-file
+		</h3>
+		
+		<input type="file" name="file"> 
+		<button type="submit" class="btn btn-lg btn-primary">upload</button>
+
+		<h3>
+			Analyze your Tree
+		</h3>
+
+		<button type="submit" class="btn btn-lg btn-primary">go!</button>
+	<% end %>
 </div>
