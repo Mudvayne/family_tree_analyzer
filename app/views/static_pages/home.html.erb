@@ -1,8 +1,8 @@
 <div class="text-center">
 	<% if !user_signed_in? %>
 		<div class="jumbotron">
-		  	<h1>Welcome to a Family Tree Analyzer </h1>
-		  	<p class="text-muted">
+				<h1>Welcome to a Family Tree Analyzer </h1>
+				<p class="text-muted">
 				You can upload a 
 				<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
 				and analyze your family tree! 
@@ -18,18 +18,23 @@
 				and analyze your family tree!
 			</small>
 		</h1>
-
-		<h3>
-			Add a new GEDCOM-file
-		</h3>
-		
-		<input type="file" name="file"> 
-		<button type="submit" class="btn btn-lg btn-primary">upload</button>
-
-		<h3>
-			Analyze your Tree
-		</h3>
-
-		<button type="submit" class="btn btn-lg btn-primary">go!</button>
+		<div class="jumbotron">
+			<div class="row">
+				<div class="col-md-6">
+					<p>Upload a family Tree</p>
+					<span class="btn btn-default btn-file">
+    				Browse <input type="file">
+					</span>
+					<button type="submit" class="btn btn-success">Upload</button>
+				</div>
+				<div class="col-md-6">
+					<p>Select a tree for analysis</p>
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select a Tree <span class="caret"></span></button>
+						<ul class="dropdown-menu" role="menu">
+						</ul>
+						<button type="submit" class="btn btn-success">Go</button>
+				</div>
+			</div>
+		</div>		
 	<% end %>
 </div>
