@@ -1,14 +1,10 @@
 <div class="text-center">
-	<h1>Filters
-		<br />
-		<small>
-			Filter your family tree!
-		</small>
-	</h1>
+	<h1>Filter your family tree!</h1>
 	<div class="jumbotron">
 		<div class="row">
 			<div class="col-md-4">
-				<div style="height: 452px; overflow: auto">
+				<h3>Persons not for analysis</h3>
+				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
 						<li class="list-group-item">Person</li>
 						<li class="list-group-item">Person</li>
@@ -39,37 +35,103 @@
 				# persons filtered: 142
 			</div>
 			<div class="col-md-4">
-				<div style="height: 452px; overflow: auto">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							Select a Filter <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a class="firstname" href="#">First name</a></li>
-							<li><a class="lastname" href="#">Last name</a></li>
-							<li><a class="occupation" href="#">Occupation</a></li>
-							<li><a class="location_birth" href="#">Location: Birth</a></li>
-							<li><a class="location_marriage" href="#">Location: Marriage</a></li>
-							<li><a class="location_death" href="#">Location: Death</a></li>
-							<li><a class="location_burial" href="#">Location: Burial</a></li>
-							<li><a class="time_birth" href="#">Time: Birth</a></li>
-							<li><a class="time_marriage" href="#">Time: Marriage</a></li>
-							<li><a class="time_death" href="#">Time: Death</a></li>
-							<li><a class="time_burial" href="#">Time: Burial</a></li>
-							<li><a class="relatives" href="#">Relatives </a></li>
-						</ul>
-					</div>
-					<br />
-					<div class="dynamic_content"></div>
-					<br />
-					<button type="button" class="btn btn-success">+</button>
-					<br />
-					<br />
-					<button type="button" class="btn btn-default">Add filter</button>
+				<div class="row">
+					<h3>Filter</h3>
+					<form class="form-inline filters">
+						<div class="input-group">
+							<span class="input-group-addon bordered height-35px">
+							<input type="radio">
+							</span>
+							<span class="input-group-addon">
+							All
+							</span>
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">
+							Firstname
+							</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Lastname</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Occupation</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Location: Birth</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Location: Marriage</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Location: Death</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Location: Burial</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Time: Birth</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Time: Marriage</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Time: Death</span>
+							<input type="text" class="form-control">
+						</div>
+						<div class="input-group">
+							<span class="input-group-addon">
+							<input type="checkbox" disabled>
+							</span>
+							<span class="input-group-addon no-border-right">Time: Burial</span>
+							<input type="text" class="form-control">
+						</div>
+					</form>
+					<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
+					<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
 				</div>
 			</div>
-
 			<div class="col-md-4">
+				<h3>Persons for analysis</h3>
 				<div style="height: 452px; overflow: auto">
 					<ul class="list-group">
 						<li class="list-group-item">Filter</li>

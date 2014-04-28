@@ -1,7 +1,5 @@
 class StaticPagesController < ApplicationController
 	def home
-		@gedcomfile = GedcomFile.new
-		puts "test"
 	end
 
 	def filters
@@ -11,14 +9,14 @@ class StaticPagesController < ApplicationController
 	end
 
 	def upload
-		#@gedcomfile.read_data(post_params["file"])
-		#@gedcomfile.save
-		#render :nothing => true
-		puts "test"
+		#gedcomfile = GedcomFile.new(post_params)
+		#puts post_params.path
+		#Gedcom.file()
+		#gedcomfile.save
+		render :nothing => true
 	end
 
 	def post_params
-		allow = [:data, :filename]
-		params.require(:file).permit(allow)
+		params.require(:gedcomfile).permit(:filename, :data)
 	end
 end

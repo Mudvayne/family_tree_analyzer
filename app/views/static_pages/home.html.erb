@@ -21,18 +21,27 @@
 		<div class="jumbotron">
 			<div class="row">
 				<div class="col-md-6">
-					<p>Upload a family Tree</p>
-					<span class="btn btn-default btn-file">
-    				Browse <input type="file">
-					</span>
-					<button type="submit" class="btn btn-success">Upload</button>
+					<%= form_for :gedcomfile, :url => upload_path do |f| %>
+						<p>Upload a family Tree</p>
+						<div class="align-block-to-button">
+							<div class="form-group">
+								<%= f.file_field :data, :id => "file" %>
+							</div>
+							<div class="form-group">
+								<%= f.text_field :filename, :id => "family-name", :class => "form-control pull-left", :placeholder=>"Family name" %>
+							</div>
+						</div>
+						<button id="upload" disabled type="submit" class="btn btn-success">Upload</button>
+					<% end %>
 				</div>
 				<div class="col-md-6">
 					<p>Select a tree for analysis</p>
-					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select a Tree <span class="caret"></span></button>
-						<ul class="dropdown-menu" role="menu">
-						</ul>
-						<button type="submit" class="btn btn-success">Go</button>
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select a Tree <span class="caret"></span></button>
+							<ul class="dropdown-menu" role="menu">
+							</ul>
+					</div>
+					<button type="submit" class="btn btn-success">Go</button>
 				</div>
 			</div>
 		</div>		
