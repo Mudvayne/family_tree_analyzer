@@ -1,8 +1,23 @@
+require './lib/gedcom'
+
 class StaticPagesController < ApplicationController
 	def home
 	end
 
 	def filters
+		persons = 0
+		fams = 0
+		parser = GEDCOM::Parser.new do
+		  before "INDI" do
+		    persons += 1
+		  end
+		  before "FAM" do
+    		fams += 1
+  		end
+		end
+		parser.parse "./royal.ged"
+		@individuals = persons
+		@families = fams
 	end
 
 	def select_tree
