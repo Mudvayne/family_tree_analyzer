@@ -1,0 +1,97 @@
+<div class="text-center">
+	<h1>Filters
+		<br />
+		<small>
+			Filter your family tree!
+		</small>
+	</h1>
+	<div class="jumbotron">
+		<div class="row">
+			<div class="col-md-4">
+				<div style="height: 452px; overflow: auto">
+					<ul class="list-group">
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+						<li class="list-group-item">Person</li>
+					</ul>
+				</div>
+				<br />
+				# persons in tree: 123
+				<br />
+				# persons filtered: 142
+			</div>
+			<div class="col-md-4">
+				<div style="height: 452px; overflow: auto">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							Select a Filter <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu" data-no-turbolink>
+							<li><a class="firstname" href="#">First name</a></li>
+							<li><a class="lastname" href="#">Last name</a></li>
+							<li><a class="occupation" href="#">Occupation</a></li>
+							<li><a class="location_birth" href="#">Location: Birth</a></li>
+							<li><a class="location_marriage" href="#">Location: Marriage</a></li>
+							<li><a class="location_death" href="#">Location: Death</a></li>
+							<li><a class="location_burial" href="#">Location: Burial</a></li>
+							<li><a class="time_birth" href="#">Time: Birth</a></li>
+							<li><a class="time_marriage" href="#">Time: Marriage</a></li>
+							<li><a class="time_death" href="#">Time: Death</a></li>
+							<li><a class="time_burial" href="#">Time: Burial</a></li>
+							<li><a class="relatives" href="#">Relatives </a></li>
+						</ul>
+					</div>
+					<br />
+
+
+					<div class="divfirstname">  
+
+						first
+
+					</div>
+
+					<div class="divlastname">  
+
+						last
+
+					</div>
+
+
+					<br />
+					<br />
+					<button type="button" class="btn btn-default">Add filter</button>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div style="height: 452px; overflow: auto">
+					<ul class="list-group">
+						<li class="list-group-item">Filter</li>
+						<li class="list-group-item">Filter</li>
+						<li class="list-group-item">Filter</li>
+						<li class="list-group-item">Filter</li>
+						<li class="list-group-item">Filter</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
+</div>
