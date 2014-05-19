@@ -6,27 +6,9 @@
 				<h3>Persons not for analysis</h3>
 				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
-						<li class="list-group-item">Person</li>
+						<% 20.times do |i| %>
+							<li class="list-group-item">Person <%= i %></li>
+						<% end %>
 					</ul>
 				</div>
 				<br />
@@ -46,103 +28,31 @@
 							All
 							</span>
 						</div>
+						<% @fields.each do |field| %>
 						<div class="input-group">
 							<span class="input-group-addon">
 							<input type="checkbox">
 							</span>
-							<span class="input-group-addon no-border-right">
-							Firstname
-							</span>
+							<span class="input-group-addon no-border-right"><%= field %></span>
 							<input type="text" class="form-control">
 						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Lastname</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Occupation</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Location: Birth</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Location: Marriage</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Location: Death</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Location: Burial</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Time: Birth</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Time: Marriage</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Time: Death</span>
-							<input type="text" class="form-control">
-						</div>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right">Time: Burial</span>
-							<input type="text" class="form-control">
-						</div>
+						<% end %>
 					</form>
-					<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
-					<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<h3>Persons for analysis</h3>
-				<div style="height: 452px; overflow: auto">
+				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
-						<li class="list-group-item">Filter</li>
-						<li class="list-group-item">Filter</li>
-						<li class="list-group-item">Filter</li>
-						<li class="list-group-item">Filter</li>
-						<li class="list-group-item">Filter</li>
+						<% 20.times do |i| %>
+							<li class="list-group-item">Filter <%= i %></li>
+						<% end %>
 					</ul>
 				</div>
 			</div>
 		</div>
+		<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
+					<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
 	</div>
 	<button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
 </div>

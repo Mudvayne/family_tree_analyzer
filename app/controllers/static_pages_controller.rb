@@ -15,9 +15,11 @@ class StaticPagesController < ApplicationController
     		fams += 1
   		end
 		end
-		parser.parse "./royal.ged"
+		parser.parse "./family.ged"
 		@individuals = persons
 		@families = fams
+
+		@fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Time: Birth","Time: Marriage","Time: Death","Time: Burial"]
 	end
 
 	def select_tree
