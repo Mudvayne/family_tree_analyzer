@@ -1,14 +1,15 @@
 FamilyTreeAnalyzer::Application.routes.draw do
-  match '/', to: 'static_pages#home', via: 'get'
+  # match '/', to: 'static_pages#home', via: 'get'
+  root 'static_pages#home'
   match '/filters', to: 'static_pages#filters', via: 'get'
   post '/upload' => 'static_pages#upload'
   get '/select_tree' => 'static_pages#select_tree'
+  resource :gedcom_file
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

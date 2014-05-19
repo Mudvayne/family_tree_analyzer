@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
 	protected
 
 	def devise_parameter_sanitizer
@@ -10,7 +9,7 @@ class ApplicationController < ActionController::Base
     	end
  	end
 
-	# Prevent CSRF attacks by raising an exception.
+	# Prevent CSRF attacks by raising an exception.asdfasdf
 	# For APIs, you may want to use :null_session instead.
 	protect_from_forgery with: :exception
 end

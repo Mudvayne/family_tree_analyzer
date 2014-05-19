@@ -24,18 +24,16 @@
 							<span class="input-group-addon bordered height-35px">
 							<input type="radio">
 							</span>
-							<span class="input-group-addon">
-							All
-							</span>
+							<span class="input-group-addon"> All </span>
 						</div>
 						<% @fields.each do |field| %>
-						<div class="input-group">
-							<span class="input-group-addon">
-							<input type="checkbox">
-							</span>
-							<span class="input-group-addon no-border-right"><%= field %></span>
-							<input type="text" class="form-control">
-						</div>
+							<div class="input-group">
+								<span class="input-group-addon">
+								<input type="checkbox">
+								</span>
+								<span class="input-group-addon no-border-right"><%= field %></span>
+								<input type="text" class="form-control">
+							</div>
 						<% end %>
 					</form>
 				</div>
@@ -52,7 +50,7 @@
 			</div>
 		</div>
 		<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
-					<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
+		<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
 	</div>
 	<button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
 </div>

@@ -1,5 +1,9 @@
 $(document).ready(function() {
 	
+	window.setTimeout(function() {
+		$(".alert").slideUp(500);
+	}, 5000);
+
 	var enableIfNotEmpty = function() {
 		var isEmpty = function(selector) {
 			return $(selector).val().trim() === "";

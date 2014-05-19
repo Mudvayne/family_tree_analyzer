@@ -2,6 +2,7 @@ require './lib/gedcom'
 
 class StaticPagesController < ApplicationController
 	def home
+		@trees = GedcomFile.where(:user_id => current_user.id)
 	end
 
 	def filters
@@ -26,11 +27,19 @@ class StaticPagesController < ApplicationController
 	end
 
 	def upload
-		#gedcomfile = GedcomFile.new(post_params)
-		#puts post_params.path
-		#Gedcom.file()
-		#gedcomfile.save
-		render :nothing => true
+		post = post_params
+		gedcomfile = GedcomFile.new({
+			:data => post[:data].read,
+			:filename => post[:filename],
+			:user_id => current_user.id
+		})
+		
+		if gedcomfile.save then
+			flash[:success] = "You have successfully uploaded #{post[:filename]}."
+		else
+			flash[:danger] = "Error! File with name #{post[:filename]} already exists!";
+		end
+		redirect_to root_path
 	end
 
 	def post_params

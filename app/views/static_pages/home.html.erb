@@ -1,4 +1,11 @@
 <div class="text-center">
+	<% if !flash.empty? %>
+		<% flash.keys.each do |k| %>
+			<div class="alert alert-<%= k %>">
+				<%= flash[k] %>
+			</div>
+		<% end %>
+	<% end %>
 	<% if !user_signed_in? %>
 		<div class="jumbotron">
 				<h1>Welcome to a Family Tree Analyzer </h1>
@@ -21,7 +28,7 @@
 		<div class="jumbotron">
 			<div class="row">
 				<div class="col-md-6">
-					<%= form_for :gedcomfile, :url => upload_path do |f| %>
+					<%= form_for :gedcomfile, :html => { :multipart => true }, :url => upload_path do |f| %>
 						<p>Upload a family Tree</p>
 						<div class="align-block-to-button">
 							<div class="form-group">
@@ -35,13 +42,18 @@
 					<% end %>
 				</div>
 				<div class="col-md-6">
-					<p>Select a tree for analysis</p>
-					<div class="btn-group">
-						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Select a Tree <span class="caret"></span></button>
-							<ul class="dropdown-menu" role="menu">
-							</ul>
-					</div>
-					<button type="submit" class="btn btn-success">Go</button>
+					<% if @trees.size > 0 %>
+						<%= form_for :gedcom_file, :url => upload_path do |f| %>
+							<p>Select a tree for analysis</p>
+							<div class="btn-group">
+								<%= f.select(:id, @trees.map {|tree| [tree.filename, tree.id]}) %>
+							</div>
+							<button type="submit" class="btn btn-success">Go</button>
+							<%= link_to 'Delete', gedcom_file_path, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+						<% end %>
+					<% else %>
+						<p>You have no trees yet.</p>
+					<% end %>
 				</div>
 			</div>
 		</div>		
