@@ -1,26 +1,18 @@
-require './lib/gedcom'
+require './lib/family_tree_parser'
 
 class StaticPagesController < ApplicationController
 	def home
-		@trees = GedcomFile.where(:user_id => current_user.id)
+		if current_user != nil
+			@trees = GedcomFile.where(:user_id => current_user.id)
+		end
 	end
 
 	def filters
-		persons = 0
-		fams = 0
-		parser = GEDCOM::Parser.new do
-		  before "INDI" do
-		    persons += 1
-		  end
-		  before "FAM" do
-    		fams += 1
-  		end
-		end
-		parser.parse "./family.ged"
-		@individuals = persons
-		@families = fams
-
 		@fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Time: Birth","Time: Marriage","Time: Death","Time: Burial"]
+		
+		parser = MyGedcomParser.new
+		parser.parse './family.ged'
+		@persons = parser.get_all_persons
 	end
 
 	def select_tree

@@ -20,6 +20,10 @@ class Individual
     @name
   end
 
+  def lastname
+    @name.delete "/"
+  end
+
   def dateofbirth
     @dateofbirth
   end
