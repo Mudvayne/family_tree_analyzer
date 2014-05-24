@@ -1,4 +1,7 @@
 class Individual
+
+  attr_reader :id, :dateofbirth, :dateofmarriage, :dateofdeath, :dateofburial, :placeofbirth, :placeofmarriage, :placeofdeath, :placeofburial
+
   def initialize(id, name, dateofbirth, dateofmarriage, dateofdeath, dateofburial, placeofbirth, placeofmarriage, placeofdeath, placeofburial)
     @id = id
     @name = name
@@ -12,47 +15,22 @@ class Individual
     @placeofburial = placeofburial
   end
 
-  def id
-    @id
-  end
-
-  def name
-    @name
+  def firstname
+    if @name.split("/").first != nil && @name.split("/").first != ""
+      return @name.split("/").first
+    end
+    return "N/A"
   end
 
   def lastname
-    @name.delete "/"
-  end
-
-  def dateofbirth
-    @dateofbirth
-  end
-
-  def dateofmarriage
-    @dateofmarriage
-  end
-
-  def dateofdeath
-    @dateofdeath
-  end
-
-  def dateofburial
-    @dateofburial
-  end
-
-  def placeofbirth
-    @placeofbirth
-  end
-
-  def placeofmarriage
-    @placeofmarriage
-  end
-
-  def placeofdeath
-    @placeofdeath
-  end
-
-  def placeofburial
-    @placeofburial
+    if firstname == "N/A"
+      return @name.delete("/")
+    else
+      if @name.split("/").last.size != @name.delete("/").size
+        return @name.split("/").last
+      else
+        return "N/A"
+      end
+    end
   end
 end

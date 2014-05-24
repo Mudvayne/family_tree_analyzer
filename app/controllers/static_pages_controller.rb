@@ -11,7 +11,7 @@ class StaticPagesController < ApplicationController
 		@fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Time: Birth","Time: Marriage","Time: Death","Time: Burial"]
 		
 		parser = MyGedcomParser.new
-		parser.parse './family.ged'
+		parser.parse './royal.ged'
 		@persons = parser.get_all_persons
 	end
 

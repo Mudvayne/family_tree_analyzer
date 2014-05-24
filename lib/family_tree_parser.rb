@@ -53,11 +53,6 @@ class MyGedcomParser < GEDCOM::Parser
     after %w(INDI) do
       @persons.push(Individual.new(@id, @name, @dateofbirth, @dateofmarriage, @dateofdeath, @dateofburial, @placeofbirth, @placeofmarriage, @placeofdeath, @placeofburial))
     end
-
-    #puts @name
-
-    #@persons.push(Individual.new(@id, @name, @dateofbirth, @dateofmarriage, @dateofdeath, @dateofburial, @placeofbirth, @placeofmarriage, @placeofdeath, @placeofburial))
-
   end
 
   def get_all_persons

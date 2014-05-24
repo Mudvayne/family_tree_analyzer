@@ -7,7 +7,7 @@
 				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
 						<% @persons.each do |i| %>
-							<li class="list-group-item"><%= i.name %></li>
+							<li class="list-group-item"><%= i.firstname + " | " + i.lastname%></li>
 						<% end %>
 					</ul>
 				</div>
