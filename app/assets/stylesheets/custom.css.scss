@@ -91,8 +91,12 @@ footer {
 }
 
 /* filters */
-.input-group-addon + .input-group-addon {
-  width: 140px;
+.form-inline .input-group {
+  display: table;
+}
+
+.form-inline .input-group-addon + .input-group-addon {
+  width: 144px;
   text-align: left;
 }
 
@@ -100,14 +104,14 @@ footer {
   border-right: 0;
 }
 
-.input-group {
+.form-inline .input-group {
   margin-bottom: 7px;
 }
 
-.input-group-addon.bordered {
+.form-inline .input-group-addon.bordered {
   border-right: 1px solid #cccccc;
 }
 
-.height-35px {
+#family-tree-analyzer .height-35px {
   height: 35px;
 }

@@ -16,6 +16,9 @@ class Individual
   end
 
   def firstname
+    if @name == "//" || @name == "/"
+      return "N/A"
+    end
     if @name.split("/").first != nil && @name.split("/").first != ""
       return @name.split("/").first
     end
@@ -23,6 +26,9 @@ class Individual
   end
 
   def lastname
+    if @name == "//" || @name == "/"
+      return "N/A"
+    end
     if firstname == "N/A"
       return @name.delete("/")
     else

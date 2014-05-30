@@ -7,7 +7,7 @@
 				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
 						<% @persons.each do |i| %>
-							<li class="list-group-item"><%= i.firstname + " | " + i.lastname%></li>
+							<li class="list-group-item"><%=i.firstname + " | " + i.lastname%></li>
 						<% end %>
 					</ul>
 				</div>
@@ -44,8 +44,9 @@
 				</div>
 			</div>
 		</div>
-		<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
-		<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
 	</div>
+	<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
+	<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
+	<br> <br>
 	<button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
 </div>
