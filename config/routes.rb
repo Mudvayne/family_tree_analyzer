@@ -1,7 +1,8 @@
 FamilyTreeAnalyzer::Application.routes.draw do
   # match '/', to: 'static_pages#home', via: 'get'
   root 'static_pages#home'
-  match '/filters', to: 'static_pages#filters', via: 'get'
+  get '/filters' => 'filters#index'
+  post '/filters' => 'filters#update'
   post '/upload' => 'static_pages#upload'
   get '/select_tree' => 'static_pages#select_tree'
   resource :gedcom_file

@@ -6,13 +6,15 @@
 				<h3>Persons not for analysis</h3>
 				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
-						<% @persons.each do |i| %>
-							<li class="list-group-item"><%=i.firstname + " | " + i.lastname%></li>
+						<% if @persons != nil %>
+							<% @persons.each do |i| %>
+								<li class="list-group-item"><%=i.firstname + " | " + i.lastname%></li>
+							<% end %>
 						<% end %>
 					</ul>
 				</div>
 				<br>
-				# persons in tree: <%= @persons.count %>
+				# persons in list: <%= @persons.count %>
 			</div>
 			<div class="col-md-4">
 				<div class="row">
@@ -40,13 +42,19 @@
 				<h3>Persons for analysis</h3>
 				<div style="height: 486px; overflow: auto">
 					<ul class="list-group">
+						<% @personsforanalysis.each do |i| %>
+							<li class="list-group-item"><%=i.firstname + " | " + i.lastname%></li>
+						<% end %>
 					</ul>
 				</div>
+				<br>
+				# persons in list: <%= @personsforanalysis.count %>
 			</div>
 		</div>
 	</div>
 	<button type="button" class="btn btn-primary text-center btn-lg" style="margin-left: 8px;">&laquo;</button>
 	<button type="button" class="btn btn-primary text-center btn-lg">&raquo;</button>
+	<%= button_to "Some Button", :action=> "to_right" %>
 	<br> <br>
 	<button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
 </div>

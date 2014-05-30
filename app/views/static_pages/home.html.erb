@@ -43,12 +43,13 @@
 				</div>
 				<div class="col-md-6">
 					<% if @trees.size > 0 %>
-						<%= form_for :gedcom_file, :url => upload_path do |f| %>
+						<%= form_for :gedcom_file, :url => gedcom_file_path do |f| %>
 							<p>Select a tree for analysis</p>
 							<div class="btn-group">
 								<%= f.select(:id, @trees.map {|tree| [tree.filename, tree.id]}) %>
 							</div>
 							<button type="submit" class="btn btn-success">Go</button>
+							<%= submit_tag 'Delete', method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
 							<%= link_to 'Delete', gedcom_file_path, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
 						<% end %>
 					<% else %>

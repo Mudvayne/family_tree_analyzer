@@ -1,0 +1,67 @@
+<%= form_tag(filters_path, action: :post, class: "form-inline filters") do %>
+  <div class="text-center">
+    <h1>Filter your family tree!</h1>
+    <div class="jumbotron">
+      <div class="row">
+        <div class="col-md-4">
+          <h3>Persons not for analysis</h3>
+          <div style="height: 486px; overflow: auto">
+            <ul class="list-group">
+              <% if @persons != nil %>
+                <% @persons.each do |i| %>
+                  <li class="list-group-item">
+                    <%=i.firstname + " | " + i.lastname%>
+                    <input type="hidden" name="persons[]" value="<%= i.id %>" >
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+          <br>
+          # persons in list: <%= @persons.count %>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <h3>Filter</h3>
+            <form class="form-inline filters">
+              <div class="input-group">
+                <span class="input-group-addon bordered height-35px">
+                <input type="radio">
+                </span>
+                <span class="input-group-addon"> All </span>
+              </div>
+              <% @fields.each do |field| %>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                  <input type="checkbox" name="<%= field[0] %>_checkbox">
+                  </span>
+                  <span class="input-group-addon no-border-right"><%= field[1] %></span>
+                  <input type="text" name="<%= field[0] %>" class="form-control">
+                </div>
+              <% end %>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <h3>Persons for analysis</h3>
+          <div style="height: 486px; overflow: auto">
+            <ul class="list-group">
+              <% @personsforanalysis.each do |i| %>
+                <li class="list-group-item">
+                  <%=i.firstname + " | " + i.lastname%>
+                  <input type="hidden" name="personsforanalysis[]" value="<%= i.id %>" >
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <br>
+          # persons in list: <%= @personsforanalysis.count %>
+        </div>
+      </div>
+    </div>
+    <%= button_tag "«", value: "to_left", class: "btn btn-primary text-center btn-lg", style: "margin-left: 8px;" %>
+    <%= button_tag "»", value: "to_right", class: "btn btn-primary text-center btn-lg", style: "margin-left: 8px;" %>
+    <br> <br>
+    <button type="submit" class="btn btn-lg btn-primary">Start analysis</button>
+  </div>
+<% end %>
