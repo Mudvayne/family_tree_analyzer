@@ -6,58 +6,43 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @personsforanalysis = Array.new(0)
+=begin    
+    puts "************** params **************"
+    params.each do |i|
+      puts i
+    end
+    puts "************ end params ************"
+=end
   end
 
   def update
-    if params[:button] == "to_left" then
-      to_left
-    elsif params[:button] == "to_right" then
-      to_right
-    end
-  end
-
-  def to_right
-    params[:persons] = params[:persons] || []
-    params[:personsforanalysis] = params[:personsforanalysis] || []
-
-=begin
-    @persons = []
-    params[:persons].each do |person_id|
-      if @all_persons_hashmap.has_key? person_id
-        @persons << @all_persons_hashmap[person_id]
-      end
-    end
-=end
+    params[:persons] = params[:persons] || Array.new
+    params[:personsforanalysis] = params[:personsforanalysis] || Array.new
 
     @personsforanalysis = get_last_persons_by_id params[:personsforanalysis]
     @persons = get_last_persons_by_id params[:persons]
-    #@personsforanalysis = []
-=begin
-    params[:personsforanalysis].each do |person_id|
-      if @all_persons_hashmap.has_key? person_id
-        @personsforanalysis << @all_persons_hashmap[person_id]
-      end
-    end
-=end
 
-    if not params[:occupation].strip.empty? then
-      @personsforanalysis.concat(@persons.select { |person| person.firstname == params[:occupation] })
-      @persons.delete_if { |person| person.firstname == params[:occupation] }
+    if params[:button] == "to_left"
+      to_left
+    elsif params[:button] == "to_right"
+      to_right
     end
-
-    # get all from persons where occupation = 7
-    # merge_with (&) get all from persons where name = "Hans"
-    # merge_with get all from persons where city = "jdfpjosdpjosdfpjo"
-    # persons.remove merge_with
-    # personsforanalysis concat merge_with
 
     render 'index'
   end
 
+  def to_right
+    matched_persons = find_all_matches @persons
+
+    @personsforanalysis.concat(matched_persons)
+    @persons = @persons - matched_persons
+  end
+
   def to_left
-    @persons = Array.new
-    @personsforanalysis = Array.new
-    render 'index'
+    matched_persons = find_all_matches @personsforanalysis
+
+    @persons.concat(matched_persons)
+    @personsforanalysis = @personsforanalysis - matched_persons
   end
 
   def set_all_persons
@@ -82,10 +67,60 @@ class FiltersController < ApplicationController
 
   def set_fields
     @fields = Hash.new
-    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Time: Birth","Time: Marriage","Time: Death","Time: Burial"]
+    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
     fields.each do |field|
       key = field.downcase.sub(":", "_").sub(" ", "")
       @fields[key] = field
     end
+  end
+
+  def find_all_matches list_of_persons
+    matched_persons = list_of_persons
+
+    if not params[:firstname].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.firstname.include? params[:firstname] })
+    end
+
+    if not params[:lastname].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.lastname.include? params[:lastname] })
+    end
+
+    if not params[:occupation].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.occupation.include? params[:occupation] })
+    end
+
+    if not params[:date_birth].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_birth.include? params[:date_birth] })
+    end
+
+    if not params[:date_marriage].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_marriage.include? params[:date_marriage] })
+    end
+
+    if not params[:date_death].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_death.include? params[:date_death] })
+    end
+
+    if not params[:date_burial].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_burial.include? params[:date_burial] })
+    end
+
+    if not params[:location_birth].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_birth.include? params[:location_birth] })
+    end
+
+    if not params[:location_marriage].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_marriage.include? params[:location_marriage] })
+    end
+
+    if not params[:location_death].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_death.include? params[:location_death] })
+    end
+
+    if not params[:location_burial].strip.empty?
+      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
+    end
+
+    return matched_persons
   end
 end

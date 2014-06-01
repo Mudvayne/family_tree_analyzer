@@ -1,14 +1,16 @@
 require './lib/gedcom'
 require './lib/individual'
 
+#todo: occu
+
 class MyGedcomParser < GEDCOM::Parser
-  #attr_accessor :persons
   def initialize
     super
     @persons = Array.new
 
     @id = nil
     @name = nil
+    @occupation = nil
     @dateofbirth = nil
     @dateofmarriage = nil
     @dateofdeath = nil
@@ -51,7 +53,7 @@ class MyGedcomParser < GEDCOM::Parser
     end 
 
     after %w(INDI) do
-      @persons.push(Individual.new(@id, @name, @dateofbirth, @dateofmarriage, @dateofdeath, @dateofburial, @placeofbirth, @placeofmarriage, @placeofdeath, @placeofburial))
+      @persons.push(Individual.new(@id, @name, @occupation, @dateofbirth, @dateofmarriage, @dateofdeath, @dateofburial, @placeofbirth, @placeofmarriage, @placeofdeath, @placeofburial))
     end
   end
 
