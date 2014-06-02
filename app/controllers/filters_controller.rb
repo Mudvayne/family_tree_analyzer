@@ -22,16 +22,16 @@ class FiltersController < ApplicationController
       matched_persons = find_all_matches @personsforanalysis
       to_left matched_persons
     end
-=begin
+
     case matched_persons.count
     when 0
-      flash[:error] = "0 matches! try a different filter."
+      flash.now[:warning] = "0 matches! try a different filter."
     when 1
-      flash[:success] = "one match!"
+      flash.now[:success] = "one match!"
     else
-      flash[:success] = matched_persons.count.to_s + " matches!"
+      flash.now[:success] = matched_persons.count.to_s + " matches!"
     end
-=end
+
     render 'index'
   end
 

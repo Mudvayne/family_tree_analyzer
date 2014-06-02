@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	var allRadio = $(".filters input[type='radio']");
 	var textInputs = $(".filters input[type='text']");
+	var checkboxes = $(".filters input[type='checkbox']")
+	
 	textInputs.keyup(function(input) {
 		var checkState = $(this).val().trim() !== "";
 		$(this).prevAll().children("input[type='checkbox']").prop("checked", checkState);
@@ -9,8 +11,13 @@ $(document).ready(function() {
 		}
 	});
 
+	checkboxes.change(function(){
+		if($(this).is(":checked")) {
+			allRadio.prop("checked", false);
+		}
+	});
+
 	$(allRadio).change(function() {
 		textInputs.val("").keyup();
 	});
-
 });
