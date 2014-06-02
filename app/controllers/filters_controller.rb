@@ -1,4 +1,4 @@
-require './lib/family_tree_parser'
+require './lib/myGedcomParser'
 
 class FiltersController < ApplicationController
   before_action :set_fields, :set_all_persons
@@ -6,13 +6,6 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @personsforanalysis = Array.new(0)
-=begin    
-    puts "************** params **************"
-    params.each do |i|
-      puts i
-    end
-    puts "************ end params ************"
-=end
   end
 
   def update
@@ -22,25 +15,33 @@ class FiltersController < ApplicationController
     @personsforanalysis = get_last_persons_by_id params[:personsforanalysis]
     @persons = get_last_persons_by_id params[:persons]
 
-    if params[:button] == "to_left"
-      to_left
-    elsif params[:button] == "to_right"
-      to_right
+    if params[:button] == "to_right"
+      matched_persons = find_all_matches @persons
+      to_right matched_persons
+    elsif params[:button] == "to_left"
+      matched_persons = find_all_matches @personsforanalysis
+      to_left matched_persons
     end
-
+=begin
+    case matched_persons.count
+    when 0
+      flash[:error] = "0 matches! try a different filter."
+    when 1
+      flash[:success] = "one match!"
+    else
+      flash[:success] = matched_persons.count.to_s + " matches!"
+    end
+=end
     render 'index'
   end
 
-  def to_right
-    matched_persons = find_all_matches @persons
-
+  def to_right matched_persons
     @personsforanalysis.concat(matched_persons)
     @persons = @persons - matched_persons
+    
   end
 
-  def to_left
-    matched_persons = find_all_matches @personsforanalysis
-
+  def to_left matched_persons
     @persons.concat(matched_persons)
     @personsforanalysis = @personsforanalysis - matched_persons
   end
@@ -56,7 +57,7 @@ class FiltersController < ApplicationController
   end
 
   def get_last_persons_by_id ids
-    result = []
+    result = Array.new
     ids.each do |person_id|
       if @all_persons_hashmap.has_key? person_id
         result << @all_persons_hashmap[person_id]
@@ -76,51 +77,86 @@ class FiltersController < ApplicationController
 
   def find_all_matches list_of_persons
     matched_persons = list_of_persons
+    handle_empty_fields
+    checkbox_set = false
 
-    if not params[:firstname].strip.empty?
+    if params[:all_radiobox] == "on"
+      return matched_persons
+    end
+
+    if params[:firstname_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.firstname.include? params[:firstname] })
     end
 
-    if not params[:lastname].strip.empty?
+    if params[:lastname_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.lastname.include? params[:lastname] })
     end
 
-    if not params[:occupation].strip.empty?
+    if params[:occupation_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.occupation.include? params[:occupation] })
     end
 
-    if not params[:date_birth].strip.empty?
+    if params[:date_birth_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.date_birth.include? params[:date_birth] })
     end
 
-    if not params[:date_marriage].strip.empty?
+    if params[:date_marriage_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.date_marriage.include? params[:date_marriage] })
     end
 
-    if not params[:date_death].strip.empty?
+    if params[:date_death_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.date_death.include? params[:date_death] })
     end
 
-    if not params[:date_burial].strip.empty?
+    if params[:date_burial_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.date_burial.include? params[:date_burial] })
     end
 
-    if not params[:location_birth].strip.empty?
+    if params[:location_birth_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_birth.include? params[:location_birth] })
     end
 
-    if not params[:location_marriage].strip.empty?
+    if params[:location_marriage_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_marriage.include? params[:location_marriage] })
     end
 
-    if not params[:location_death].strip.empty?
+    if params[:location_death_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_death.include? params[:location_death] })
     end
 
-    if not params[:location_burial].strip.empty?
+    if params[:location_burial_checkbox] == "on"
+      checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
     end
 
-    return matched_persons
+    if matched_persons.count == list_of_persons.count && checkbox_set == false #no matches
+      return Array.new
+    else
+      return matched_persons
+    end
+  end
+
+  def handle_empty_fields
+    if params[:firstname] == "" then params[:firstname] = "N/A" end
+    if params[:lastname] == "" then params[:lastname] = "N/A" end
+    if params[:occupation] == "" then params[:occupation] = "N/A" end
+    if params[:date_birth] == "" then params[:date_birth] = "N/A" end
+    if params[:date_marriage] == "" then params[:date_marriage] = "N/A" end
+    if params[:date_death] == "" then params[:date_death] = "N/A" end
+    if params[:date_burial] == "" then params[:date_burial] = "N/A" end
+    if params[:location_birth] == "" then params[:location_birth] = "N/A" end
+    if params[:location_marriage] == "" then params[:location_marriage] = "N/A" end
+    if params[:location_death] == "" then params[:location_death] = "N/A" end
+    if params[:location_burial] == "" then params[:location_burial] = "N/A" end
   end
 end

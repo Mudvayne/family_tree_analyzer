@@ -14,7 +14,6 @@ class Individual
     @location_marriage = location_marriage || "N/A"
     @location_death = location_death || "N/A"
     @location_burial = location_burial || "N/A"
-    to_s
   end
 
   def firstname

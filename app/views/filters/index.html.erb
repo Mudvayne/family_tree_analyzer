@@ -1,6 +1,14 @@
 <%= form_tag(filters_path, action: :post, class: "form-inline filters") do %>
   <div class="text-center">
     <h1>Filter your family tree!</h1>
+<!--
+    <% flash.keys.each do |k| %>
+      <div class="alert alert-<%= k %>">
+        <%= flash[k] %>
+        <% flash[k] == "" %>
+      </div>
+    <% end %>
+-->
     <div class="jumbotron">
       <div class="row">
         <div class="col-md-4">
@@ -27,7 +35,7 @@
             <form class="form-inline filters">
               <div class="input-group">
                 <span class="input-group-addon bordered height-35px">
-                <input type="radio">
+                <input type="radio" name="all_radiobox">
                 </span>
                 <span class="input-group-addon"> All </span>
               </div>

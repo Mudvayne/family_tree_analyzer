@@ -1,3 +1,3 @@
-a = ["Victoria", "Hans"]
-a.delete("Victoria")
-puts a
+a = 8
+
+a == 8 ? puts("läuft") : puts("lololol")

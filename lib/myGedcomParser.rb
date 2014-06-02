@@ -2,6 +2,7 @@ require './lib/gedcom'
 require './lib/individual'
 
 #todo: occu
+#shortcut: %w(foo bar) = ["foo", "bar"]
 
 class MyGedcomParser < GEDCOM::Parser
   def initialize

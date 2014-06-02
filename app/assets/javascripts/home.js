@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	
 	window.setTimeout(function() {
-		$(".alert").slideUp(500);
-	}, 5000);
+		$(".alert").slideUp(300);
+	}, 3500);
 
 	var enableIfNotEmpty = function() {
 		var isEmpty = function(selector) {
