@@ -27,4 +27,5 @@ class StaticPagesController < ApplicationController
 	def post_params
 		params.require(:gedcomfile).permit(:filename, :data)
 	end
+
 end

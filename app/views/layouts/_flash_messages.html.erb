@@ -1,6 +1,7 @@
-<% flash.each do |type, message| %>
-  <div class="alert <%= bootstrap_class_for(type) %> fade in">
-    <button class="close" data-dismiss="alert">×</button>
-    <%= message %>
-  </div>
+<% if !flash.empty? %>
+  <% flash.keys.each do |k| %>
+    <div class="alert text-center <%= bootstrap_class_for k %>">
+      <%= flash[k] %>
+    </div>
+  <% end %>
 <% end %>

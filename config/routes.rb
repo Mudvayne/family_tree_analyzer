@@ -4,9 +4,11 @@ FamilyTreeAnalyzer::Application.routes.draw do
   get '/filters' => 'filters#index'
   post '/filters' => 'filters#update'
   post '/upload' => 'static_pages#upload'
+  post '/gedcom_file' => 'gedcom_files#delete' 
   get '/select_tree' => 'static_pages#select_tree'
   resource :gedcom_file
   devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
