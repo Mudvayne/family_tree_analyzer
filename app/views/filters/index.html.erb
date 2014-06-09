@@ -10,8 +10,8 @@
               <% if @persons != nil %>
                 <% @persons.each do |i| %>
                   <li class="list-group-item">
-                    <%#=i.id. + " | " + i.firstname + " | " + i.lastname%>
-                    <%=i.to_s%>
+                    <%=i.firstname + " | " + i.lastname%>
+                    <%#=i.to_s%>
                     <input type="hidden" name="persons[]" value="<%= i.id %>" >
                   </li>
                 <% end %>
@@ -47,7 +47,7 @@
           <h3>Persons for analysis</h3>
           <div style="height: 486px; overflow: auto">
             <ul class="list-group">
-              <% @personsforanalysis.each do |i| %>
+              <% @persons_for_analysis.each do |i| %>
                 <li class="list-group-item">
                   <%#=i.firstname + " | " + i.lastname%>
                   <%=i.to_s%>
@@ -57,7 +57,7 @@
             </ul>
           </div>
           <br>
-          # persons in list: <%= @personsforanalysis.count %>
+          # persons in list: <%= @persons_for_analysis.count %>
         </div>
       </div>
     </div>

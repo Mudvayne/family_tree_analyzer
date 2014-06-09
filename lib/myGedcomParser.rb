@@ -10,7 +10,6 @@ class MyGedcomParser < GEDCOM::Parser
     super
 
     #individuals
-
     @persons = Array.new
     @id_person = nil
     @name = nil
@@ -72,7 +71,6 @@ class MyGedcomParser < GEDCOM::Parser
     end
 
     #families
-
     @families = Array.new
     @id_family = nil
     @husband = nil

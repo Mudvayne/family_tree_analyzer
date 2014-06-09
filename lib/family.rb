@@ -10,13 +10,16 @@ class Family
   end
 
   def to_s
-    string = "Family: " + id + " Husband: " + husband + " Wife: " + wife
+    puts "TO STRING"
+    string = "Family: " + id + "\nHusband: " + husband + "\nWife: " + wife + "\nChildren: "
     string_children = ""
     if not children.empty?
       children.each do |child|
-        string_children += string_children
+        string_children += child
       end
     end
     string += string_children
+    puts string
+    return string
   end
 end

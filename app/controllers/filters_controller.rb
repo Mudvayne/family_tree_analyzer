@@ -1,25 +1,47 @@
 require './lib/myGedcomParser'
 
 class FiltersController < ApplicationController
-  before_action :set_fields, :set_all_persons
+  before_action :set_fields, :set_all_persons_and_families
+
+  
+  def set_fields
+    @fields = Hash.new
+    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
+    fields.each do |field|
+      key = field.downcase.sub(":", "_").sub(" ", "")
+      @fields[key] = field
+    end
+  end
+
+  
+  def set_all_persons_and_families
+    parser = MyGedcomParser.new
+    parser.parse './royal.ged'
+    @all_persons = parser.get_all_persons
+    @all_persons_hashmap = Hash.new
+    @all_persons.each do |person|
+      @all_persons_hashmap[person.id] = person
+    end
+    @families = parser.get_all_families
+  end
 
   def index
     @persons = @all_persons
-    @personsforanalysis = Array.new(0)
+    @persons_for_analysis = Array.new(0)
   end
 
   def update
     params[:persons] = params[:persons] || Array.new
-    params[:personsforanalysis] = params[:personsforanalysis] || Array.new
+    params[:persons_for_analysis] = params[:persons_for_analysis] || Array.new
 
-    @personsforanalysis = get_last_persons_by_id params[:personsforanalysis]
+    @persons_for_analysis = get_last_persons_by_id params[:persons_for_analysis]
     @persons = get_last_persons_by_id params[:persons]
 
     if params[:button] == "to_right"
       matched_persons = find_all_matches @persons
       to_right matched_persons
     elsif params[:button] == "to_left"
-      matched_persons = find_all_matches @personsforanalysis
+      matched_persons = find_all_matches @persons_for_analysis
       to_left matched_persons
     end
 
@@ -35,27 +57,20 @@ class FiltersController < ApplicationController
     render 'index'
   end
 
+  
   def to_right matched_persons
-    @personsforanalysis.concat(matched_persons)
+    @persons_for_analysis.concat(matched_persons)
     @persons = @persons - matched_persons
     
   end
 
+  
   def to_left matched_persons
     @persons.concat(matched_persons)
-    @personsforanalysis = @personsforanalysis - matched_persons
+    @persons_for_analysis = @persons_for_analysis - matched_persons
   end
 
-  def set_all_persons
-    parser = MyGedcomParser.new
-    parser.parse './royal.ged'
-    @all_persons = parser.get_all_persons
-    @all_persons_hashmap = Hash.new
-    @all_persons.each do |person|
-      @all_persons_hashmap[person.id] = person
-    end
-  end
-
+  
   def get_last_persons_by_id ids
     result = Array.new
     ids.each do |person_id|
@@ -66,15 +81,7 @@ class FiltersController < ApplicationController
     return result
   end
 
-  def set_fields
-    @fields = Hash.new
-    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
-    fields.each do |field|
-      key = field.downcase.sub(":", "_").sub(" ", "")
-      @fields[key] = field
-    end
-  end
-
+  
   def find_all_matches list_of_persons
     matched_persons = list_of_persons
     handle_empty_fields
@@ -159,4 +166,10 @@ class FiltersController < ApplicationController
     if params[:location_death] == "" then params[:location_death] = "N/A" end
     if params[:location_burial] == "" then params[:location_burial] = "N/A" end
   end
+=begin
+  def find_all_descendants person, already_found_decendents
+
+
+  end
+=end
 end
