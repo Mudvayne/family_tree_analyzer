@@ -2,7 +2,7 @@
   <div class="col-md-4 col-md-offset-4">
     <h2 class="text-center">Sign in</h2>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-
+      <%= devise_error_messages! %>
       <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, class: "form-control" %>

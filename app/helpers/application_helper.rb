@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def bootstrap_class_for flash_type
-    puts "KALSHJLKAJDLKAJDLKAJD " +flash_type
+    puts "F L A S H  T Y P E: " +flash_type
     case flash_type
       when "success"
         "alert-success"
@@ -20,6 +20,8 @@ module ApplicationHelper
         "alert-danger"
       when "notice"
         "alert-info"
+      when "alert" #for devise
+        "alert-danger"
       else
         flash_type.to_s
     end
