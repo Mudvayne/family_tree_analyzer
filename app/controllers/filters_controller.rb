@@ -61,7 +61,6 @@ class FiltersController < ApplicationController
   def to_right matched_persons
     @persons_for_analysis.concat(matched_persons)
     @persons = @persons - matched_persons
-    
   end
 
   
