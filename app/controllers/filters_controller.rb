@@ -3,28 +3,6 @@ require './lib/myGedcomParser'
 class FiltersController < ApplicationController
   before_action :set_fields, :set_all_persons_and_families
 
-  
-  def set_fields
-    @fields = Hash.new
-    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
-    fields.each do |field|
-      key = field.downcase.sub(":", "_").sub(" ", "")
-      @fields[key] = field
-    end
-  end
-
-  
-  def set_all_persons_and_families
-    parser = MyGedcomParser.new
-    parser.parse './royal.ged'
-    @all_persons = parser.get_all_persons
-    @all_persons_hashmap = Hash.new
-    @all_persons.each do |person|
-      @all_persons_hashmap[person.id] = person
-    end
-    @families = parser.get_all_families
-  end
-
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
@@ -57,18 +35,36 @@ class FiltersController < ApplicationController
     render 'index'
   end
 
+  private
+  def set_fields
+    @fields = Hash.new
+    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
+    fields.each do |field|
+      key = field.downcase.sub(":", "_").sub(" ", "")
+      @fields[key] = field
+    end
+  end
+  
+  def set_all_persons_and_families
+    parser = MyGedcomParser.new
+    parser.parse './royal.ged'
+    @all_persons = parser.get_all_persons
+    @all_persons_hashmap = Hash.new
+    @all_persons.each do |person|
+      @all_persons_hashmap[person.id] = person
+    end
+    @families = parser.get_all_families
+  end
   
   def to_right matched_persons
     @persons_for_analysis.concat(matched_persons)
     @persons = @persons - matched_persons
   end
-
   
   def to_left matched_persons
     @persons.concat(matched_persons)
     @persons_for_analysis = @persons_for_analysis - matched_persons
   end
-
   
   def get_last_persons_by_id ids
     result = Array.new
@@ -80,7 +76,6 @@ class FiltersController < ApplicationController
     return result
   end
 
-  
   def find_all_matches list_of_persons
     matched_persons = list_of_persons
     handle_empty_fields
@@ -165,10 +160,34 @@ class FiltersController < ApplicationController
     if params[:location_death] == "" then params[:location_death] = "N/A" end
     if params[:location_burial] == "" then params[:location_burial] = "N/A" end
   end
-=begin
-  def find_all_descendants person, already_found_decendents
 
-
+  def find_all_descendants person_id, decendent_ids
+    @families.each do |family|
+      if family.husband == person_id || family.wife == person_id
+        decendent_ids = decendent_ids.push(family.children)
+        family.children.each do |child|
+          find_all_descendants child, decendent_ids
+        end
+      end
+    end
+    return decendent_ids
   end
-=end
+end
+
+def get_person_by_id person_id
+  @all_persons.each do |person|
+    if person.id == person_id
+      return person
+    end
+  end
+  return "no such person"
+end
+
+def get_family_by_id family_id
+  @families.each do |family|
+    if family.id == family_id
+      return family
+    end
+  end
+  return "no such family"
 end

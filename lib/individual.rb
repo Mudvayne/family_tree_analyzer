@@ -1,6 +1,6 @@
 class Individual
 
-  attr_reader :id, :occupation, :date_birth, :date_marriage, :date_death, :date_burial, :location_birth, :location_marriage, :location_death, :location_burial, :child_in_family
+  attr_reader :id, :occupation, :date_birth, :date_marriage, :date_death, :date_burial, :location_birth, :location_marriage, :location_death, :location_burial, :parent_in_families, :child_in_family
 
   def initialize(id, name, occupation, date_birth, date_marriage, date_death, date_burial, location_birth, location_marriage, location_death, location_burial, parent_in_families, child_in_family)
     @id = id || "N/A"

@@ -68,6 +68,7 @@ class MyGedcomParser < GEDCOM::Parser
 
     after %w(INDI) do
       @persons.push(Individual.new(@id_person, @name, @occupation, @date_birth, @date_marriage, @date_death, @date_burial, @location_birth, @location_marriage, @location_death, @location_burial, @parent_in_families, @child_in_family))
+      empty_fields
     end
 
     #families
@@ -96,6 +97,7 @@ class MyGedcomParser < GEDCOM::Parser
 
     after %w(FAM) do
       @families.push(Family.new(@id_family, @husband, @wife, @children))
+      empty_fields
     end
   end
 
@@ -105,5 +107,26 @@ class MyGedcomParser < GEDCOM::Parser
 
   def get_all_families
     @families
+  end
+
+  private
+  def empty_fields
+    @id_person = nil
+    @name = nil
+    @occupation = nil
+    @date_birth = nil
+    @date_marriage = nil
+    @date_death = nil
+    @date_burial = nil
+    @location_birth = nil
+    @location_marriage = nil
+    @location_death = nil
+    @location_burial = nil
+    @child_in_family = nil
+    @parent_in_families = nil
+    @id_family = nil
+    @husband = nil
+    @wife = nil
+    @children = nil
   end
 end

@@ -1,9 +1,4 @@
-require './MyGedcomParser.rb'
+require './test'
 
-parser = MyGedcomParser.new
-parser.parse './royal.ged'
-persons = parser.get_all_persons
-
-persons.each do |person|
-  puts person.id
-end
+tester = Test.new
+puts tester.find_person_by_kekule "@I881@", 5
