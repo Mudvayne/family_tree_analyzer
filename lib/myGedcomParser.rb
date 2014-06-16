@@ -67,7 +67,7 @@ class MyGedcomParser < GEDCOM::Parser
     end
 
     after %w(INDI) do
-      @persons.push(Individual.new(@id_person, @name, @occupation, @date_birth, @date_marriage, @date_death, @date_burial, @location_birth, @location_marriage, @location_death, @location_burial, @parent_in_families, @child_in_family))
+      @persons.push(Individual.new(@id_person, @name, @occupation, @date_birth, @date_death, @date_burial, @location_birth, @location_death, @location_burial, @parent_in_families, @child_in_family))
       empty_fields
     end
 
@@ -77,6 +77,7 @@ class MyGedcomParser < GEDCOM::Parser
     @husband = nil
     @wife = nil
     @children = nil
+    @date_married = nil
 
     before %w(FAM) do |data|
       @children = Array.new
@@ -84,7 +85,7 @@ class MyGedcomParser < GEDCOM::Parser
     end
 
     before %w(FAM HUSB) do |data|
-      @husband = data;
+      @husband = data
     end
 
     before %w(FAM WIFE) do |data|
@@ -95,8 +96,12 @@ class MyGedcomParser < GEDCOM::Parser
       @children.push(data)
     end
 
+    before %w(FAM MARR DATE) do |data|
+      @date_married = data
+    end
+
     after %w(FAM) do
-      @families.push(Family.new(@id_family, @husband, @wife, @children))
+      @families.push(Family.new(@id_family, @husband, @wife, @children, @date_married))
       empty_fields
     end
   end
@@ -106,6 +111,7 @@ class MyGedcomParser < GEDCOM::Parser
   end
 
   def get_all_families
+    puts "IN PARSER: " + @families.count.to_s
     @families
   end
 
@@ -128,5 +134,7 @@ class MyGedcomParser < GEDCOM::Parser
     @husband = nil
     @wife = nil
     @children = nil
+    @date_married = nil
+    @location_married = nil
   end
 end

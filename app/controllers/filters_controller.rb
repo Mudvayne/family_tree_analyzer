@@ -6,6 +6,13 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
+
+    puts "IN INDEX: " + @families.count.to_s
+    
+    @families.each do |fam|
+      puts fam.to_s
+    end
+
   end
 
   def update
@@ -38,9 +45,9 @@ class FiltersController < ApplicationController
   private
   def set_fields
     @fields = Hash.new
-    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Marriage","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
+    fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
     fields.each do |field|
-      key = field.downcase.sub(":", "_").sub(" ", "")
+      key = field.downcase.gsub(":", "_").gsub(" ", "")
       @fields[key] = field
     end
   end
@@ -107,7 +114,7 @@ class FiltersController < ApplicationController
 
     if params[:date_marriage_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_marriage.include? params[:date_marriage] })
+      matched_persons = matched_persons & (get_persons_married_at_date params[:date_marriage])
     end
 
     if params[:date_death_checkbox] == "on"
@@ -123,11 +130,6 @@ class FiltersController < ApplicationController
     if params[:location_birth_checkbox] == "on"
       checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_birth.include? params[:location_birth] })
-    end
-
-    if params[:location_marriage_checkbox] == "on"
-      checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_marriage.include? params[:location_marriage] })
     end
 
     if params[:location_death_checkbox] == "on"
@@ -156,7 +158,6 @@ class FiltersController < ApplicationController
     if params[:date_death] == "" then params[:date_death] = "N/A" end
     if params[:date_burial] == "" then params[:date_burial] = "N/A" end
     if params[:location_birth] == "" then params[:location_birth] = "N/A" end
-    if params[:location_marriage] == "" then params[:location_marriage] = "N/A" end
     if params[:location_death] == "" then params[:location_death] = "N/A" end
     if params[:location_burial] == "" then params[:location_burial] = "N/A" end
   end
@@ -190,4 +191,15 @@ def get_family_by_id family_id
     end
   end
   return "no such family"
+end
+
+def get_persons_married_at_date date_marriage
+  persons = Array.new
+  @families.each do |family|
+    if family.date_married.include? date_marriage
+      persons.push(get_person_by_id family.husband)
+      persons.push(get_person_by_id family.wife)
+    end
+  end
+  return persons
 end

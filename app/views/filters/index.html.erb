@@ -10,8 +10,8 @@
               <% if @persons != nil %>
                 <% @persons.each do |i| %>
                   <li class="list-group-item">
-                    <%=i.firstname + " | " + i.lastname%>
-                    <%#=i.to_s%>
+                    <%#=i.firstname + " | " + i.lastname%>
+                    <%=i.to_s%>
                     <input type="hidden" name="persons[]" value="<%= i.id %>" >
                   </li>
                 <% end %>
