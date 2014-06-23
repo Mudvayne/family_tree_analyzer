@@ -13,6 +13,9 @@ gem 'mechanize'
 gem 'cancan'
 gem 'devise'
 
+gem 'morrisjs-rails'
+gem 'raphael-rails'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'

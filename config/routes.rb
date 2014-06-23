@@ -1,7 +1,10 @@
 FamilyTreeAnalyzer::Application.routes.draw do
+  get 'analyses/analysis'
+
   # match '/', to: 'static_pages#home', via: 'get'
   root 'static_pages#home'
   get '/filters' => 'filters#index'
+  get '/analysis' => 'analyses#analysis'
   post '/filters' => 'filters#update'
   post '/upload' => 'static_pages#upload'
   post '/gedcom_file' => 'gedcom_files#delete' 

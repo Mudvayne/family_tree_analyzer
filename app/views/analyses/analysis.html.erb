@@ -1,0 +1,99 @@
+<h1>Analyses</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <h2> Persons:  <%= @persons %>  </h2>
+    <div id="sex_donut" style="height: 250px;"></div> 
+  </div>
+
+  <div class="col-md-6">
+    <h2> Alive/Deceased
+    <div id="dead_alive_donut" style="height: 250px;"></div>
+</div>
+
+<h2> Birth occurrences by year </h2>
+<div id="birth_barchart" style="height: 250px;"></div>
+
+<h2> Death occurrences by year </h2>
+<div id="death_barchart" style="height: 250px;"></div>
+
+<h2> Alive persons by year </h2>
+<div id="alive_persons_areachart" style="height: 250px;"></div>
+
+<h2> Age </h2>
+<div id="age_barchart" style="height: 250px;"></div>
+
+<h2> Locations of births </h2>
+
+<h2> Location of Deaths </h2>
+
+<script>
+Morris.Donut({
+  element: 'sex_donut',
+  data: [
+    {label: "Male", value: 70},
+    {label: "Female", value: 80},
+  ]
+});
+
+Morris.Donut({
+  element: 'dead_alive_donut',
+  data: [
+    {label: "Alive", value: 120},
+    {label: "Deceased", value: 30},
+  ]
+});
+
+Morris.Bar({
+  element: 'birth_barchart',
+  data: [
+    <% 80.times do |i| %>
+      { y: '<%= i+1930 %>', a: <%= Random.rand(20) %> },
+    <%end%>
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Births'
+});
+
+Morris.Bar({
+  element: 'death_barchart',
+  data: [
+    <% 80.times do |i| %>
+      { y: '<%= i+1930 %>', a: <%= Random.rand(20) %> },
+    <%end%>
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Deaths'
+});
+
+Morris.Area({
+  element: 'alive_persons_areachart',
+  data: [
+    { y: '2006', a: 100},
+    { y: '2007', a: 75},
+    { y: '2008', a: 50},
+    { y: '2009', a: 75},
+    { y: '2010', a: 50},
+    { y: '2011', a: 75},
+    { y: '2012', a: 100 }
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Alive Persons'
+});
+
+Morris.Bar({
+  element: 'age_barchart',
+  data: [
+    <% 80.times do |i| %>
+    { y: '<%= i %>', a: <%= Random.rand(100) %> },
+    <%end%>
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Age'
+});
+
+</script>
