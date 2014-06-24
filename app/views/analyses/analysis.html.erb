@@ -1,31 +1,57 @@
 <h1>Analyses</h1>
 
-<div class="row">
-  <div class="col-md-6">
-    <h2> Persons:  <%= @persons %>  </h2>
-    <div id="sex_donut" style="height: 250px;"></div> 
-  </div>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-md-6">
+      <h2> Persons:  <%= @persons %>  </h2>
+      <div id="sex_donut" style="height: 250px;"></div> 
+    </div>
 
-  <div class="col-md-6">
-    <h2> Alive/Deceased
-    <div id="dead_alive_donut" style="height: 250px;"></div>
+    <div class="col-md-6">
+      <h2> Alive/Deceased
+      <div id="dead_alive_donut" style="height: 250px;"></div>
+    </div>
+  </div>
 </div>
 
-<h2> Birth occurrences by year </h2>
-<div id="birth_barchart" style="height: 250px;"></div>
+<div class="jumbotron">
+  <h2> Birth occurrences by year </h2>
+  <div id="birth_barchart" style="height: 250px;"></div>
 
-<h2> Death occurrences by year </h2>
-<div id="death_barchart" style="height: 250px;"></div>
+  <h2> Death occurrences by year </h2>
+  <div id="death_barchart" style="height: 250px;"></div>
 
-<h2> Alive persons by year </h2>
-<div id="alive_persons_areachart" style="height: 250px;"></div>
+  <h2> Age </h2>
+  <div id="age_barchart" style="height: 250px;"></div>
 
-<h2> Age </h2>
-<div id="age_barchart" style="height: 250px;"></div>
+  <h2> Average age by gender <h2>
+  <div id="age_average_barchart" style="height: 250px;"></div>
 
-<h2> Locations of births </h2>
+  <h2> Alive persons by year </h2>
+  <div id="alive_persons_areachart" style="height: 250px;"></div>
+</div>
 
-<h2> Location of Deaths </h2>
+<div class="jumbotron">
+  <h2> Nationalities </h2>
+  <div id="nationalites_barchart" style="height: 250px;"></div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h2> Places of birth </h2>
+    </div>
+    <div class="col-md-6">
+      <h2> Places of death</h2>
+    </div>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <h2> Lastnames </h2>
+  <div id="lastnames_barchart" style="height: 250px;"></div>
+
+  <h2> The 10 most common firstnames </h2>
+  <div id="common_firstnames" style="height: 250px;"></div>
+</div>
 
 <script>
 Morris.Donut({
@@ -68,6 +94,29 @@ Morris.Bar({
   labels: 'Deaths'
 });
 
+Morris.Bar({
+  element: 'age_average_barchart',
+  data: [
+    { y: 'male', a: 66},
+    { y: 'female', a: 73},
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Age'
+});
+
+Morris.Bar({
+  element: 'age_barchart',
+  data: [
+    <% 80.times do |i| %>
+    { y: '<%= i %>', a: <%= Random.rand(100) %> },
+    <%end%>
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Age'
+});
+
 Morris.Area({
   element: 'alive_persons_areachart',
   data: [
@@ -85,11 +134,46 @@ Morris.Area({
 });
 
 Morris.Bar({
-  element: 'age_barchart',
+  element: 'nationalites_barchart',
   data: [
-    <% 80.times do |i| %>
-    { y: '<%= i %>', a: <%= Random.rand(100) %> },
-    <%end%>
+    { y: 'Germany', a: 77},
+    { y: 'France', a: 24},
+    { y: 'England', a: 12},
+    { y: 'Poland', a: 44},
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Age'
+});
+
+Morris.Bar({
+  element: 'lastnames_barchart',
+  data: [
+    { y: 'Müller', a: 23},
+    { y: 'Huber', a: 44},
+    { y: 'Meier', a: 35},
+    { y: 'Weber', a: 5},
+    { y: 'Schmid', a: 67},
+    { y: 'Bergholz', a: 34},
+  ],
+  xkey: 'y',
+  ykeys: 'a',
+  labels: 'Age'
+});
+
+Morris.Bar({
+  element: 'common_firstnames',
+  data: [
+    { y: 'Peter', a: 12},
+    { y: 'Michael', a: 12},
+    { y: 'Ursula', a: 10},
+    { y: 'Karin', a: 9},
+    { y: 'Thomas', a: 7},
+    { y: 'Jürgen', a: 4},
+    { y: 'Wolfgang', a: 3},
+    { y: 'Klaus', a: 3},
+    { y: 'Sabine', a: 3},
+    { y: 'Ingrid', a: 2},
   ],
   xkey: 'y',
   ykeys: 'a',
