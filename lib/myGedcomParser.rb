@@ -12,6 +12,7 @@ class MyGedcomParser < GEDCOM::Parser
     #individuals
     @persons = Array.new
     @id_person = nil
+    @gender = nil
     @name = nil
     @occupation = nil
     @date_birth = nil
@@ -28,6 +29,10 @@ class MyGedcomParser < GEDCOM::Parser
     before %w(INDI) do |data|
       @parent_in_families = Array.new
       @id_person = data
+    end
+
+    before %w(INDI SEX) do |data|
+      @gender = data
     end
 
     before %w(INDI NAME) do |data|
@@ -67,7 +72,7 @@ class MyGedcomParser < GEDCOM::Parser
     end
 
     after %w(INDI) do
-      @persons.push(Individual.new(@id_person, @name, @occupation, @date_birth, @date_death, @date_burial, @location_birth, @location_death, @location_burial, @parent_in_families, @child_in_family))
+      @persons.push(Individual.new(@id_person, @gender, @name, @occupation, @date_birth, @date_death, @date_burial, @location_birth, @location_death, @location_burial, @parent_in_families, @child_in_family))
       empty_fields
     end
 
@@ -111,7 +116,6 @@ class MyGedcomParser < GEDCOM::Parser
   end
 
   def get_all_families
-    puts "IN PARSER: " + @families.count.to_s
     @families
   end
 

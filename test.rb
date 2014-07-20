@@ -13,6 +13,9 @@ class Test
       @all_persons_hashmap[person.id] = person
     end
     @families = parser.get_all_families
+
+    #blubbor
+    @persons = @all_persons
   end
 
   def find_all_descendants person_id, decendent_ids
@@ -80,5 +83,25 @@ class Test
       end
     end
     return "no such family"
+  end
+
+  def get_males
+    males = Array.new
+    @persons.each do |i|
+      if i.gender == "M"
+        males.push(i)
+      end
+    end
+    return males
+  end
+
+  def get_females
+    femails = Array.new
+    @persons.each do |i|
+      if i.gender == "F"
+        femails.push(i)
+      end
+    end
+    return femails
   end
 end

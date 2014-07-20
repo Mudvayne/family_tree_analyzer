@@ -1,4 +1,5 @@
 require './test'
 
 tester = Test.new
-puts tester.find_person_by_kekule "@I881@", 5
+puts "males: " + tester.get_males.count.to_s
+puts "females: " + tester.get_females.count.to_s

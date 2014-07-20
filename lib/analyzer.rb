@@ -6,7 +6,7 @@ class Analyzer
   def get_males
     males = Array.new
     @persons.each do |i|
-      if i.male? 
+      if i.gender == "M"
         males.push(i)
       end
     end
@@ -16,7 +16,7 @@ class Analyzer
   def get_females
     femails = Array.new
     @persons.each do |i|
-      if not i.male? 
+      if i.gender == "F"
         femails.push(i)
       end
     end

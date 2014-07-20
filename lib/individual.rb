@@ -1,9 +1,10 @@
 class Individual
 
-  attr_reader :id, :occupation, :date_birth, :date_death, :date_burial, :location_birth, :location_death, :location_burial, :parent_in_families, :child_in_family
+  attr_reader :id, :gender, :occupation, :date_birth, :date_death, :date_burial, :location_birth, :location_death, :location_burial, :parent_in_families, :child_in_family
 
-  def initialize(id, name, occupation, date_birth, date_death, date_burial, location_birth, location_death, location_burial, parent_in_families, child_in_family)
+  def initialize(id, gender, name, occupation, date_birth, date_death, date_burial, location_birth, location_death, location_burial, parent_in_families, child_in_family)
     @id = id || "N/A"
+    @gender = gender.upcase! || "N/A"
     @name = name.gsub("_"," ") || "N/A"
     @occupation = occupation || "N/A"
     @date_birth = date_birth || "N/A"
