@@ -18,6 +18,10 @@ body {
   padding: 13px;
 }
 
+.margin-bottom {
+  margin-bottom: 1em;
+}
+
 /* typography */
 
 h1 {
@@ -99,7 +103,8 @@ footer {
   display: table;
 }
 
-.form-inline .input-group-addon + .input-group-addon {
+.form-inline .input-group-addon + .input-group-addon,
+.filter-label-size {
   width: 144px;
   text-align: left;
 }
@@ -118,4 +123,12 @@ footer {
 
 #family-tree-analyzer .height-35px {
   height: 35px;
+}
+
+.modal-lg {
+  width: 1350px;
+}
+
+.no-border-radius {
+  border-radius: 0;
 }

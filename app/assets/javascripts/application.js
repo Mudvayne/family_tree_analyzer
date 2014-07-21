@@ -17,3 +17,4 @@
 //= require_tree .
 //= require raphael
 //= require morris
+//= require dataTables/jquery.dataTables
