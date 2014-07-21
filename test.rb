@@ -1,6 +1,8 @@
 require './lib/myGedcomParser'
 require './lib/individual'
 require './lib/family'
+require './lib/diagramData'
+require './lib/gedcom_date.rb'
 
 class Test
 
@@ -18,90 +20,131 @@ class Test
     @persons = @all_persons
   end
 
-  def find_all_descendants person_id, decendent_ids
-    @families.each do |family|
-      if family.husband == person_id || family.wife == person_id
-        decendent_ids = decendent_ids.push(family.children)
-        family.children.each do |child|
-          find_all_descendants child, decendent_ids
-        end
-      end
-    end
-    return decendent_ids
-  end
-
-  #returns found person_id or nil if no person was found
-  def find_person_by_kekule person_id, kekule
-    
-    #generate path
-    calc = kekule
-    path = Array.new
-
-    while calc > 1 do 
-      if calc % 2 == 0 
-        path.push(0) #male
-      else 
-        path.push(1) #female
-      end
-      calc /= 2
-    end
-    path.reverse! #reverse the path for cycle later
-
-    actual_person_id = person_id
-    family_id = ""
-    
-    #go through path
-    while path.count > 0 do
-      person = get_person_by_id actual_person_id
-      family_id = person.child_in_family
-      if family_id == "N/A" then return nil end #person with empty FAMC field found in path -> return nil
-      family = get_family_by_id family_id
-
-      if path.shift == 0 # go for father
-        actual_person_id = family.husband
-      else # go for mother
-        actual_person_id = family.wife
-      end
-    end
-
-    return actual_person_id
-  end
-
-  def get_person_by_id person_id
-    @all_persons.each do |person|
-      if person.id == person_id
-        return person
-      end
-    end
-    return "no such person"
-  end
-
-  def get_family_by_id family_id
-    @families.each do |family|
-      if family.id == family_id
-        return family
-      end
-    end
-    return "no such family"
-  end
-
+  #tested
   def get_males
     males = Array.new
     @persons.each do |i|
-      if i.gender == "M"
+      puts i.gender
+      if i.gender == "M" || i.gender == "m"
         males.push(i)
       end
     end
     return males
   end
 
+  #tested
   def get_females
-    femails = Array.new
+    females = Array.new
     @persons.each do |i|
-      if i.gender == "F"
-        femails.push(i)
+      if i.gender == "F" || i.gender == "f"
+        females.push(i)
       end
     end
-    return femails
+    return females
+  end
+
+  #tested
+  def get_locations_of_birth
+    puts "entering"
+    locations = Array.new
+    @persons.each do |person|
+      if not person.location_birth == "N/A" then locations.push(person.location_birth) end
+    end
+    return locations
+  end
+
+  #tested
+  def get_locations_of_death
+    locations = Array.new
+    @persons.each do |person|
+      if not person.location_death == "N/A" then locations.push(person.location_death) end
+    end
+    return locations
+  end
+
+  def get_birth_accurrences_by_year
+    birth_years = Array.new
+    @persons.each do |person|
+      year = get_year person.date_birth
+      if not year == "N/A"
+        birth_years.push(year)
+      end
+    end
+    return get_diagram_data_array birth_years
+  end
+
+  def get_death_accurrences_by_year
+    death_years = Array.new
+    @persons.each do |person|
+      year = get_year person.date_death
+      if not year == "N/A"
+        death_years.push(year)
+      end
+    end
+    return get_diagram_data_array death_years
+  end
+
+  def get_number_alive_persons
+    count = 0
+    @persons.each do |person|
+      if person.date_death == "N/A" then count += 1 end
+    end
+    return count
+  end
+
+  def get_number_deceased_persons
+    return @persons.count - get_number_alive_persons
+  end
+
+  def get_ages_by_year
+
+  end
+  
+  def get_average_age_male
+
+  end
+
+  def get_average_age_female
+    
+  end
+
+  def get_alive_persons_by_year
+
+  end
+
+  def get_count_by_nationalities
+
+  end
+
+  def get_count_by_lastnames
+
+  end
+
+  def get_ten_most_common_firstnames
+
+  end
+
+  private
+  def get_year date
+    d = GEDCOM::Date.safe_new( date )
+    if (not d.first.has_year?) || date == "N/A"
+      return "N/A"
+    else
+      return d.first.year
+    end
+  end
+
+  def get_diagram_data_array years
+    years.sort!
+    diagram_data_array = Array.new
+    actual_year = years.first
+    last_year = years.last
+    while actual_year < last_year do
+      size_before = years.count
+      years.delete(actual_year)
+      diagram_data_array.push(DiagramData.new(actual_year, size_before - years.count))
+      actual_year += 1
+    end
+    return diagram_data_array
   end
 end

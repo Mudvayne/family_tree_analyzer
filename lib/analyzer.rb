@@ -1,3 +1,6 @@
+require './lib/diagramData'
+require './lib/gedcom_date.rb'
+
 class Analyzer
   def initialize persons
     @persons = persons
@@ -6,7 +9,7 @@ class Analyzer
   def get_males
     males = Array.new
     @persons.each do |i|
-      if i.gender == "M"
+      if i.gender == "M" || i.gender == "m"
         males.push(i)
       end
     end
@@ -14,33 +17,47 @@ class Analyzer
   end
 
   def get_females
-    femails = Array.new
+    females = Array.new
     @persons.each do |i|
-      if i.gender == "F"
-        femails.push(i)
+      if i.gender == "F" || i.gender == "f"
+        females.push(i)
       end
     end
-    return femails
-  end
-
-  def get_birth_accurrences_by_year
-    start_year = get_oldest_persons_birth_year
-    end_year = Time.now.to_a[5]
-    #TODO
-  end
-
-  def get_death_accurrences_by_year
-    start_year = get_oldest_persons_death_year
-    end_year = Time.now.to_a[5]
-    #TODO
+    return females
   end
 
   def get_number_alive_persons
-
+    count = 0
+    @persons.each do |person|
+      if person.date_death == "N/A" then count += 1 end
+    end
+    return count
   end
 
-  def get_number_death_persons
+  def get_number_deceased_persons
     return @persons.count - get_number_alive_persons
+  end
+
+  def get_birth_accurrences_by_year
+    birth_years = Array.new
+    @persons.each do |person|
+      year = get_year person.date_birth
+      if not year == "N/A"
+        birth_years.push(year)
+      end
+    end
+    return get_diagram_data_array birth_years
+  end
+
+  def get_death_accurrences_by_year
+    death_years = Array.new
+    @persons.each do |person|
+      year = get_year person.date_death
+      if not year == "N/A"
+        death_years.push(year)
+      end
+    end
+    return get_diagram_data_array death_years
   end
 
   def get_ages_by_year
@@ -70,35 +87,44 @@ class Analyzer
 
   def get_locations_of_birth
     locations = Array.new
-    @persons.each do |i|
-      if not i.locaation_birth == "N/A" then location.push(i.locaation_birth) end
+    @persons.each do |person|
+      if not person.location_birth == "N/A" then locations.push(person.location_birth) end
     end
     return locations
   end
 
   def get_locations_of_death
     locations = Array.new
-    @persons.each do |i|
-      if not i.locaation_death == "N/A" then location.push(i.locaation_death) end
+    @persons.each do |person|
+      if not person.location_death == "N/A" then locations.push(person.location_death) end
     end
     return locations
   end
 
   private
-  def get_oldest_persons_birth_year
-    year = 999999
-    @persons.each do |i|
-      if i.date_birth.last < year then year = i.date_birth.last end
+  def get_year date
+    d = GEDCOM::Date.safe_new( date )
+    if (not d.first.has_year?) || date == "N/A"
+      return "N/A"
+    else
+      return d.first.year
     end
-    return year
   end
 
-  private
-  def get_oldest_persons_death_year
-    year = 999999
-    @persons.each do |i|
-      if i.date_death.last < year then year = i.date_death.last end
+  def get_diagram_data_array years
+    years.sort!
+    diagram_data_array = Array.new
+    actual_year = years.first
+    last_year = years.last
+
+    puts actual_year
+    puts last_year
+    while actual_year < last_year do
+      size_before = years.count
+      years.delete(actual_year)
+      diagram_data_array.push(DiagramData.new(actual_year, size_before - years.count))
+      actual_year += 1
     end
-    return year
+    return diagram_data_array
   end
 end

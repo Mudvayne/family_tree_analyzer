@@ -2,13 +2,11 @@
 
 <div class="jumbotron">
   <div class="row">
+    <h2> Persons:  <%= @persons.count %>  </h2>
     <div class="col-md-6">
-      <h2> Persons:  <%= @persons %>  </h2>
       <div id="sex_donut" style="height: 250px;"></div> 
     </div>
-
     <div class="col-md-6">
-      <h2> Alive/Deceased
       <div id="dead_alive_donut" style="height: 250px;"></div>
     </div>
   </div>
@@ -54,130 +52,129 @@
 </div>
 
 <script>
-Morris.Donut({
-  element: 'sex_donut',
-  data: [
-    {label: "Male", value: 70},
-    {label: "Female", value: 80},
-  ]
-});
+  Morris.Donut({
+    element: 'sex_donut',
+    data: [
+      {label: "Male", value: <%= @number_male_persons %>},
+      {label: "Female", value: <%= @number_female_persons %>},
+    ]
+  });
 
-Morris.Donut({
-  element: 'dead_alive_donut',
-  data: [
-    {label: "Alive", value: 120},
-    {label: "Deceased", value: 30},
-  ]
-});
+  Morris.Donut({
+    element: 'dead_alive_donut',
+    data: [
+      {label: "Alive", value: <%= @number_alive_persons %>},
+      {label: "Deceased", value: <%= @number_deceased_persons %>},
+    ]
+  });
 
-Morris.Bar({
-  element: 'birth_barchart',
-  data: [
-    <% 80.times do |i| %>
-      { y: '<%= i+1930 %>', a: <%= Random.rand(20) %> },
-    <%end%>
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Births'
-});
+  Morris.Bar({
+    element: 'birth_barchart',
+    data: [
+      <% @birth_occurrences_by_year.each do |i| %>
+        { y: '<%= i.label %>', a: <%= i.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Births'
+  });
 
-Morris.Bar({
-  element: 'death_barchart',
-  data: [
-    <% 80.times do |i| %>
-      { y: '<%= i+1930 %>', a: <%= Random.rand(20) %> },
-    <%end%>
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Deaths'
-});
+  Morris.Bar({
+    element: 'death_barchart',
+    data: [
+      <% @death_occurrences_by_year.each do |i| %>
+        { y: '<%= i.label %>', a: <%= i.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Deaths'
+  });
 
-Morris.Bar({
-  element: 'age_average_barchart',
-  data: [
-    { y: 'male', a: 66},
-    { y: 'female', a: 73},
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Age'
-});
+  Morris.Bar({
+    element: 'age_average_barchart',
+    data: [
+      { y: 'male', a: 66},
+      { y: 'female', a: 73},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
 
-Morris.Bar({
-  element: 'age_barchart',
-  data: [
-    <% 80.times do |i| %>
-    { y: '<%= i %>', a: <%= Random.rand(100) %> },
-    <%end%>
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Age'
-});
+  Morris.Bar({
+    element: 'age_barchart',
+    data: [
+      <% 80.times do |i| %>
+      { y: '<%= i %>', a: <%= Random.rand(100) %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
 
-Morris.Area({
-  element: 'alive_persons_areachart',
-  data: [
-    { y: '2006', a: 100},
-    { y: '2007', a: 75},
-    { y: '2008', a: 50},
-    { y: '2009', a: 75},
-    { y: '2010', a: 50},
-    { y: '2011', a: 75},
-    { y: '2012', a: 100 }
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Alive Persons'
-});
+  Morris.Area({
+    element: 'alive_persons_areachart',
+    data: [
+      { y: '2006', a: 100},
+      { y: '2007', a: 75},
+      { y: '2008', a: 50},
+      { y: '2009', a: 75},
+      { y: '2010', a: 50},
+      { y: '2011', a: 75},
+      { y: '2012', a: 100 }
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Alive Persons'
+  });
 
-Morris.Bar({
-  element: 'nationalites_barchart',
-  data: [
-    { y: 'Germany', a: 77},
-    { y: 'France', a: 24},
-    { y: 'England', a: 12},
-    { y: 'Poland', a: 44},
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Age'
-});
+  Morris.Bar({
+    element: 'nationalites_barchart',
+    data: [
+      { y: 'Germany', a: 77},
+      { y: 'France', a: 24},
+      { y: 'England', a: 12},
+      { y: 'Poland', a: 44},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
 
-Morris.Bar({
-  element: 'lastnames_barchart',
-  data: [
-    { y: 'Müller', a: 23},
-    { y: 'Huber', a: 44},
-    { y: 'Meier', a: 35},
-    { y: 'Weber', a: 5},
-    { y: 'Schmid', a: 67},
-    { y: 'Bergholz', a: 34},
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Age'
-});
+  Morris.Bar({
+    element: 'lastnames_barchart',
+    data: [
+      { y: 'Müller', a: 23},
+      { y: 'Huber', a: 44},
+      { y: 'Meier', a: 35},
+      { y: 'Weber', a: 5},
+      { y: 'Schmid', a: 67},
+      { y: 'Bergholz', a: 34},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
 
-Morris.Bar({
-  element: 'common_firstnames',
-  data: [
-    { y: 'Peter', a: 12},
-    { y: 'Michael', a: 12},
-    { y: 'Ursula', a: 10},
-    { y: 'Karin', a: 9},
-    { y: 'Thomas', a: 7},
-    { y: 'Jürgen', a: 4},
-    { y: 'Wolfgang', a: 3},
-    { y: 'Klaus', a: 3},
-    { y: 'Sabine', a: 3},
-    { y: 'Ingrid', a: 2},
-  ],
-  xkey: 'y',
-  ykeys: 'a',
-  labels: 'Age'
-});
-
+  Morris.Bar({
+    element: 'common_firstnames',
+    data: [
+      { y: 'Peter', a: 12},
+      { y: 'Michael', a: 12},
+      { y: 'Ursula', a: 10},
+      { y: 'Karin', a: 9},
+      { y: 'Thomas', a: 7},
+      { y: 'Jürgen', a: 4},
+      { y: 'Wolfgang', a: 3},
+      { y: 'Klaus', a: 3},
+      { y: 'Sabine', a: 3},
+      { y: 'Ingrid', a: 2},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
 </script>
