@@ -24,7 +24,6 @@ class Test
   def get_males
     males = Array.new
     @persons.each do |i|
-      puts i.gender
       if i.gender == "M" || i.gender == "m"
         males.push(i)
       end
@@ -100,8 +99,30 @@ class Test
 
   end
   
-  def get_average_age_male
-
+  #returns an array: [0] = average are, [1] = relevant persons
+  def get_average_age_of gender
+    if gender == "male" then gender = "M" else gender = "F" end
+    persons_for_calculation = 0;
+    age = 0;
+    @persons.each do |person|
+      if person.gender == gender || person.gender == gender.downcase
+        birth_year = get_year person.date_birth
+        if not birth_year == "N/A" #person not relevant 
+          death_year = get_year person.date_death
+          if death_year == "N/A" #alive
+            death_year = Time.new.year
+          end
+          if (death_year - birth_year) > -1 #person not relevant (negative age -> wrong data!)
+            age += (death_year - birth_year)
+            persons_for_calculation += 1
+          end
+        end
+      end
+    end
+    return_value = Array.new
+    return_value.push(age / persons_for_calculation)
+    return_value.push(persons_for_calculation)
+    return return_value
   end
 
   def get_average_age_female

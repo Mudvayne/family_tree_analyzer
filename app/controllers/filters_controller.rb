@@ -141,7 +141,29 @@ class FiltersController < ApplicationController
       checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
     end
-
+=begin
+    if params[:descendence_checkbox] == "on"
+      checkbox_set = true
+      if params[:descendence_filter_type] == "kekule"
+        descendent_ids = (find_person_by_kekule params[:descendence_person_id], params[:descendence_kekule_number].to_i)
+      elsif params[:descendence_filter_type] == "all"
+        descendent_ids = (find_all_descendants params[:descendence_person_id], Array.new)
+      end
+      puts "DESCENDANT_IDS:::: " + descendent_ids.count.to_s
+      descendents = Array.new
+      descendent_ids.each do |descendent_id|
+        puts "C O U N T = " + descendent_id.count.to_s
+        descendents.push(get_person_by_id descendent_id)
+      end
+      puts "DESCENDANTS:::: "
+      descendent_ids.each do |d|
+        puts d
+      end
+      puts " 1 MATCHED:::: " + matched_persons.count.to_s
+      matched_persons = matched_persons & descendents
+      puts " 2 MATCHED:::: " + matched_persons.count.to_s
+    end
+=end
     if matched_persons.count == list_of_persons.count && checkbox_set == false #no matches
       return Array.new
     else

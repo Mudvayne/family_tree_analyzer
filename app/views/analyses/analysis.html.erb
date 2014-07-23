@@ -13,19 +13,19 @@
 </div>
 
 <div class="jumbotron">
-  <h2> Birth occurrences by year </h2>
+  <h2> Birth occurrences by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
-  <h2> Death occurrences by year </h2>
+  <h2> Death occurrences by decade </h2>
   <div id="death_barchart" style="height: 250px;"></div>
-
-  <h2> Age </h2>
-  <div id="age_barchart" style="height: 250px;"></div>
 
   <h2> Average age by gender <h2>
   <div id="age_average_barchart" style="height: 250px;"></div>
 
-  <h2> Alive persons by year </h2>
+  <h2> Age </h2>
+  <div id="age_barchart" style="height: 250px;"></div>
+
+  <h2> Alive persons by decade </h2>
   <div id="alive_persons_areachart" style="height: 250px;"></div>
 </div>
 
@@ -71,11 +71,9 @@
   Morris.Bar({
     element: 'birth_barchart',
     data: [
-      /*
-      <% @birth_occurrences_by_year.each do |i| %>
+      <% @birth_occurrences_by_decade.each do |i| %>
         { y: '<%= i.label %>', a: <%= i.value %> },
       <%end%>
-      */
     ],
     xkey: 'y',
     ykeys: 'a',
@@ -85,11 +83,9 @@
   Morris.Bar({
     element: 'death_barchart',
     data: [
-      /*
-      <% @death_occurrences_by_year.each do |i| %>
+      <% @death_occurrences_by_decade.each do |i| %>
         { y: '<%= i.label %>', a: <%= i.value %> },
       <%end%>
-      */
     ],
     xkey: 'y',
     ykeys: 'a',
@@ -99,8 +95,8 @@
   Morris.Bar({
     element: 'age_average_barchart',
     data: [
-      { y: 'male', a: 66},
-      { y: 'female', a: 73},
+      { y: 'males: <%= @average_age_males_array[1] %> of <%= @number_male_persons %> correct records.', a: <%= @average_age_males_array[0] %>},
+      { y: 'females: <%= @average_age_females_array[1] %> of <%= @number_female_persons %> correct records.', a: <%= @average_age_females_array[0] %>},
     ],
     xkey: 'y',
     ykeys: 'a',

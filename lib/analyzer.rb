@@ -38,7 +38,7 @@ class Analyzer
     return @persons.count - get_number_alive_persons
   end
 
-  def get_birth_accurrences_by_year
+  def get_birth_accurrences_by_decade
     birth_years = Array.new
     @persons.each do |person|
       year = get_year person.date_birth
@@ -49,7 +49,7 @@ class Analyzer
     return get_diagram_data_array birth_years
   end
 
-  def get_death_accurrences_by_year
+  def get_death_accurrences_by_decade
     death_years = Array.new
     @persons.each do |person|
       year = get_year person.date_death
@@ -60,16 +60,36 @@ class Analyzer
     return get_diagram_data_array death_years
   end
 
-  def get_ages_by_year
-
+  def get_ages
+    @persons.each do |person|
+      
+    end
   end
   
-  def get_average_age_male
-
-  end
-
-  def get_average_age_female
-    
+  #returns an array: [0] = average are, [1] = relevant persons
+  def get_average_age_of gender
+    if gender == "male" then gender = "M" else gender = "F" end
+    persons_for_calculation = 0;
+    age = 0;
+    @persons.each do |person|
+      if person.gender == gender || person.gender == gender.downcase
+        birth_year = get_year person.date_birth
+        if not birth_year == "N/A" #person not relevant 
+          death_year = get_year person.date_death
+          if death_year == "N/A" #alive
+            death_year = Time.new.year
+          end
+          if (death_year - birth_year) > -1 #person not relevant (negative age -> wrong data!)
+            age += (death_year - birth_year)
+            persons_for_calculation += 1
+          end
+        end
+      end
+    end
+    return_value = Array.new
+    return_value.push(age / persons_for_calculation)
+    return_value.push(persons_for_calculation)
+    return return_value
   end
 
   def get_alive_persons_by_year
@@ -119,11 +139,17 @@ class Analyzer
 
     puts actual_year
     puts last_year
+
     while actual_year < last_year do
-      size_before = years.count
-      years.delete(actual_year)
-      diagram_data_array.push(DiagramData.new(actual_year, size_before - years.count))
-      actual_year += 1
+      births = 0
+      block = actual_year + 10
+      while actual_year < block do 
+        size_before = years.count
+        years.delete(actual_year)
+        births += size_before - years.count
+        actual_year += 1
+      end
+      diagram_data_array.push(DiagramData.new(actual_year.to_s + " - " + (actual_year + 10).to_s, births))
     end
     return diagram_data_array
   end
