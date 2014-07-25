@@ -64,4 +64,8 @@ class Individual
 
     return string
   end
+
+  def nationality
+    return @location_birth.split(",").last
+  end
 end

@@ -1,1 +1,421 @@
-males = 1695 relevant = 920 average age = 56
+lastname: Hanover count: 70
+lastname: Romanov count: 66
+lastname: Stuart count: 34
+lastname: Windsor count: 29
+lastname: Howard count: 29
+lastname: Tudor count: 21
+lastname: Seymour count: 20
+lastname: Oldenburg count: 18
+lastname: Hohenzollern count: 18
+lastname: Wurttemberg count: 18
+lastname: Wittelsbach count: 17
+lastname: Mortimer count: 15
+lastname: Beaufort count: 15
+lastname: Spencer count: 15
+lastname: Lascelles count: 15
+lastname: Ferguson count: 13
+lastname: Bowes-Lyon count: 12
+lastname: Mountbatten count: 12
+lastname: Hamilton count: 11
+lastname: Dudley count: 10
+lastname: Grey count: 9
+lastname: Stewart count: 9
+lastname: McCorquodale count: 7
+lastname: Bruce count: 6
+lastname: Cartland count: 6
+lastname: Straehl count: 6
+lastname: Scobell count: 6
+lastname: Ferner count: 6
+lastname: Unknown count: 6
+lastname: Holland count: 6
+lastname: Legge count: 6
+lastname: Knollys count: 6
+lastname: George count: 6
+lastname: von Arbin count: 6
+lastname: Bingham count: 6
+lastname: Nevill count: 5
+lastname: O'Brien count: 5
+lastname: Montagu-Douglas- count: 5
+lastname: Ullens count: 5
+lastname: Plantagenet count: 5
+lastname: Beauchamp count: 4
+lastname: De Bohun count: 4
+lastname: Kautz count: 4
+lastname: Dacre count: 4
+lastname: Boleyn count: 4
+lastname: Devereux count: 4
+lastname: Nilert count: 4
+lastname: Marshal count: 4
+lastname: Brandon count: 4
+lastname: Gill count: 4
+lastname: Hill count: 4
+lastname: Baring count: 4
+lastname: Phillips count: 4
+lastname: Clifford count: 4
+lastname: Lorentzen count: 4
+lastname: Burke Roche count: 4
+lastname: Hastings count: 4
+lastname: Wellesley count: 4
+lastname: Bauscher count: 4
+lastname: Carnegie count: 4
+lastname: Armstrong-Jones count: 4
+lastname: Carey count: 3
+lastname: Scott count: 3
+lastname: Wright count: 3
+lastname: Ryding count: 3
+lastname: Russell count: 3
+lastname: Smith count: 3
+lastname: Balliol count: 3
+lastname: Bariatinsky count: 3
+lastname: Koulikovsky count: 3
+lastname: Cavendish count: 3
+lastname: Cavendish-Bentin count: 3
+lastname: Reutersward count: 3
+lastname: Fitzroy count: 3
+lastname: Work count: 3
+lastname: Woodville count: 3
+lastname: Wingfield count: 3
+lastname: Fellowes count: 3
+lastname: Littlejohn count: 3
+lastname: Coke count: 3
+lastname: Drummond count: 3
+lastname: Parr count: 3
+lastname: Stafford count: 3
+lastname: Ogilvy count: 3
+lastname: Courtenay count: 3
+lastname: Brand count: 3
+lastname: Makim count: 3
+lastname: Douglas count: 3
+lastname: Bergstrom count: 3
+lastname: Stanley count: 3
+lastname: Kreuger count: 2
+lastname: Bowes count: 2
+lastname: Munck count: 2
+lastname: Mowatt count: 2
+lastname: Bourchier count: 2
+lastname: Stein count: 2
+lastname: De Braose count: 2
+lastname: Boothby count: 2
+lastname: Streshniev count: 2
+lastname: Montagu-Douglas count: 2
+lastname: Medforth-Mills count: 2
+lastname: Tilney count: 2
+lastname: Tomaselli count: 2
+lastname: Marsham count: 2
+lastname: Neville count: 2
+lastname: Boyle count: 2
+lastname: Marr count: 2
+lastname: Manos count: 2
+lastname: Crombie count: 2
+lastname: Sommerlath count: 2
+lastname: Visconti count: 2
+lastname: Magnusson count: 2
+lastname: Walpole count: 2
+lastname: Lyon count: 2
+lastname: Warfield count: 2
+lastname: Loisinger count: 2
+lastname: Emery count: 2
+lastname: Cobham count: 2
+lastname: Lewes count: 2
+lastname: Sobieski count: 2
+lastname: Leontiev count: 2
+lastname: Bulteel count: 2
+lastname: Wood count: 2
+lastname: Ramsay count: 2
+lastname: Reuss count: 2
+lastname: Landgrave count: 2
+lastname: Fitzalan count: 2
+lastname: Lambrino count: 2
+lastname: Mure count: 2
+lastname: Cecil count: 2
+lastname: Roet count: 2
+lastname: Flach count: 2
+lastname: Rogers count: 2
+lastname: Fletcher count: 2
+lastname: Keppel count: 2
+lastname: Burnaby count: 2
+lastname: Karnovich count: 2
+lastname: Hyde count: 2
+lastname: Worsley count: 2
+lastname: Schmith count: 2
+lastname: Audley count: 2
+lastname: Athling count: 2
+lastname: de Beauharnais count: 2
+lastname: de Montfort count: 2
+lastname: Hepburn count: 2
+lastname: Hayles count: 2
+lastname: von Amsberg count: 2
+lastname: Haraldsen count: 2
+lastname: von Hauke count: 2
+lastname: von Hugel count: 2
+lastname: Lyon-Bowes count: 2
+lastname: Wentworth count: 1
+lastname: Guildford count: 1
+lastname: Guillermo count: 1
+lastname: Guinness count: 1
+lastname: Gyllenkrok count: 1
+lastname: Green count: 1
+lastname: Granville count: 1
+lastname: Gore count: 1
+lastname: Harris count: 1
+lastname: Gordon-Lennox count: 1
+lastname: Hauntz count: 1
+lastname: Gomez-Acebo count: 1
+lastname: Golafre count: 1
+lastname: Herbert count: 1
+lastname: Hicks count: 1
+lastname: Glahns count: 1
+lastname: Hochuli count: 1
+lastname: Hodgson count: 1
+lastname: Gibbs count: 1
+lastname: Geddes count: 1
+lastname: Horton count: 1
+lastname: Gamage count: 1
+lastname: Hurepel count: 1
+lastname: Fry count: 1
+lastname: Jones count: 1
+lastname: Jorn count: 1
+lastname: Just count: 1
+lastname: Karageorgeovitch count: 1
+lastname: Karella count: 1
+lastname: Friso count: 1
+lastname: Freydag count: 1
+lastname: Keith count: 1
+lastname: Forbes count: 1
+lastname: Kerr count: 1
+lastname: Keveliock count: 1
+lastname: Keyes count: 1
+lastname: Kirby count: 1
+lastname: Fleetwood count: 1
+lastname: Knyvett count: 1
+lastname: Kohary count: 1
+lastname: Fitzwater count: 1
+lastname: Fitzherbert count: 1
+lastname: Krzesinska count: 1
+lastname: Kyme count: 1
+lastname: Fitzgerald count: 1
+lastname: FitzGeorge count: 1
+lastname: Langenskiold count: 1
+lastname: Larsson count: 1
+lastname: Fillol count: 1
+lastname: Leczinska count: 1
+lastname: Leczinski count: 1
+lastname: Lee count: 1
+lastname: Ferrers count: 1
+lastname: Leighton count: 1
+lastname: Fergant count: 1
+lastname: Farnese count: 1
+lastname: Lindberg count: 1
+lastname: Lindsay-Hogg count: 1
+lastname: Fairbrother count: 1
+lastname: Lockwood count: 1
+lastname: Logie count: 1
+lastname: Elphinstone count: 1
+lastname: Dutry count: 1
+lastname: Lupescu count: 1
+lastname: Dunbar count: 1
+lastname: Duhrrson count: 1
+lastname: Lyte count: 1
+lastname: MacAlpin count: 1
+lastname: MacMailnamo count: 1
+lastname: MacMurrough count: 1
+lastname: Magnus count: 1
+lastname: Magnuson count: 1
+lastname: Duff count: 1
+lastname: Druker count: 1
+lastname: Dreyer count: 1
+lastname: Manville count: 1
+lastname: Marone count: 1
+lastname: Dowding count: 1
+lastname: Dorrit count: 1
+lastname: Dewar count: 1
+lastname: Martel count: 1
+lastname: Despencer count: 1
+lastname: Derners count: 1
+lastname: Messenger count: 1
+lastname: Monomakh count: 1
+lastname: Deptford count: 1
+lastname: Denison count: 1
+lastname: Montague count: 1
+lastname: Morgan count: 1
+lastname: De La Pole count: 1
+lastname: Mortinozzi count: 1
+lastname: Morton count: 1
+lastname: Dawson-Damer count: 1
+lastname: Davies count: 1
+lastname: Mowbray count: 1
+lastname: Mucel count: 1
+lastname: Darell count: 1
+lastname: Curzon-Howe count: 1
+lastname: Naryshkin count: 1
+lastname: Curtain count: 1
+lastname: Cunningham count: 1
+lastname: Culpeper count: 1
+lastname: Nissvandt count: 1
+lastname: Crichton count: 1
+lastname: Obelensky count: 1
+lastname: Cornwall count: 1
+lastname: Ogston count: 1
+lastname: Comyn count: 1
+lastname: Ollen count: 1
+lastname: Onley count: 1
+lastname: Osborne count: 1
+lastname: Ovchinnikov count: 1
+lastname: Paget count: 1
+lastname: Palairet count: 1
+lastname: Palk count: 1
+lastname: Colvin count: 1
+lastname: Paston count: 1
+lastname: Patzek count: 1
+lastname: Pavlovna count: 1
+lastname: Pawel-Rammingen count: 1
+lastname: Percy count: 1
+lastname: Coljach count: 1
+lastname: Clay count: 1
+lastname: Pole count: 1
+lastname: Poynings count: 1
+lastname: Poyntz count: 1
+lastname: Prynne count: 1
+lastname: Radcliffe count: 1
+lastname: Radziwill count: 1
+lastname: Ragotski count: 1
+lastname: Chaworth count: 1
+lastname: Rashevska count: 1
+lastname: Rasmussen count: 1
+lastname: Rawlinson count: 1
+lastname: Rayevska count: 1
+lastname: Rayevski count: 1
+lastname: Cedergren count: 1
+lastname: Cavendish-Bentwi count: 1
+lastname: Rivelsrud count: 1
+lastname: Robbert count: 1
+lastname: Robsart count: 1
+lastname: Rocafort count: 1
+lastname: Roche count: 1
+lastname: Cave count: 1
+lastname: Cator count: 1
+lastname: Castenskiold count: 1
+lastname: Ruffo count: 1
+lastname: Carteret count: 1
+lastname: Carr count: 1
+lastname: Sackville count: 1
+lastname: Salisbury count: 1
+lastname: Sandilands count: 1
+lastname: Carpenter count: 1
+lastname: Scholastica count: 1
+lastname: Capet count: 1
+lastname: Campbell-Geddes count: 1
+lastname: Campbell count: 1
+lastname: Shand-Kydde count: 1
+lastname: Sheremetevskaya count: 1
+lastname: Sidney count: 1
+lastname: Silfverschiold count: 1
+lastname: Simpson count: 1
+lastname: Sinclair count: 1
+lastname: Skarne count: 1
+lastname: Butler count: 1
+lastname: Snylling count: 1
+lastname: Sobieska count: 1
+lastname: Bryce count: 1
+lastname: Somerset count: 1
+lastname: Brudenell count: 1
+lastname: Broughton count: 1
+lastname: St. Lawrence count: 1
+lastname: St. Leger count: 1
+lastname: Bridgeman count: 1
+lastname: Stampe count: 1
+lastname: Stanhope count: 1
+lastname: Boyd count: 1
+lastname: Boude count: 1
+lastname: Borough count: 1
+lastname: Stokes count: 1
+lastname: Stoney count: 1
+lastname: Borjesson count: 1
+lastname: Streona count: 1
+lastname: Bonney count: 1
+lastname: Strong count: 1
+lastname: Bonde count: 1
+lastname: Swynford count: 1
+lastname: Taillefer count: 1
+lastname: Talbot count: 1
+lastname: Talboys count: 1
+lastname: Terney count: 1
+lastname: Thomssen count: 1
+lastname: Tiedemann count: 1
+lastname: Bonaparte count: 1
+lastname: Blount count: 1
+lastname: Torlonia count: 1
+lastname: Troubridge count: 1
+lastname: Troyes count: 1
+lastname: Tuckwell count: 1
+lastname: Berg count: 1
+lastname: Ulick count: 1
+lastname: Berenger count: 1
+lastname: Berengar count: 1
+lastname: Unton count: 1
+lastname: Benyon count: 1
+lastname: Volkonska count: 1
+lastname: Volkonski count: 1
+lastname: Wachtmeister count: 1
+lastname: Wake count: 1
+lastname: Waldegrave count: 1
+lastname: Bentley count: 1
+lastname: Bennett count: 1
+lastname: Welles count: 1
+lastname: Bender count: 1
+lastname: Wellhoefer count: 1
+lastname: Grosvenor count: 1
+lastname: Wettin count: 1
+lastname: Whorwood count: 1
+lastname: Wijkmark count: 1
+lastname: Windham count: 1
+lastname: Bee count: 1
+lastname: Beaton count: 1
+lastname: Bean count: 1
+lastname: Bayliss count: 1
+lastname: Bassett count: 1
+lastname: Barrantes count: 1
+lastname: Baenkler count: 1
+lastname: Baels count: 1
+lastname: Atheling count: 1
+lastname: Yourievska count: 1
+lastname: Yussoupov count: 1
+lastname: Zarnekau count: 1
+lastname: Zoubkoff count: 1
+lastname: d'Aubigny count: 1
+lastname: d'Este count: 1
+lastname: de Asis count: 1
+lastname: Ashley count: 1
+lastname: de Beaumont count: 1
+lastname: de Burgh count: 1
+lastname: de Forz count: 1
+lastname: de Geer count: 1
+lastname: de Guzman count: 1
+lastname: de Laborde count: 1
+lastname: de Medici count: 1
+lastname: Arnasson count: 1
+lastname: de Polignac count: 1
+lastname: de Toledo count: 1
+lastname: de la Tour count: 1
+lastname: de' Medici count: 1
+lastname: la Fontaine count: 1
+lastname: le Brun count: 1
+lastname: van Vollenhoven count: 1
+lastname: Albertin count: 1
+lastname: Argyropoulos count: 1
+lastname: von Bassewitz count: 1
+lastname: von Deurs count: 1
+lastname: von Gunsteren count: 1
+lastname: von Harrach count: 1
+lastname: Ambler count: 1
+lastname: von Hochberg count: 1
+lastname: Alcaz count: 1
+lastname: von Humboldt count: 1
+lastname: von Merenberg count: 1
+lastname: von Rauch count: 1
+lastname: von Reden count: 1
+lastname: von Reibnitz count: 1
+lastname: von Rosen count: 1
+lastname: von Salviati count: 1
+lastname: von Thurn count: 1
+lastname: von dem Bussche- count: 1

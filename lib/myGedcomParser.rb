@@ -44,7 +44,7 @@ class MyGedcomParser < GEDCOM::Parser
     end
 
     before %w(INDI BIRT PLAC) do |data|
-      @location_burial = data
+      @location_birth = data
     end
 
     before %w(INDI DEAT DATE) do |data|

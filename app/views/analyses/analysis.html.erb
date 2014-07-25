@@ -13,20 +13,20 @@
 </div>
 
 <div class="jumbotron">
+  <p> <%= @correct_ages %> out of <%= @persons.count %> persons found with valid date fields for calculation. (= <%=@valid_dates_percentage%>%)</p>
   <h2> Birth occurrences by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
   <h2> Death occurrences by decade </h2>
   <div id="death_barchart" style="height: 250px;"></div>
 
-  <h2> Average age by gender <h2>
-  <div id="age_average_barchart" style="height: 250px;"></div>
-
   <h2> Age </h2>
   <div id="age_barchart" style="height: 250px;"></div>
 
-  <h2> Alive persons by decade </h2>
-  <div id="alive_persons_areachart" style="height: 250px;"></div>
+  <h2> Average age by gender <h2>
+  <div id="age_average_barchart" style="height: 250px;"></div>
+
+
 </div>
 
 <div class="jumbotron">
@@ -44,11 +44,11 @@
 </div>
 
 <div class="jumbotron">
-  <h2> Lastnames </h2>
-  <div id="lastnames_barchart" style="height: 250px;"></div>
+  <h2> The 10 most common lastnames </h2>
+  <div id="common_lastnames_barchart" style="height: 250px;"></div>
 
   <h2> The 10 most common firstnames </h2>
-  <div id="common_firstnames" style="height: 250px;"></div>
+  <div id="common_firstnames_barchart" style="height: 250px;"></div>
 </div>
 
 <script>
@@ -106,29 +106,13 @@
   Morris.Bar({
     element: 'age_barchart',
     data: [
-      <% 80.times do |i| %>
-      { y: '<%= i %>', a: <%= Random.rand(100) %> },
+      <% @ages.each do |age| %>
+      { y: '<%= age.label %>', a: <%= age.value %> },
       <%end%>
     ],
     xkey: 'y',
     ykeys: 'a',
     labels: 'Age'
-  });
-
-  Morris.Area({
-    element: 'alive_persons_areachart',
-    data: [
-      { y: '2006', a: 100},
-      { y: '2007', a: 75},
-      { y: '2008', a: 50},
-      { y: '2009', a: 75},
-      { y: '2010', a: 50},
-      { y: '2011', a: 75},
-      { y: '2012', a: 100 }
-    ],
-    xkey: 'y',
-    ykeys: 'a',
-    labels: 'Alive Persons'
   });
 
   Morris.Bar({
@@ -145,14 +129,11 @@
   });
 
   Morris.Bar({
-    element: 'lastnames_barchart',
+    element: 'common_lastnames_barchart',
     data: [
-      { y: 'Müller', a: 23},
-      { y: 'Huber', a: 44},
-      { y: 'Meier', a: 35},
-      { y: 'Weber', a: 5},
-      { y: 'Schmid', a: 67},
-      { y: 'Bergholz', a: 34},
+      <% @ten_most_common_lastnames.each do |lastnames| %>
+      { y: '<%= lastnames.label %>', a: <%= lastnames.value %> },
+      <%end%>
     ],
     xkey: 'y',
     ykeys: 'a',
@@ -160,18 +141,11 @@
   });
 
   Morris.Bar({
-    element: 'common_firstnames',
+    element: 'common_firstnames_barchart',
     data: [
-      { y: 'Peter', a: 12},
-      { y: 'Michael', a: 12},
-      { y: 'Ursula', a: 10},
-      { y: 'Karin', a: 9},
-      { y: 'Thomas', a: 7},
-      { y: 'Jürgen', a: 4},
-      { y: 'Wolfgang', a: 3},
-      { y: 'Klaus', a: 3},
-      { y: 'Sabine', a: 3},
-      { y: 'Ingrid', a: 2},
+      <% @ten_most_common_firstnames.each do |lastnames| %>
+      { y: '<%= lastnames.label %>', a: <%= lastnames.value %> },
+      <%end%>
     ],
     xkey: 'y',
     ykeys: 'a',
