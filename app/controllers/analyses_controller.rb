@@ -6,11 +6,15 @@ class AnalysesController < ApplicationController
     parser = MyGedcomParser.new
     parser.parse './royal.ged'
     @persons = parser.get_all_persons
+    @families = parser.get_all_families
 
-    analyzer = Analyzer.new @persons
+    analyzer = Analyzer.new @persons, @families
 
     @number_male_persons = analyzer.get_males_count
     @number_female_persons = analyzer.get_females_count
+
+    @families_count = analyzer.get_families_count
+    @average_children_per_family = analyzer.get_average_children_per_family
 
     @persons_with_vaid_date_fields = analyzer.get_persons_with_valid_date_fields
     @count_persons_with_birthyear_set = analyzer.get_persons_with_birthyear_set.count

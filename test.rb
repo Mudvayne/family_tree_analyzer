@@ -20,24 +20,30 @@ class Test
     @persons = @all_persons
   end
 
-  def get_males
-    males = Array.new
+  def get_males_count
+    males = 0
     @persons.each do |i|
       if i.gender == "M" || i.gender == "m"
-        males.push(i)
+        males += 1
       end
     end
     return males
   end
 
-  def get_females
-    females = Array.new
-    @persons.each do |i|
-      if i.gender == "F" || i.gender == "f"
-        females.push(i)
-      end
+  def get_females_count
+    return @persons.count - get_males_count
+  end
+
+  def get_families_count
+    return @families.count
+  end
+
+  def get_average_children_per_family
+    all_children = 0.to_f
+    @families.each do |family|
+      all_children += family.children.count
     end
-    return females
+    return all_children / get_families_count
   end
 
   def get_persons_with_valid_date_fields

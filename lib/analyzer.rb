@@ -2,8 +2,9 @@ require './lib/diagramData'
 require './lib/gedcom_date.rb'
 
 class Analyzer
-  def initialize persons
+  def initialize persons, families
     @persons = persons
+    @families = families
   end
 
   def get_males_count
@@ -18,6 +19,18 @@ class Analyzer
 
   def get_females_count
     return @persons.count - get_males_count
+  end
+
+  def get_families_count
+    return @families.count
+  end
+
+  def get_average_children_per_family
+    all_children = 0.to_f
+    @families.each do |family|
+      all_children += family.children.count
+    end
+    return all_children / get_families_count
   end
 
   def get_persons_with_valid_date_fields
