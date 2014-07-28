@@ -9,23 +9,21 @@ class AnalysesController < ApplicationController
 
     analyzer = Analyzer.new @persons
 
-    @number_male_persons = analyzer.get_males.count
-    @number_female_persons = analyzer.get_females.count
-    @number_alive_persons = analyzer.get_number_alive_persons
+    @number_male_persons = analyzer.get_males_count
+    @number_female_persons = analyzer.get_females_count
 
-    @number_deceased_persons = analyzer.get_number_deceased_persons
-    @birth_occurrences_by_decade = analyzer.get_birth_accurrences_by_decade
-    @death_occurrences_by_decade = analyzer.get_death_accurrences_by_decade
+    @persons_with_vaid_date_fields = analyzer.get_persons_with_valid_date_fields
+    @count_persons_with_birthyear_set = analyzer.get_persons_with_birthyear_set.count
+    @count_persons_with_birthyear_unset = @persons.count - @count_persons_with_birthyear_set
+    @count_probably_missing_death_dates = analyzer.get_count_of_probably_missing_death_dates
 
-    @average_age_males_array = analyzer.get_average_age_of "male"
-    @average_age_females_array = analyzer.get_average_age_of "female"
-
-    ages_return_value = analyzer.get_ages
-
-    @ages = ages_return_value[0]
-    @correct_ages = ages_return_value[1]
-    @valid_dates_percentage = ((100.to_f / @persons.count.to_f) * @correct_ages.to_f).round
-    #@alive_persons_by_decade = analyzer.get_alive_persons_by_decade
+    @birth_occurrences_by_decade = analyzer.get_birth_accurrences_by_decade @persons_with_vaid_date_fields
+    @death_occurrences_by_decade = analyzer.get_death_accurrences_by_decade @persons_with_vaid_date_fields
+    @alive_persons_by_decade = analyzer.get_alive_persons_by_decade @persons_with_vaid_date_fields
+    @ages = analyzer.get_ages @persons_with_vaid_date_fields
+    @average_age_males = analyzer.get_average_age_of("male", @persons_with_vaid_date_fields)
+    @average_age_females = analyzer.get_average_age_of("female", @persons_with_vaid_date_fields)
+   
     @ten_most_common_lastnames = analyzer.get_ten_most_common_lastnames
     @ten_most_common_firstnames = analyzer.get_ten_most_common_firstnames
   end

@@ -1,31 +1,42 @@
 <h1>Analyses</h1>
 
 <div class="jumbotron">
+  <h2> Persons:  <%= @persons.count %> </h2>
+  <div id="sex_donut" style="height: 250px;"></div> 
+</div>
+<div class="jumbotron">
+  <h2> Completeness of date fields for further analyses </h2>
   <div class="row">
-    <h2> Persons:  <%= @persons.count %>  </h2>
-    <div class="col-md-6">
-      <div id="sex_donut" style="height: 250px;"></div> 
+    <div class="col-md-4">
+      <h3> Valid/Invalid date fields </h3>
+      <div id="valid_donut" style="height: 250px;"></div>
     </div>
-    <div class="col-md-6">
-      <div id="dead_alive_donut" style="height: 250px;"></div>
+    <div class="col-md-4">
+      <h3> Birthyear set/not set </h3>
+      <div id="birthyear_set_donut" style="height: 250px;"></div>
+    </div>
+    <div class="col-md-4">
+      <h3> Probably missing death date </h3>
+      <div id="missing_deathdate_donut" style="height: 250px;"></div>
     </div>
   </div>
 </div>
 
 <div class="jumbotron">
-  <p> <%= @correct_ages %> out of <%= @persons.count %> persons found with valid date fields for calculation. (= <%=@valid_dates_percentage%>%)</p>
   <h2> Birth occurrences by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
   <h2> Death occurrences by decade </h2>
   <div id="death_barchart" style="height: 250px;"></div>
 
-  <h2> Age </h2>
+  <h2> Alive persons by decade </h2>
+  <div id="alive_by_decade_areachart" style="height: 250px;"></div> 
+
+  <h2> Age distribution </h2>
   <div id="age_barchart" style="height: 250px;"></div>
 
   <h2> Average age by gender <h2>
   <div id="age_average_barchart" style="height: 250px;"></div>
-
 
 </div>
 
@@ -55,16 +66,32 @@
   Morris.Donut({
     element: 'sex_donut',
     data: [
-      {label: "Male", value: <%= @number_male_persons %>},
-      {label: "Female", value: <%= @number_female_persons %>},
+      {label: "male", value: <%= @number_male_persons %>},
+      {label: "female", value: <%= @number_female_persons %>},
     ]
   });
 
   Morris.Donut({
-    element: 'dead_alive_donut',
+    element: 'valid_donut',
     data: [
-      {label: "Alive", value: <%= @number_alive_persons %>},
-      {label: "Deceased", value: <%= @number_deceased_persons %>},
+      {label: "valid", value: <%= @persons_with_vaid_date_fields.count %>},
+      {label: "invalid", value: <%= (@persons.count - @persons_with_vaid_date_fields.count) %>},
+    ]
+  });
+
+  Morris.Donut({
+    element: 'birthyear_set_donut',
+    data: [
+      {label: "set", value: <%= @count_persons_with_birthyear_set %>},
+      {label: "not set", value: <%= @count_persons_with_birthyear_unset %>},
+    ]
+  });
+
+  Morris.Donut({
+    element: 'missing_deathdate_donut',
+    data: [
+      {label: "missing", value: <%= @count_probably_missing_death_dates %>},
+      {label: "not missing", value: <%= (@persons.count - @count_probably_missing_death_dates) %>},
     ]
   });
 
@@ -92,11 +119,23 @@
     labels: 'Deaths'
   });
 
+  Morris.Area({
+    element: 'alive_by_decade_areachart',
+    data: [
+      <% @alive_persons_by_decade.each do |i| %>
+      { y: '<%= i.label %>', a: <%= i.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Alive persons'
+  });
+
   Morris.Bar({
     element: 'age_average_barchart',
     data: [
-      { y: 'males: <%= @average_age_males_array[1] %> of <%= @number_male_persons %> correct records.', a: <%= @average_age_males_array[0] %>},
-      { y: 'females: <%= @average_age_females_array[1] %> of <%= @number_female_persons %> correct records.', a: <%= @average_age_females_array[0] %>},
+      { y: 'males', a: <%= @average_age_males %>},
+      { y: 'females', a: <%= @average_age_females %>},
     ],
     xkey: 'y',
     ykeys: 'a',

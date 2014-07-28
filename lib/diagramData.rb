@@ -1,5 +1,5 @@
 class DiagramData
-  attr_reader :label, :value
+  attr_accessor :label, :value
   def initialize(label, value)
     @label = label
     @value = value
