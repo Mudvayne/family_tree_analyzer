@@ -102,8 +102,8 @@ class Analyzer
       birth_person = get_year person.date_birth
       if not birth_person == "N/A"
         index = (birth_person - first_year) / 10 #find first relevant index for performance
-        diagram_data_array.each do |i|
-          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+index*10)
+        while true do
+          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+index*10) #this will be true, for first interval
             diagram_data_array[index].value += 1
           else
             break #person died in this index, no need for checking greater indizes
@@ -112,7 +112,6 @@ class Analyzer
         end
       end
     end
-
     return diagram_data_array
   end
 

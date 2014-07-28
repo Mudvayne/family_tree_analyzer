@@ -7,6 +7,7 @@ persons = tester.get_persons_with_valid_date_fields
 
 persons_with_vaid_date_fields = tester.get_persons_with_valid_date_fields
 
+=begin
 data = tester.get_males_count
 puts "males: " + data.to_s
 
@@ -27,3 +28,15 @@ puts "families: " + data.to_s
 
 data = tester.get_average_children_per_family
 puts "average children per family: " + data.round(3).to_s
+
+data = tester.get_alive_persons_by_decade persons_with_vaid_date_fields
+data.each do |i|
+  puts i.label.to_s + " count: " + i.value.to_s
+end
+
+=end
+
+data = tester.find_all_descendants("@I108@",Array.new)
+data.each do |i|
+  puts i
+end

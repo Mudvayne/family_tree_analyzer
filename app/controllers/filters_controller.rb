@@ -6,13 +6,6 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
-
-    puts "IN INDEX: " + @families.count.to_s
-    
-    @families.each do |fam|
-      puts fam.to_s
-    end
-
   end
 
   def update
@@ -53,14 +46,25 @@ class FiltersController < ApplicationController
   end
   
   def set_all_persons_and_families
-    parser = MyGedcomParser.new
-    parser.parse './royal.ged'
-    @all_persons = parser.get_all_persons
-    @all_persons_hashmap = Hash.new
-    @all_persons.each do |person|
-      @all_persons_hashmap[person.id] = person
+    family = './royal.ged'
+    if not Rails.cache.exist?(family)
+      parser = MyGedcomParser.new
+      parser.parse family
+      @all_persons = parser.get_all_persons
+      @all_persons_hashmap = Hash.new
+      @all_persons.each do |person|
+        @all_persons_hashmap[person.id] = person
+      end
+      @families = parser.get_all_families
+      Rails.cache.write(family + "all_persons_hashmap", @all_persons_hashmap)
+      Rails.cache.write(family + "all_persons", @all_persons)
+      Rails.cache.write(family + "families", @families)
+      Rails.cache.write(family, true) # signal that this family is cached
+    else
+      @all_persons = Rails.cache.fetch(family + "all_persons")
+      @all_persons_hashmap = Rails.cache.fetch(family + "all_persons_hashmap")
+      @families = Rails.cache.fetch(family + "families")
     end
-    @families = parser.get_all_families
   end
   
   def to_right matched_persons
@@ -141,29 +145,23 @@ class FiltersController < ApplicationController
       checkbox_set = true
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
     end
-=begin
+
     if params[:descendence_checkbox] == "on"
       checkbox_set = true
       if params[:descendence_filter_type] == "kekule"
-        descendent_ids = (find_person_by_kekule params[:descendence_person_id], params[:descendence_kekule_number].to_i)
+        descendent_ids = find_person_by_kekule(params[:descendence_person_id], params[:descendence_kekule_number].to_i)
       elsif params[:descendence_filter_type] == "all"
-        descendent_ids = (find_all_descendants params[:descendence_person_id], Array.new)
+        descendent_ids = find_all_descendants(params[:descendence_person_id], Array.new)
       end
-      puts "DESCENDANT_IDS:::: " + descendent_ids.count.to_s
+
       descendents = Array.new
       descendent_ids.each do |descendent_id|
-        puts "C O U N T = " + descendent_id.count.to_s
         descendents.push(get_person_by_id descendent_id)
       end
-      puts "DESCENDANTS:::: "
-      descendent_ids.each do |d|
-        puts d
-      end
-      puts " 1 MATCHED:::: " + matched_persons.count.to_s
+
       matched_persons = matched_persons & descendents
-      puts " 2 MATCHED:::: " + matched_persons.count.to_s
     end
-=end
+
     if matched_persons.count == list_of_persons.count && checkbox_set == false #no matches
       return Array.new
     else
@@ -187,7 +185,7 @@ class FiltersController < ApplicationController
   def find_all_descendants person_id, decendent_ids
     @families.each do |family|
       if family.husband == person_id || family.wife == person_id
-        decendent_ids = decendent_ids.push(family.children)
+        decendent_ids.concat(family.children)
         family.children.each do |child|
           find_all_descendants child, decendent_ids
         end

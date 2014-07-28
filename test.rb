@@ -20,6 +20,18 @@ class Test
     @persons = @all_persons
   end
 
+  def find_all_descendants person_id, decendent_ids
+    @families.each do |family|
+      if family.husband == person_id || family.wife == person_id
+        decendent_ids.concat(family.children)
+        family.children.each do |child|
+          find_all_descendants child, decendent_ids
+        end
+      end
+    end
+    return decendent_ids
+  end
+
   def get_males_count
     males = 0
     @persons.each do |i|
@@ -115,8 +127,8 @@ class Test
       birth_person = get_year person.date_birth
       if not birth_person == "N/A"
         index = (birth_person - first_year) / 10 #find first relevant index for performance
-        diagram_data_array.each do |i|
-          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+index*10)
+        while true do
+          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+index*10) #this will be true, for first interval
             diagram_data_array[index].value += 1
           else
             break #person died in this index, no need for checking greater indizes
@@ -125,7 +137,6 @@ class Test
         end
       end
     end
-
     return diagram_data_array
   end
 
