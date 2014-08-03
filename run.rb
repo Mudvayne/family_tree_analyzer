@@ -59,8 +59,7 @@ puts "TIME NEEDED: " + (Time.new - time_before).to_s
 
 =end
 
-data = tester.get_average_age_of_male_at_marriage
+
+data = tester.get_average_age_of_female_at_first_child
 puts data
 
-data = tester.get_average_age_of_female_at_marriage
-puts data

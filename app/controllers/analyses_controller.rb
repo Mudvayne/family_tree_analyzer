@@ -30,8 +30,8 @@ class AnalysesController < ApplicationController
 
     @average_age_of_male_at_marriage = analyzer.get_average_age_of_male_at_marriage
     @average_age_of_female_at_marriage = analyzer.get_average_age_of_female_at_marriage
-    @average_age_of_male_at_first_child = 28
-    @average_age_of_female_at_first_child = 22
+    @average_age_of_male_at_first_child = analyzer.get_average_age_of_male_at_first_child
+    @average_age_of_female_at_first_child = analyzer.get_average_age_of_female_at_first_child
    
     @ten_most_common_lastnames = analyzer.get_ten_most_common_lastnames
     @ten_most_common_firstnames = analyzer.get_ten_most_common_firstnames
