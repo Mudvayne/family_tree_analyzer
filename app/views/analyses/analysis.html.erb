@@ -16,7 +16,7 @@
   <h2> Completeness of date fields for further analyses </h2>
   <div class="row">
     <div class="col-md-4">
-      <h3> Valid/Invalid date fields </h3>
+      <h3> Persons used for calculation </h3>
       <div id="valid_donut" style="height: 250px;"></div>
     </div>
     <div class="col-md-4">
@@ -24,17 +24,17 @@
       <div id="birthyear_set_donut" style="height: 250px;"></div>
     </div>
     <div class="col-md-4">
-      <h3> Probably missing death date </h3>
+      <h3> Probably missing death-year </h3>
       <div id="missing_deathdate_donut" style="height: 250px;"></div>
     </div>
   </div>
 </div>
 
 <div class="jumbotron">
-  <h2> Birth occurrences by decade </h2>
+  <h2> Births by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
-  <h2> Death occurrences by decade </h2>
+  <h2> Deaths by decade </h2>
   <div id="death_barchart" style="height: 250px;"></div>
 
   <h2> Alive persons by decade </h2>
@@ -46,6 +46,16 @@
   <h2> Average age by gender <h2>
   <div id="age_average_barchart" style="height: 250px;"></div>
 
+  <div class="row">
+    <div class="col-md-6">
+      <h2> Average age at marriage </h2>
+      <div id="average_age_at_marriage_barchart" style="height: 250px;"></div> 
+    </div>
+    <div class="col-md-6">
+      <h2> Average age at first child </h2>
+      <div id="average_age_at_first_child_barchart" style="height: 250px;"></div> 
+    </div>
+  </div>
 </div>
 
 <div class="jumbotron">
@@ -92,8 +102,8 @@
   Morris.Donut({
     element: 'valid_donut',
     data: [
-      {label: "valid", value: <%= @persons_with_vaid_date_fields.count %>},
-      {label: "invalid", value: <%= (@persons.count - @persons_with_vaid_date_fields.count) %>},
+      {label: "used", value: <%= @persons_with_vaid_date_fields.count %>},
+      {label: "not used", value: <%= (@persons.count - @persons_with_vaid_date_fields.count) %>},
     ]
   });
 
@@ -154,6 +164,28 @@
     data: [
       { y: 'males', a: <%= @average_age_males %>},
       { y: 'females', a: <%= @average_age_females %>},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
+  Morris.Bar({
+    element: 'average_age_at_marriage_barchart',
+    data: [
+      { y: 'males', a: <%= @average_age_of_male_at_marriage %>},
+      { y: 'females', a: <%= @average_age_of_female_at_marriage %>},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
+  Morris.Bar({
+    element: 'average_age_at_first_child_barchart',
+    data: [
+      { y: 'males', a: <%= @average_age_of_male_at_first_child %>},
+      { y: 'females', a: <%= @average_age_of_female_at_first_child %>},
     ],
     xkey: 'y',
     ykeys: 'a',

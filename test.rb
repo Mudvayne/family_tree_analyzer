@@ -282,6 +282,50 @@ class Test
 
   # nationalities here
 
+  def get_average_age_of_male_at_marriage
+    age_at_marriage_all = 0
+    count_persons = 0
+    @families.each do |family|
+      year = get_year family.date_married
+      if not year == "N/A"
+        if not family.husband == "N/A"
+          husband = get_person_by_id family.husband
+          husband_birth_year = get_year husband.date_birth
+          if not husband_birth_year == "N/A" 
+            age = year.to_i - husband_birth_year.to_i
+            if age > -1
+              age_at_marriage_all += age
+              count_persons += 1
+            end
+          end
+        end
+      end
+    end
+    return age_at_marriage_all / count_persons
+  end
+
+  def get_average_age_of_female_at_marriage
+    age_at_marriage_all = 0
+    count_persons = 0
+    @families.each do |family|
+      year = get_year family.date_married
+      if not year == "N/A"        
+        if not family.wife == "N/A"
+          wife = get_person_by_id family.wife
+          wife_birth_year = get_year wife.date_birth
+          if not wife_birth_year == "N/A"
+            age = year.to_i - wife_birth_year.to_i
+            if age > -1
+              age_at_marriage_all += age
+              count_persons += 1
+            end
+          end
+        end
+      end
+    end
+    return age_at_marriage_all / count_persons
+  end
+
   def get_ten_most_common_lastnames
     lastnames = Array.new
     @persons.each do |person|

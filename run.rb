@@ -34,7 +34,7 @@ data.each do |i|
   puts i.label.to_s + " count: " + i.value.to_s
 end
 
-=end
+
 
 time_before = Time.new
 data = tester.find_all_descendants2("@I34@", Array.new)
@@ -57,3 +57,10 @@ end
 puts data.count
 puts "TIME NEEDED: " + (Time.new - time_before).to_s
 
+=end
+
+data = tester.get_average_age_of_male_at_marriage
+puts data
+
+data = tester.get_average_age_of_female_at_marriage
+puts data
