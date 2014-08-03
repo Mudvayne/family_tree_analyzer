@@ -20,17 +20,118 @@ class Test
     @persons = @all_persons
   end
 
-  def find_all_descendants person_id, decendent_ids
+  ### filters controller
+=begin
+  def find_all_descendants person_id, descendent_ids
     @families.each do |family|
       if family.husband == person_id || family.wife == person_id
-        decendent_ids.concat(family.children)
         family.children.each do |child|
-          find_all_descendants child, decendent_ids
+          if not descendent_ids.include? child 
+            descendent_ids.push(child) 
+            find_all_descendants child, descendent_ids
+          end
         end
       end
     end
-    return decendent_ids
+    return descendent_ids
   end
+=end
+
+  def find_all_descendants person_id, descendent_ids
+    person = get_person_by_id person_id
+    family_ids = person.parent_in_families
+    if not family_ids == "N/A"
+      families = Array.new
+      family_ids.each do |family_id|
+        families.push(get_family_by_id family_id)
+      end
+      families.each do |family|
+        if family.husband == person_id || family.wife == person_id
+          family.children.each do |child|
+            if not descendent_ids.include? child 
+              descendent_ids.push(child) 
+              find_all_descendants child, descendent_ids
+            end
+          end
+        end
+      end
+    end
+    return descendent_ids
+  end
+
+  def find_all_ancestors person_id, ancestor_ids
+    person = get_person_by_id person_id
+    if not person.child_in_family == nil
+      family = get_family_by_id person.child_in_family
+      if not family == "no such family"
+        if (not ancestor_ids.include? family.husband) && (not family.husband == "N/A")
+          ancestor_ids.push(family.husband)
+          find_all_ancestors(family.husband,ancestor_ids)
+        end
+        if (not ancestor_ids.include? family.wife) && (not family.wife == "N/A")
+          ancestor_ids.push(family.wife)
+          find_all_ancestors(family.wife, ancestor_ids)
+        end
+      end
+    end
+    return ancestor_ids
+  end
+
+  #returns found person_id or nil if no person was found
+  def find_person_by_kekule person_id, kekule
+    if kekule < 1 then return nil end
+    #generate path
+    calc = kekule
+    path = Array.new
+
+    while calc > 1 do 
+      if calc % 2 == 0 
+        path.push(0) #male
+      else 
+        path.push(1) #female
+      end
+      calc /= 2
+    end
+    path.reverse! #reverse the path for cycle later
+
+    actual_person_id = person_id
+    family_id = ""
+    
+    #go through path
+    while path.count > 0 do
+      person = get_person_by_id actual_person_id
+      family_id = person.child_in_family
+      if family_id == "N/A" then return nil end #person with empty FAMC field found in path -> return nil
+      family = get_family_by_id family_id
+
+      if path.shift == 0 # go for father
+        actual_person_id = family.husband
+      else # go for mother
+        actual_person_id = family.wife
+      end
+    end
+    return actual_person_id
+  end
+
+  def get_person_by_id person_id
+    @all_persons.each do |person|
+      if person.id == person_id
+        return person
+      end
+    end
+    return "no such person"
+  end
+
+  def get_family_by_id family_id
+    @families.each do |family|
+      if family.id == family_id
+        return family
+      end
+    end
+    return "no such family"
+  end
+
+  ### end filters controller
 
   def get_males_count
     males = 0

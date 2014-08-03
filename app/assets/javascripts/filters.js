@@ -50,14 +50,14 @@ $(document).ready(function() {
 				var lastname = selectedRow.children().eq(1).text();
 				var selectionType = $("#select-all-decendents").is(":checked") ? "all" : "kekule " + kekuleNumber;
 				$("#descendent-filter-name").val(firstname + " " + lastname + " (" + selectionType + ")");
-				$("#select-descendents-apply").removeProp("disabled");
+				$("#select-relatives-apply").removeProp("disabled");
 				$("#descendent-filter-checked").prop("checked", "checked");
 				$("#descendent-filter-checked-input").val("on");
 				$("#descendence-person-id").val(selectedRow.data("person-id"));
 			} else {
 				// no one is selected anymore
 				$("#descendent-filter-name").val("");
-				$("#select-descendents-apply").prop("disabled", "disabled");
+				$("#select-relatives-apply").prop("disabled", "disabled");
 				$("#descendent-filter-checked").removeProp("checked");
 				$("#descendent-filter-checked-input").val("off");
 				$("#descendence-person-id").val("");
@@ -89,7 +89,7 @@ $(document).ready(function() {
 	$("#select-kekule-descendent").change(refreshGui);
 	$("#select-by-kekule-number").keyup(refreshGui);
 
-	$("#select-descendents-cancel").click(function() {
+	$("#select-relatives-cancel").click(function() {
 		table.$('.selected').click(); // click on the selected row to deselect it...
 	});
 });

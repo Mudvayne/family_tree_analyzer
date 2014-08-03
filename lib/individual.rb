@@ -14,7 +14,7 @@ class Individual
     @location_death = location_death || "N/A"
     @location_burial = location_burial || "N/A"
     @child_in_family = child_in_family || "N/A"
-    @parent_in_families = parent_in_families
+    @parent_in_families = parent_in_families || "N/A"
   end
 
   def firstname

@@ -47,7 +47,10 @@ class FiltersController < ApplicationController
   
   def set_all_persons_and_families
     family = './royal.ged'
+
+=begin
     if not Rails.cache.exist?(family)
+=end
       parser = MyGedcomParser.new
       parser.parse family
       @all_persons = parser.get_all_persons
@@ -56,6 +59,7 @@ class FiltersController < ApplicationController
         @all_persons_hashmap[person.id] = person
       end
       @families = parser.get_all_families
+=begin
       Rails.cache.write(family + "all_persons_hashmap", @all_persons_hashmap)
       Rails.cache.write(family + "all_persons", @all_persons)
       Rails.cache.write(family + "families", @families)
@@ -65,6 +69,7 @@ class FiltersController < ApplicationController
       @all_persons_hashmap = Rails.cache.fetch(family + "all_persons_hashmap")
       @families = Rails.cache.fetch(family + "families")
     end
+=end
   end
   
   def to_right matched_persons
@@ -148,17 +153,17 @@ class FiltersController < ApplicationController
 
     if params[:descendence_checkbox] == "on"
       checkbox_set = true
+      descendents = Array.new
+
       if params[:descendence_filter_type] == "kekule"
-        descendent_ids = find_person_by_kekule(params[:descendence_person_id], params[:descendence_kekule_number].to_i)
+        descendent_id = find_person_by_kekule(params[:descendence_person_id], params[:descendence_kekule_number].to_i)
+        descendents.push(get_person_by_id descendent_id)
       elsif params[:descendence_filter_type] == "all"
         descendent_ids = find_all_descendants(params[:descendence_person_id], Array.new)
+        descendent_ids.each do |descendent_id|
+          descendents.push(get_person_by_id descendent_id)
+        end
       end
-
-      descendents = Array.new
-      descendent_ids.each do |descendent_id|
-        descendents.push(get_person_by_id descendent_id)
-      end
-
       matched_persons = matched_persons & descendents
     end
 
@@ -182,20 +187,65 @@ class FiltersController < ApplicationController
     if params[:location_burial] == "" then params[:location_burial] = "N/A" end
   end
 
-  def find_all_descendants person_id, decendent_ids
+=begin
+  def find_all_descendants person_id, descendent_ids
     @families.each do |family|
       if family.husband == person_id || family.wife == person_id
-        decendent_ids.concat(family.children)
         family.children.each do |child|
-          find_all_descendants child, decendent_ids
+          if not descendent_ids.include? child 
+            descendent_ids.push(child) 
+            find_all_descendants child, descendent_ids
+          end
         end
       end
     end
-    return decendent_ids
+    return descendent_ids
+  end
+=end
+
+  def find_all_descendants person_id, descendent_ids
+    person = get_person_by_id person_id
+    family_ids = person.parent_in_families
+    if not family_ids == "N/A"
+      families = Array.new
+      family_ids.each do |family_id|
+        families.push(get_family_by_id family_id)
+      end
+      families.each do |family|
+        if family.husband == person_id || family.wife == person_id
+          family.children.each do |child|
+            if not descendent_ids.include? child 
+              descendent_ids.push(child) 
+              find_all_descendants child, descendent_ids
+            end
+          end
+        end
+      end
+    end
+    return descendent_ids
   end
 
-  #returns found person_id or nil if no person was found
+  def find_all_ancestors person_id, ancestor_ids
+    person = get_person_by_id person_id
+    if not person.child_in_family == nil
+      family = get_family_by_id person.child_in_family
+      if not family == "no such family"
+        if (not ancestor_ids.include? family.husband) && (not family.husband == "N/A")
+          ancestor_ids.push(family.husband)
+          find_all_ancestors(family.husband,ancestor_ids)
+        end
+        if (not ancestor_ids.include? family.wife) && (not family.wife == "N/A")
+          ancestor_ids.push(family.wife)
+          find_all_ancestors(family.wife, ancestor_ids)
+        end
+      end
+    end
+    return ancestor_ids
+  end
+
+#returns found person_id or nil if no person was found
   def find_person_by_kekule person_id, kekule
+    if kekule < 1 then return nil end
     #generate path
     calc = kekule
     path = Array.new

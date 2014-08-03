@@ -10,8 +10,8 @@
               <% if @persons != nil %>
                 <% @persons.each do |i| %>
                   <li class="list-group-item">
-                    <%#=i.firstname + " | " + i.lastname%>
-                    <%=i.to_s%>
+                    <%=i.firstname + " | " + i.lastname%>
+                    <%#=i.to_s%>
                     <input type="hidden" name="persons[]" value="<%= i.id %>" >
                   </li>
                 <% end %>
@@ -47,7 +47,7 @@
                 </span>
                 <div class="input-group-btn">
                   <button class="btn btn-primary no-border-radius filter-label-size" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="return false;">
-                    Descendents of
+                    Relatives of
                   </button>
                 </div>
                 <input id="descendent-filter-name" type="text" class="form-control" readonly disabled />
@@ -64,8 +64,8 @@
             <ul class="list-group">
               <% @persons_for_analysis.each do |i| %>
                 <li class="list-group-item">
-                  <%#=i.firstname + " | " + i.lastname%>
-                  <%=i.to_s%>
+                  <%=i.firstname + " | " + i.lastname%>
+                  <%#=i.to_s%>
                   <input type="hidden" name="persons_for_analysis[]" value="<%= i.id %>" >
                 </li>
               <% end %>
@@ -108,7 +108,7 @@
               <th>Location death</th>
             </tfoot>
             <tbody>
-              <% @persons.each do |person| %>
+              <% @all_persons.each do |person| %>
                 <tr data-person-id="<%= person.id %>">
                   <td><%= person.firstname %></td>
                   <td><%= person.lastname %></td>
@@ -124,15 +124,23 @@
         <div class="form-inline">
           <div class="radio">
             <label>
-              <input type="radio" name="select-descendents" id="select-all-decendents" checked>
+              <input type="radio" name="select-relatives" id="select-all-decendents" checked>
               All descendents
+            </label>
+          </div>
+        </div>
+        <div class="form-inline">
+          <div class="radio">
+            <label>
+              <input type="radio" name="select-relatives" id="select-all-ancestors" >
+              All ancestors
             </label>
           </div>
         </div>
         <div class="form-inline margin-bottom">
           <div class="radio">
             <label>
-              <input type="radio" name="select-descendents" id="select-kekule-descendent">
+              <input type="radio" name="select-relatives" id="select-kekule-descendent">
               By kekule number:
             </label>
           </div>
@@ -141,8 +149,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button id="select-descendents-cancel" type="button" class="btn btn-default" data-dismiss="modal" onclick="return false;">Cancel</button>
-          <button id="select-descendents-apply" type="button" class="btn btn-primary" data-dismiss="modal" disabled>Apply person</button>
+          <button id="select-relatives-cancel" type="button" class="btn btn-default" data-dismiss="modal" onclick="return false;">Cancel</button>
+          <button id="select-relatives-apply" type="button" class="btn btn-primary" data-dismiss="modal" disabled>Apply person</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

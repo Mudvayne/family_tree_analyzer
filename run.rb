@@ -36,7 +36,24 @@ end
 
 =end
 
-data = tester.find_all_descendants("@I108@",Array.new)
+time_before = Time.new
+data = tester.find_all_descendants2("@I34@", Array.new)
+data.sort! { |x,y| y <=> x }
+puts "*************************** 2 ***************************"
 data.each do |i|
   puts i
 end
+puts data.count
+puts "TIME NEEDED: " + (Time.new - time_before).to_s
+
+
+time_before = Time.new
+data = tester.find_all_descendants("@I34@", Array.new)
+data.sort! { |x,y| y <=> x }
+puts "*************************** 1 ***************************"
+data.each do |i|
+  puts i
+end
+puts data.count
+puts "TIME NEEDED: " + (Time.new - time_before).to_s
+
