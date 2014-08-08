@@ -151,20 +151,23 @@ class FiltersController < ApplicationController
       matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
     end
 
-    if params[:descendence_checkbox] == "on"
+    if params[:relatives_checkbox] == "on"
       checkbox_set = true
       relatives = Array.new
 
-      if params[:descendence_filter_type] == "kekule"
-        descendent_id = find_person_by_kekule(params[:descendence_person_id], params[:descendence_kekule_number].to_i)
-        descendents.push(get_person_by_id descendent_id)
-      elsif params[:descendence_filter_type] == "descendants"
-        descendent_ids = find_all_descendants(params[:descendence_person_id], Array.new)
+      if params[:relative_filter_type] == "kekule"
+        relative_id = find_person_by_kekule(params[:relative_person_id], params[:relative_kekule_number].to_i)
+        relatives.push(get_person_by_id relative_id)
+      elsif params[:relative_filter_type] == "descendants"
+        descendent_ids = find_all_descendants(params[:relative_person_id], Array.new)
         descendent_ids.each do |descendent_id|
-          descendents.push(get_person_by_id descendent_id)
+          relatives.push(get_person_by_id descendent_id)
         end
-      elsif params[:descendence_filter_type] == "ancestors"
-        #todo
+      elsif params[:relative_filter_type] == "ancestors"
+        ancestor_ids = find_all_ancestors(params[:relative_person_id], Array.new)
+        ancestor_ids.each do |ancestor_id|
+          relatives.push(get_person_by_id ancestor_id)
+        end
       end
       matched_persons = matched_persons & relatives
     end

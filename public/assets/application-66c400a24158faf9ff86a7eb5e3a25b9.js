@@ -13397,11 +13397,11 @@ $(document).ready(function() {
 			}
 
 			if($("#select-all-decendents").is(":checked")) {
-				$("#descendence-filter-type").val("all");
+				$("#relative-filter-type").val("all");
 				$("#select-by-kekule-number").val("");
 				$("#select-by-kekule-number").prop("disabled", "disabled");
 			} else {
-				$("#descendence-filter-type").val("kekule");
+				$("#relative-filter-type").val("kekule");
 				$("#descendence-kekule-number").val(kekuleNumber);
 				$("#select-by-kekule-number").removeProp("disabled");
 			}

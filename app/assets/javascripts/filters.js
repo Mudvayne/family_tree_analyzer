@@ -50,29 +50,42 @@ $(document).ready(function() {
 				var selectedRow = $("#persons-preview .selected");
 				var firstname = selectedRow.children().eq(0).text();
 				var lastname = selectedRow.children().eq(1).text();
-				var selectionType = $("#select-all-decendents").is(":checked") ? "all" : "kekule " + kekuleNumber;
-				$("#descendent-filter-name").val(firstname + " " + lastname + " (" + selectionType + ")");
+				var selectionType = $("#select-all-decendents").is(":checked") ? "all descendants"
+													: $("#select-all-ancestors").is(":checked")  ? "all ancestors"
+																																				: "Kekule " + kekuleNumber;
+
+				$("#relative-filter-name").val(firstname + " " + lastname + " (" + selectionType + ")");
 				$("#select-relatives-apply").removeProp("disabled");
-				$("#descendent-filter-checked").prop("checked", "checked");
-				$("#descendent-filter-checked-input").val("on");
-				$("#descendence-person-id").val(selectedRow.data("person-id"));
+				$("#relative-filter-checked").prop("checked", "checked");
+				$("#relative-filter-checked-input").val("on");
+				$("#relative-person-id").val(selectedRow.data("person-id"));
 			} else {
 				// no one is selected anymore
-				$("#descendent-filter-name").val("");
+				$("#relative-filter-name").val("");
 				$("#select-relatives-apply").prop("disabled", "disabled");
-				$("#descendent-filter-checked").removeProp("checked");
-				$("#descendent-filter-checked-input").val("off");
-				$("#descendence-person-id").val("");
+				$("#relative-filter-checked").removeProp("checked");
+				$("#relative-filter-checked-input").val("off");
+				$("#relative-person-id").val("");
 			}
 
 			if($("#select-all-decendents").is(":checked")) {
-				$("#descendence-filter-type").val("all");
+				$("#relative-filter-type").val("descendants");
+			} else if($("#select-all-ancestors").is(":checked")) {
+				$("#relative-filter-type").val("ancestors");
+			} else {
+				$("#relative-filter-type").val("kekule");
+				$("#relative-kekule-number").val(kekuleNumber);
+				$("#select-by-kekule-number").removeProp("disabled");
+
+				// validate selected kekule number
+				if(/^[1-9][0-9]*$/.test(kekuleNumber)) {
+					
+				}
+			}
+
+			if($("#select-kekule-relative").is(":not(:checked")) {
 				$("#select-by-kekule-number").val("");
 				$("#select-by-kekule-number").prop("disabled", "disabled");
-			} else {
-				$("#descendence-filter-type").val("kekule");
-				$("#descendence-kekule-number").val(kekuleNumber);
-				$("#select-by-kekule-number").removeProp("disabled");
 			}
 	}
 
@@ -88,6 +101,7 @@ $(document).ready(function() {
 	});
 
 	$("#select-all-decendents").change(refreshGui);
+	$("#select-all-ancestors").change(refreshGui);
 	$("#select-kekule-descendent").change(refreshGui);
 	$("#select-by-kekule-number").keyup(refreshGui);
 
