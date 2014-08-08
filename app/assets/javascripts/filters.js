@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on("page:change", function() {
 	var allRadio = $(".filters input[type='radio']");
 	var textInputs = $(".filters input[type='text']");
 	var checkboxes = $(".filters input[type='checkbox']")

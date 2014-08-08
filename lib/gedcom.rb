@@ -58,6 +58,8 @@ module GEDCOM
         else
           parse_file(file)
         end
+      when StringIO
+        parse_io(file)
       when IO
         parse_io(file)
       else

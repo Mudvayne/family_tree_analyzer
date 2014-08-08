@@ -1,8 +1,7 @@
 class StaticPagesController < ApplicationController
 	def home
-		if current_user != nil
-			@trees = GedcomFile.where(:user_id => current_user.id)
-		end
+		@gedcom_file = GedcomFile.new
+		fill_trees
 	end
 
 	def select_tree
@@ -10,22 +9,30 @@ class StaticPagesController < ApplicationController
 
 	def upload
 		post = post_params
-		gedcomfile = GedcomFile.new({
+		@gedcom_file = GedcomFile.new({
 			:data => post[:data].read,
 			:filename => post[:filename],
 			:user_id => current_user.id
 		})
 		
-		if gedcomfile.save then
+		if @gedcom_file.save then
 			flash[:success] = "You have successfully uploaded #{post[:filename]}."
+			redirect_to root_path
 		else
-			flash[:danger] = "Error! File with name #{post[:filename]} already exists!";
+			fill_trees
+			render 'home'
 		end
-		redirect_to root_path
 	end
 
+	private
 	def post_params
 		params.require(:gedcomfile).permit(:filename, :data)
+	end
+
+	def fill_trees
+		if current_user != nil
+			@trees = GedcomFile.where(:user_id => current_user.id)
+		end
 	end
 
 end

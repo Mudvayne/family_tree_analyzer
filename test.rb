@@ -8,7 +8,7 @@ class Test
 
   def initialize
     parser = MyGedcomParser.new
-    parser.parse './royal.ged'
+    parser.parse './run.rb'
     @all_persons = parser.get_all_persons
     @all_persons_hashmap = Hash.new
     @all_persons.each do |person|

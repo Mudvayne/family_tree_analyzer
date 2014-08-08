@@ -1,11 +1,15 @@
-require './test'
+require './lib/myGedcomParser'
+require './lib/individual'
+require './lib/family'
 require './lib/diagramData'
-
+require './lib/gedcom_date.rb'
+=begin
 tester = Test.new
 
 persons = tester.get_persons_with_valid_date_fields
 
 persons_with_vaid_date_fields = tester.get_persons_with_valid_date_fields
+=end
 
 =begin
 data = tester.get_males_count
@@ -59,7 +63,7 @@ puts "TIME NEEDED: " + (Time.new - time_before).to_s
 
 =end
 
-
-data = tester.get_average_age_of_female_at_first_child
-puts data
-
+parser = MyGedcomParser.new
+parser.parse './fam.ged'
+@all_persons = parser.get_all_persons
+puts @all_persons.count

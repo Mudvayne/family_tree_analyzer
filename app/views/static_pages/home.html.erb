@@ -1,3 +1,13 @@
+<% if @gedcom_file.errors.any? then %>
+    <div class="alert alert-danger text-center">
+        <ul class="list-unstyled">
+            <% @gedcom_file.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+        <ul>
+    </div>
+<% end %>
+
 <div class="text-center">
 	<% if !user_signed_in? %>
 		<div class="jumbotron">
