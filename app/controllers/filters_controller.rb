@@ -6,6 +6,7 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
+    sort
   end
 
   def update
@@ -31,11 +32,16 @@ class FiltersController < ApplicationController
     else
       flash.now[:success] = matched_persons.count.to_s + " matches!"
     end
-
+    sort
     render 'index'
   end
 
   private
+  def sort
+    @persons.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
+    @persons_for_analysis.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
+  end
+
   def set_fields
     @fields = Hash.new
     fields = ["Firstname","Lastname","Occupation","Location: Birth","Location: Death","Location: Burial","Date: Birth","Date: Marriage","Date: Death","Date: Burial"]
