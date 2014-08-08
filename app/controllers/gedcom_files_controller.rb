@@ -1,17 +1,11 @@
 class GedcomFilesController < ApplicationController
   def delete
-    puts "delete"
-    GedcomFile.destroy(params[:gedcom_file][:id])
+    GedcomFile.destroy(params[:id])
     flash[:success] = "Your tree was deleted successfully!"
     redirect_to root_path
   end
 
   def go_to_analysis
-    if params[:commit]
-      delete
-      return
-    end
-
-    redirect_to analysis_path
+    redirect_to filter_path(params[:id])
   end
 end

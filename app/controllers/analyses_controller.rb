@@ -3,9 +3,9 @@ require './lib/analyzer'
 
 class AnalysesController < ApplicationController
   def analysis
-    parser = MyGedcomParser.new
-    parser.parse './royal.ged'
-    @persons = parser.get_all_persons
+    parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
+    @persons = parser.get_all_persons.keep_if {|person| session[:persons_for_analysis].include?(person.id) }
+
     @families = parser.get_all_families
 
     analyzer = Analyzer.new @persons, @families

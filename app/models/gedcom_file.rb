@@ -35,7 +35,7 @@ class GedcomFile < ActiveRecord::Base
     begin
       parser.parse gedcom_data
       if parser.get_all_persons.count > 0
-        return parser.get_all_persons
+        return parser
       else
         raise ArgumentError.new
       end

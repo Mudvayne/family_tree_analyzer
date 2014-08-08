@@ -55,17 +55,17 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% 10.times do @trees.each do |tree| %>
+								<% @trees.each do |tree| %>
 									<tr>
 										<td class="vertical-align-middle"><%= tree.filename %></td>
 										<td>
 											<div class="pull-right">
-												<%= link_to "Analyze", "", class: "btn btn-primary btn-sm" %>
-												<%= link_to "Delete", "", method: :delete, :data => { confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
+												<%= link_to "Analyze", gedcom_file_path(tree.id), class: "btn btn-primary btn-sm" %>
+												<%= link_to "Delete", gedcom_file_path(tree.id), method: :delete, :data => { confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
 											</div>
 										</td>
 									</tr>
-								<% end end %>
+								<% end %>
 							</tbody>
 						</table>
 					<% else %>

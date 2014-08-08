@@ -1,15 +1,13 @@
 FamilyTreeAnalyzer::Application.routes.draw do
-  get 'analyses/analysis'
-
   # match '/', to: 'static_pages#home', via: 'get'
   root 'static_pages#home'
-  get '/filters' => 'filters#index'
-  get '/analysis' => 'analyses#analysis'
-  post '/filters' => 'filters#update'
+  get '/filters/:id' => 'filters#index', as: :filter
+  post '/filters/:id' => 'filters#update'
+  get '/analysis/:id' => 'analyses#analysis', as: :analysis
   post '/upload' => 'static_pages#upload'
   
-  delete '/gedcom_file' => 'gedcom_files#delete'
-  post '/gedcom_file' => 'gedcom_files#go_to_analysis'
+  delete '/gedcom_file/:id' => 'gedcom_files#delete', as: :gedcom_file
+  get '/gedcom_file/:id' => 'gedcom_files#go_to_analysis'
 
   get '/select_tree' => 'static_pages#select_tree'
 
@@ -20,7 +18,6 @@ FamilyTreeAnalyzer::Application.routes.draw do
     delete '/admin/gedcom/delete/:id' => 'admin#delete_gedcom_file', as: :delete_gedcom_file
   end
 
-  resource :gedcom_file
   devise_for :users
 
   # The priority is based upon order of creation: first created -> highest priority.

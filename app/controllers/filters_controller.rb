@@ -33,6 +33,7 @@ class FiltersController < ApplicationController
       flash.now[:success] = matched_persons.count.to_s + " matches!"
     end
     sort
+    session[:persons_for_analysis] = @persons_for_analysis.map {|person| person.id}
     render 'index'
   end
 
@@ -52,13 +53,10 @@ class FiltersController < ApplicationController
   end
   
   def set_all_persons_and_families
-    family = './royal.ged'
-
 =begin
     if not Rails.cache.exist?(family)
 =end
-      parser = MyGedcomParser.new
-      parser.parse family
+      parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
       @all_persons = parser.get_all_persons
       @all_persons_hashmap = Hash.new
       @all_persons.each do |person|
