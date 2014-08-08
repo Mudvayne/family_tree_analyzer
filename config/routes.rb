@@ -9,6 +9,14 @@ FamilyTreeAnalyzer::Application.routes.draw do
   post '/upload' => 'static_pages#upload'
   post '/gedcom_file' => 'gedcom_files#delete' 
   get '/select_tree' => 'static_pages#select_tree'
+
+  authenticated :user, lambda { |user| user.admin? } do
+    get '/admin' => 'admin#index'
+    get '/admin/gedcom_files_archive' => 'admin#gedcom_files_archive'
+    get '/admin/download_gedcom/:id' => 'admin#download_gedcom_file', as: :download_gedcom_file
+    delete '/admin/gedcom/delete/:id' => 'admin#delete_gedcom_file', as: :delete_gedcom_file
+  end
+
   resource :gedcom_file
   devise_for :users
 

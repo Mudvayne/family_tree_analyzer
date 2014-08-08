@@ -8,8 +8,13 @@ $(document).ready(function() {
 		var isEmpty = function(selector) {
 			return $(selector).val().trim() === "";
 		};
-		var areBothFilled = !isEmpty("#file") && !isEmpty("#family-name");
-		$("#upload").prop("disabled", !areBothFilled);
+		var isOneEmpty = isEmpty("#file") || isEmpty("#family-name");
+
+		console.log("#file", isEmpty("#file"))
+		console.log("#family-name", isEmpty("#family-name"))
+		console.log("isOneEmpty / disabled", isOneEmpty)
+
+		$("#upload").prop("disabled", isOneEmpty);
 	};
 
 	$("#family-name").keyup(enableIfNotEmpty);

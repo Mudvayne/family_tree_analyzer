@@ -1,0 +1,31 @@
+<h1>Administration</h1>
+
+<% if @gedcom_files.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Gedcom-Name</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>eMail</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @gedcom_files.each do |gedcom_file| %>
+        <tr>
+          <td><%= gedcom_file.filename %></td>
+          <td><%= gedcom_file.user.first_name %></td>
+          <td><%= gedcom_file.user.last_name %></td>
+          <td><%= gedcom_file.user.email %></td>
+          <td><%= link_to "Download", download_gedcom_file_path(gedcom_file.id) %></td>
+          <td><%= link_to "Delete", delete_gedcom_file_path(gedcom_file.id), method: :delete, class: "text-danger", data: {confirm: "Are your sure?" } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Download Gedcom files archive", admin_gedcom_files_archive_path, class: "btn btn-lg btn-primary" %>
+<% else %>
+  <p>No Gedcom files have been uploaded yet</p>
+<% end %>

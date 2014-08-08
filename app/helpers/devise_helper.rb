@@ -18,6 +18,6 @@ module DeviseHelper
   end
 
   def admin?
-    current_user.admin?
+    current_user != nil && current_user.admin?
   end
 end

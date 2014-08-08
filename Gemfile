@@ -53,6 +53,7 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder'
+gem 'rubyzip', '~> 1.1.3'
 
 group :production do
   gem 'pg'
