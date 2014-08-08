@@ -32,13 +32,15 @@ $(document).ready(function() {
 	var table = $('#persons-preview').DataTable();
 
 	// Apply the search
-	table.columns().eq( 0 ).each( function ( colIdx ) {
-		$('input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
-				table.column( colIdx )
-							.search( this.value )
-							.draw();
+	if(table.length > 0) {
+		table.columns().eq( 0 ).each( function ( colIdx ) {
+			$('input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+					table.column( colIdx )
+								.search( this.value )
+								.draw();
+			});
 		});
-	});
+	}
 
 	var refreshGui = function() {
 			var hasSelected = $("#persons-preview .selected").length > 0;

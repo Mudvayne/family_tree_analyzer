@@ -153,18 +153,20 @@ class FiltersController < ApplicationController
 
     if params[:descendence_checkbox] == "on"
       checkbox_set = true
-      descendents = Array.new
+      relatives = Array.new
 
       if params[:descendence_filter_type] == "kekule"
         descendent_id = find_person_by_kekule(params[:descendence_person_id], params[:descendence_kekule_number].to_i)
         descendents.push(get_person_by_id descendent_id)
-      elsif params[:descendence_filter_type] == "all"
+      elsif params[:descendence_filter_type] == "descendants"
         descendent_ids = find_all_descendants(params[:descendence_person_id], Array.new)
         descendent_ids.each do |descendent_id|
           descendents.push(get_person_by_id descendent_id)
         end
+      elsif params[:descendence_filter_type] == "ancestors"
+        #todo
       end
-      matched_persons = matched_persons & descendents
+      matched_persons = matched_persons & relatives
     end
 
     if matched_persons.count == list_of_persons.count && checkbox_set == false #no matches
