@@ -7,7 +7,10 @@ FamilyTreeAnalyzer::Application.routes.draw do
   get '/analysis' => 'analyses#analysis'
   post '/filters' => 'filters#update'
   post '/upload' => 'static_pages#upload'
-  post '/gedcom_file' => 'gedcom_files#delete' 
+  
+  delete '/gedcom_file' => 'gedcom_files#delete'
+  post '/gedcom_file' => 'gedcom_files#go_to_analysis'
+
   get '/select_tree' => 'static_pages#select_tree'
 
   authenticated :user, lambda { |user| user.admin? } do

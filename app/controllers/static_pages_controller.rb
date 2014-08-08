@@ -4,9 +4,6 @@ class StaticPagesController < ApplicationController
 		fill_trees
 	end
 
-	def select_tree
-	end
-
 	def upload
 		post = post_params
 		@gedcom_file = GedcomFile.new({
@@ -31,7 +28,7 @@ class StaticPagesController < ApplicationController
 
 	def fill_trees
 		if current_user != nil
-			@trees = GedcomFile.where(:user_id => current_user.id)
+			@trees = current_user.gedcom_files.order(:filename)
 		end
 	end
 

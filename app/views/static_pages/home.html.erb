@@ -41,19 +41,33 @@
 								<%= f.text_field :filename, :id => "family-name", :class => "form-control pull-left", :placeholder=>"Family name" %>
 							</div>
 						</div>
-						<button id="upload" disabled type="submit" class="btn btn-success">Upload</button>
+						<button id="upload" disabled type="submit" class="btn btn-primary btn-sm">Upload</button>
 					<% end %>
 				</div>
 				<div class="col-md-6">
 					<% if @trees.size > 0 %>
-						<%= form_for :gedcom_file, :url => gedcom_file_path do |f| %>
-							<p>Select a tree for analysis</p>
-							<div class="btn-group">
-								<%= f.select(:id, @trees.map {|tree| [tree.filename, tree.id]}) %>
-							</div>
-							<button type="submit" class="btn btn-success">Go</button>
-							<%= submit_tag 'Delete', :method => :delete, :data => { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
-						<% end %>
+						<p>Select a tree for analysis</p>
+						<table id="gedcom-files-table" class="table table-condensed text-left">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th data-sortable="false"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% 10.times do @trees.each do |tree| %>
+									<tr>
+										<td class="vertical-align-middle"><%= tree.filename %></td>
+										<td>
+											<div class="pull-right">
+												<%= link_to "Analyze", "", class: "btn btn-primary btn-sm" %>
+												<%= link_to "Delete", "", method: :delete, :data => { confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
+											</div>
+										</td>
+									</tr>
+								<% end end %>
+							</tbody>
+						</table>
 					<% else %>
 						<p>You have no trees yet.</p>
 					<% end %>
