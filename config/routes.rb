@@ -5,6 +5,8 @@ FamilyTreeAnalyzer::Application.routes.draw do
   post '/filters/:id' => 'filters#update'
   get '/analysis/:id' => 'analyses#analysis', as: :analysis
   post '/upload' => 'static_pages#upload'
+  ### dummy route
+  #get '/analysis' => 'analyses#analysis'
   
   delete '/gedcom_file/:id' => 'gedcom_files#delete', as: :gedcom_file
   get '/gedcom_file/:id' => 'gedcom_files#go_to_analysis'

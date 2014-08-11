@@ -3,7 +3,7 @@
 <div class="jumbotron">
   <div class="row">
     <div class="col-md-6">
-      <h2> Persons:  <%= @persons.count %> </h2>
+      <h2> Persons:  <%= @persons_for_analysis.count %> </h2>
       <div id="sex_donut" style="height: 250px;"></div> 
     </div>
     <div class="col-md-6">
@@ -12,25 +12,24 @@
     </div>
   </div>
 </div>
+
 <div class="jumbotron">
-  <h2> Completeness of date fields for further analyses </h2>
+  <h2> Completeness of date fields for date analyses </h2>
   <div class="row">
     <div class="col-md-4">
-      <h3> Persons used for calculation </h3>
-      <div id="valid_donut" style="height: 250px;"></div>
-    </div>
-    <div class="col-md-4">
-      <h3> Birth-year set/not set </h3>
+      <h3> Birth-year set? </h3>
       <div id="birthyear_set_donut" style="height: 250px;"></div>
     </div>
     <div class="col-md-4">
-      <h3> Probably missing death-year </h3>
+      <h3> Missing death-year? (likely) </h3>
       <div id="missing_deathdate_donut" style="height: 250px;"></div>
     </div>
+    <div class="col-md-4">
+      <h3> Resulting in: used entities </h3>
+      <div id="valid_donut" style="height: 250px;"></div>
+    </div>
   </div>
-</div>
 
-<div class="jumbotron">
   <h2> Births by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
@@ -59,9 +58,6 @@
 </div>
 
 <div class="jumbotron">
-  <h2> Nationalities </h2>
-  <div id="nationalites_barchart" style="height: 250px;"></div>
-
   <div class="row">
     <div class="col-md-6">
       <h2> Places of birth </h2>
@@ -76,8 +72,11 @@
   <h2> The 10 most common lastnames </h2>
   <div id="common_lastnames_barchart" style="height: 250px;"></div>
 
-  <h2> The 10 most common firstnames </h2>
-  <div id="common_firstnames_barchart" style="height: 250px;"></div>
+  <h2> The 10 most common male firstnames </h2>
+  <div id="common_firstnames_males_barchart" style="height: 250px;"></div>
+
+  <h2> The 10 most common female firstnames </h2>
+  <div id="common_firstnames_females_barchart" style="height: 250px;"></div>
 </div>
 
 <script>
@@ -103,7 +102,7 @@
     element: 'valid_donut',
     data: [
       {label: "used", value: <%= @persons_with_vaid_date_fields.count %>},
-      {label: "not used", value: <%= (@persons.count - @persons_with_vaid_date_fields.count) %>},
+      {label: "not used", value: <%= (@persons_for_analysis.count - @persons_with_vaid_date_fields.count) %>},
     ]
   });
 
@@ -118,8 +117,8 @@
   Morris.Donut({
     element: 'missing_deathdate_donut',
     data: [
+      {label: "not missing", value: <%= (@persons_for_analysis.count - @count_probably_missing_death_dates) %>},
       {label: "missing", value: <%= @count_probably_missing_death_dates %>},
-      {label: "not missing", value: <%= (@persons.count - @count_probably_missing_death_dates) %>},
     ]
   });
 
@@ -205,19 +204,6 @@
   });
 
   Morris.Bar({
-    element: 'nationalites_barchart',
-    data: [
-      { y: 'Germany', a: 77},
-      { y: 'France', a: 24},
-      { y: 'England', a: 12},
-      { y: 'Poland', a: 44},
-    ],
-    xkey: 'y',
-    ykeys: 'a',
-    labels: 'Age'
-  });
-
-  Morris.Bar({
     element: 'common_lastnames_barchart',
     data: [
       <% @ten_most_common_lastnames.each do |lastnames| %>
@@ -230,9 +216,21 @@
   });
 
   Morris.Bar({
-    element: 'common_firstnames_barchart',
+    element: 'common_firstnames_males_barchart',
     data: [
-      <% @ten_most_common_firstnames.each do |lastnames| %>
+      <% @ten_most_common_firstnames_males.each do |lastnames| %>
+      { y: '<%= lastnames.label %>', a: <%= lastnames.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
+  Morris.Bar({
+    element: 'common_firstnames_females_barchart',
+    data: [
+      <% @ten_most_common_firstnames_females.each do |lastnames| %>
       { y: '<%= lastnames.label %>', a: <%= lastnames.value %> },
       <%end%>
     ],

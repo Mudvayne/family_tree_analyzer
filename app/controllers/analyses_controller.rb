@@ -3,22 +3,39 @@ require './lib/analyzer'
 
 class AnalysesController < ApplicationController
   def analysis
+
     parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
-    @persons = parser.get_all_persons.keep_if {|person| session[:persons_for_analysis].include?(person.id) }
+    @persons_for_analysis = session[:persons_for_analysis]
+    puts "persons: " + @persons_for_analysis.count.to_s
+    @all_persons = session[:all_persons]
+    @all_families = session[:all_families]
 
-    @families = parser.get_all_families
+=begin
+    ### dummy for testing
+    parser = MyGedcomParser.new
+    parser.parse './royal.ged'
+    @all_persons = parser.get_all_persons
+    @all_families = parser.get_all_families
+    @persons_for_analysis = Array.new
+    @all_persons.each do |person|
+        if (person.lastname.include? "Oldenburg") || (person.lastname.include? "Hanover") then @persons_for_analysis.push(person) end
+    end
+    @persons_for_analysis = @all_persons
 
-    analyzer = Analyzer.new @persons, @families
+    ###
+=end
+
+    analyzer = Analyzer.new @persons_for_analysis, @all_families, @all_persons
 
     @number_male_persons = analyzer.get_males_count
     @number_female_persons = analyzer.get_females_count
 
-    @families_count = analyzer.get_families_count
+    @families_count = analyzer.get_family_ids.count
     @average_children_per_family = analyzer.get_average_children_per_family
 
     @persons_with_vaid_date_fields = analyzer.get_persons_with_valid_date_fields
     @count_persons_with_birthyear_set = analyzer.get_persons_with_birthyear_set.count
-    @count_persons_with_birthyear_unset = @persons.count - @count_persons_with_birthyear_set
+    @count_persons_with_birthyear_unset = @persons_for_analysis.count - @count_persons_with_birthyear_set
     @count_probably_missing_death_dates = analyzer.get_count_of_probably_missing_death_dates
 
     @birth_occurrences_by_decade = analyzer.get_birth_accurrences_by_decade @persons_with_vaid_date_fields
@@ -34,6 +51,7 @@ class AnalysesController < ApplicationController
     @average_age_of_female_at_first_child = analyzer.get_average_age_of_female_at_first_child
    
     @ten_most_common_lastnames = analyzer.get_ten_most_common_lastnames
-    @ten_most_common_firstnames = analyzer.get_ten_most_common_firstnames
+    @ten_most_common_firstnames_males = analyzer.get_ten_most_common_firstnames_males
+    @ten_most_common_firstnames_females = analyzer.get_ten_most_common_firstnames_females
   end
 end

@@ -6,7 +6,7 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
-    sort
+    sort_lists
   end
 
   def update
@@ -32,13 +32,17 @@ class FiltersController < ApplicationController
     else
       flash.now[:success] = matched_persons.count.to_s + " matches!"
     end
-    sort
-    session[:persons_for_analysis] = @persons_for_analysis.map {|person| person.id}
+    sort_lists
+
+    session[:persons_for_analysis] = @persons_for_analysis
+    session[:all_persons] = @all_persons
+    session[:all_families] = @all_families
+    
     render 'index'
   end
 
   private
-  def sort
+  def sort_lists
     @persons.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
     @persons_for_analysis.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
   end
@@ -62,7 +66,7 @@ class FiltersController < ApplicationController
       @all_persons.each do |person|
         @all_persons_hashmap[person.id] = person
       end
-      @families = parser.get_all_families
+      @all_families = parser.get_all_families
 =begin
       Rails.cache.write(family + "all_persons_hashmap", @all_persons_hashmap)
       Rails.cache.write(family + "all_persons", @all_persons)
@@ -298,7 +302,7 @@ class FiltersController < ApplicationController
   end
 
   def get_family_by_id family_id
-    @families.each do |family|
+    @all_families.each do |family|
       if family.id == family_id
         return family
       end
@@ -308,7 +312,7 @@ class FiltersController < ApplicationController
 
   def get_persons_married_at_date date_marriage
     persons = Array.new
-    @families.each do |family|
+    @all_families.each do |family|
       if family.date_married.include? date_marriage
         persons.push(get_person_by_id family.husband)
         persons.push(get_person_by_id family.wife)

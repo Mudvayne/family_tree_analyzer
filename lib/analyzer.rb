@@ -2,9 +2,14 @@ require './lib/diagramData'
 require './lib/gedcom_date.rb'
 
 class Analyzer
-  def initialize persons, families
+  def initialize persons, all_families, all_persons
     @persons = persons
-    @families = families
+    @all_families = all_families
+    @all_persons = all_persons
+    @families = Array.new
+    get_family_ids.each do |family_id|
+      @families.push(get_family_by_id family_id)
+    end
   end
 
   def get_males_count
@@ -21,8 +26,18 @@ class Analyzer
     return @persons.count - get_males_count
   end
 
-  def get_families_count
-    return @families.count
+  def get_family_ids
+    family_ids = Array.new
+    @persons.each do |person|
+      if not person.child_in_family == "N/A" then family_ids.push(person.child_in_family) end
+      parent_in = person.parent_in_families
+      if not parent_in == "N/A"
+        parent_in.each do |family_id|
+          family_ids.push(family_id)
+        end
+      end
+    end
+    return family_ids.uniq!
   end
 
   def get_average_children_per_family
@@ -30,7 +45,7 @@ class Analyzer
     @families.each do |family|
       all_children += family.children.count
     end
-    return all_children / get_families_count
+    return all_children / @families.count
   end
 
   def get_persons_with_valid_date_fields
@@ -151,7 +166,11 @@ class Analyzer
         end
       end
     end
-    return age_all / persons_for_calculation
+    if persons_for_calculation > 0
+      return age_all / persons_for_calculation
+    else
+      return 0
+    end
   end
 
   # nationalities here
@@ -220,8 +239,7 @@ class Analyzer
           husband_birth_year = get_year husband.date_birth
           if not husband_birth_year == "N/A" 
             age = year.to_i - husband_birth_year.to_i
-            if age > 11 && age < 100 #plausible age for fatherhood
-              puts "AGE: " + age.to_s
+            if age > 11 && age <= 100 #plausible age for fatherhood
               age_at_first_child_all += age
               count_persons += 1
             end
@@ -253,8 +271,7 @@ class Analyzer
           wife_birth_year = get_year wife.date_birth
           if not wife_birth_year == "N/A" 
             age = year.to_i - wife_birth_year.to_i
-            if age > 11 && age < 56 #plausible age for motherhood
-              puts "AGE: " + age.to_s
+            if age > 11 && age <= 55 #plausible age for motherhood
               age_at_first_child_all += age
               count_persons += 1
             end
@@ -275,10 +292,20 @@ class Analyzer
     return all_lastnames.sort! {|x,y| y.value <=> x.value}[0..9]
   end
 
-  def get_ten_most_common_firstnames
+  def get_ten_most_common_firstnames_males
     firstnames = Array.new
     @persons.each do |person|
-      if not person.firstname == "N/A" then firstnames.push(person.firstname) end
+      if (person.gender == "M") && (not person.firstname == "N/A") then firstnames.push(person.firstname) end
+    end
+
+    all_firstnames = get_diagram_data_array firstnames
+    return all_firstnames.sort! {|x,y| y.value <=> x.value}[0..9]
+  end
+
+  def get_ten_most_common_firstnames_females
+    firstnames = Array.new
+    @persons.each do |person|
+      if (person.gender == "F") && (not person.firstname == "N/A") then firstnames.push(person.firstname) end
     end
 
     all_firstnames = get_diagram_data_array firstnames
@@ -301,8 +328,17 @@ class Analyzer
     return locations
   end
 
-
   private
+
+  def get_family_by_id family_id
+    @all_families.each do |family|
+      if family.id == family_id
+        return family
+      end
+    end
+    return "no such family"
+  end
+
   def get_year date
     d = GEDCOM::Date.safe_new( date )
     if (not d.first.has_year?) || date == "N/A"
@@ -364,7 +400,7 @@ class Analyzer
 
   def get_birth_years persons
     birth_years = Array.new
-    @persons.each do |person|
+    persons.each do |person|
       year = get_year person.date_birth
       if not year == "N/A"
         birth_years.push(year)
@@ -406,7 +442,7 @@ class Analyzer
   end
 
   def get_person_by_id person_id
-    @persons.each do |person|
+    @all_persons.each do |person|
       if person.id == person_id
         return person
       end
