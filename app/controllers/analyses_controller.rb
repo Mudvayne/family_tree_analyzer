@@ -13,45 +13,40 @@ class AnalysesController < ApplicationController
 =begin
     ### dummy for testing
     parser = MyGedcomParser.new
-    parser.parse './royal.ged'
+    parser.parse './Test456.ged'
+    puts "START"
     @all_persons = parser.get_all_persons
     @all_families = parser.get_all_families
-    @persons_for_analysis = Array.new
-    @all_persons.each do |person|
-        if (person.lastname.include? "Oldenburg") || (person.lastname.include? "Hanover") then @persons_for_analysis.push(person) end
-    end
     @persons_for_analysis = @all_persons
-
-    ###
 =end
 
     analyzer = Analyzer.new @persons_for_analysis, @all_families, @all_persons
 
-    @number_male_persons = analyzer.get_males_count
-    @number_female_persons = analyzer.get_females_count
+    @number_male_persons = analyzer.number_male_persons
+    @number_female_persons = analyzer.number_female_persons
 
-    @families_count = analyzer.get_family_ids.count
-    @average_children_per_family = analyzer.get_average_children_per_family
+    @families_count = analyzer.families_count
+    @average_children_per_family = analyzer.average_children_per_family
 
-    @persons_with_vaid_date_fields = analyzer.get_persons_with_valid_date_fields
-    @count_persons_with_birthyear_set = analyzer.get_persons_with_birthyear_set.count
-    @count_persons_with_birthyear_unset = @persons_for_analysis.count - @count_persons_with_birthyear_set
-    @count_probably_missing_death_dates = analyzer.get_count_of_probably_missing_death_dates
+    @persons_with_vaid_date_fields = analyzer.persons_with_vaid_date_fields
+    @count_persons_with_birthyear_set = analyzer.count_persons_with_birthyear_set
+    @count_persons_with_birthyear_unset = analyzer.count_persons_with_birthyear_unset
+    @count_probably_missing_death_dates = analyzer.count_probably_missing_death_dates
 
-    @birth_occurrences_by_decade = analyzer.get_birth_accurrences_by_decade @persons_with_vaid_date_fields
-    @death_occurrences_by_decade = analyzer.get_death_accurrences_by_decade @persons_with_vaid_date_fields
-    @alive_persons_by_decade = analyzer.get_alive_persons_by_decade @persons_with_vaid_date_fields
-    @ages = analyzer.get_ages @persons_with_vaid_date_fields
-    @average_age_males = analyzer.get_average_age_of("male", @persons_with_vaid_date_fields)
-    @average_age_females = analyzer.get_average_age_of("female", @persons_with_vaid_date_fields)
+    @birth_occurrences_by_decade = analyzer.birth_occurrences_by_decade
+    @death_occurrences_by_decade = analyzer.death_occurrences_by_decade
+    @alive_persons_by_decade = analyzer.alive_persons_by_decade
+    @ages = analyzer.ages
+    @average_age_males = analyzer.average_age_males
+    @average_age_females = analyzer.average_age_females
 
-    @average_age_of_male_at_marriage = analyzer.get_average_age_of_male_at_marriage
-    @average_age_of_female_at_marriage = analyzer.get_average_age_of_female_at_marriage
-    @average_age_of_male_at_first_child = analyzer.get_average_age_of_male_at_first_child
-    @average_age_of_female_at_first_child = analyzer.get_average_age_of_female_at_first_child
+    @average_age_of_male_at_marriage = analyzer.average_age_of_male_at_marriage
+    @average_age_of_female_at_marriage = analyzer.average_age_of_female_at_marriage
+    @average_age_of_male_at_first_child = analyzer.average_age_of_male_at_first_child
+    @average_age_of_female_at_first_child = analyzer.average_age_of_female_at_first_child
    
-    @ten_most_common_lastnames = analyzer.get_ten_most_common_lastnames
-    @ten_most_common_firstnames_males = analyzer.get_ten_most_common_firstnames_males
-    @ten_most_common_firstnames_females = analyzer.get_ten_most_common_firstnames_females
+    @ten_most_common_lastnames = analyzer.ten_most_common_lastnames
+    @ten_most_common_firstnames_males = analyzer.ten_most_common_firstnames_males
+    @ten_most_common_firstnames_females = analyzer.ten_most_common_firstnames_females
   end
 end

@@ -67,6 +67,10 @@ class FiltersController < ApplicationController
         @all_persons_hashmap[person.id] = person
       end
       @all_families = parser.get_all_families
+      @all_families_hashmap = Hash.new
+      @all_families.each do |family|
+        @all_families_hashmap[family.id] = family
+      end
 =begin
       Rails.cache.write(family + "all_persons_hashmap", @all_persons_hashmap)
       Rails.cache.write(family + "all_persons", @all_persons)
@@ -165,16 +169,16 @@ class FiltersController < ApplicationController
 
       if params[:relative_filter_type] == "kekule"
         relative_id = find_person_by_kekule(params[:relative_person_id], params[:relative_kekule_number].to_i)
-        relatives.push(get_person_by_id relative_id)
+        relatives.push(@all_persons_hashmap[relative_id] )
       elsif params[:relative_filter_type] == "descendants"
         descendent_ids = find_all_descendants(params[:relative_person_id], Array.new)
         descendent_ids.each do |descendent_id|
-          relatives.push(get_person_by_id descendent_id)
+          relatives.push(@all_persons_hashmap[descendent_id])
         end
       elsif params[:relative_filter_type] == "ancestors"
         ancestor_ids = find_all_ancestors(params[:relative_person_id], Array.new)
         ancestor_ids.each do |ancestor_id|
-          relatives.push(get_person_by_id ancestor_id)
+          relatives.push(@all_persons_hashmap[ancestor_id])
         end
       end
       matched_persons = matched_persons & relatives
@@ -217,12 +221,12 @@ class FiltersController < ApplicationController
 =end
 
   def find_all_descendants person_id, descendent_ids
-    person = get_person_by_id person_id
+    person = @all_persons_hashmap[person_id]
     family_ids = person.parent_in_families
     if not family_ids == "N/A"
       families = Array.new
       family_ids.each do |family_id|
-        families.push(get_family_by_id family_id)
+        families.push(@all_families_hashmap[family_id])
       end
       families.each do |family|
         if family.husband == person_id || family.wife == person_id
@@ -239,9 +243,9 @@ class FiltersController < ApplicationController
   end
 
   def find_all_ancestors person_id, ancestor_ids
-    person = get_person_by_id person_id
+    person = @all_persons_hashmap[person_id]
     if not person.child_in_family == nil
-      family = get_family_by_id person.child_in_family
+      family = @all_families_hashmap[person.child_in_family]
       if not family == "no such family"
         if (not ancestor_ids.include? family.husband) && (not family.husband == "N/A")
           ancestor_ids.push(family.husband)
@@ -278,10 +282,10 @@ class FiltersController < ApplicationController
     
     #go through path
     while path.count > 0 do
-      person = get_person_by_id actual_person_id
+      person = @all_persons_hashmap[actual_person_id]
       family_id = person.child_in_family
       if family_id == "N/A" then return nil end #person with empty FAMC field found in path -> return nil
-      family = get_family_by_id family_id
+      family = @all_families_hashmap[family_id]
 
       if path.shift == 0 # go for father
         actual_person_id = family.husband
@@ -292,30 +296,12 @@ class FiltersController < ApplicationController
     return actual_person_id
   end
 
-  def get_person_by_id person_id
-    @all_persons.each do |person|
-      if person.id == person_id
-        return person
-      end
-    end
-    return "no such person"
-  end
-
-  def get_family_by_id family_id
-    @all_families.each do |family|
-      if family.id == family_id
-        return family
-      end
-    end
-    return "no such family"
-  end
-
   def get_persons_married_at_date date_marriage
     persons = Array.new
     @all_families.each do |family|
       if family.date_married.include? date_marriage
-        persons.push(get_person_by_id family.husband)
-        persons.push(get_person_by_id family.wife)
+        persons.push(@all_persons_hashmap[family.husband])
+        persons.push(@all_persons_hashmap[family.wife])
       end
     end
     return persons

@@ -2,16 +2,90 @@ require './lib/diagramData'
 require './lib/gedcom_date.rb'
 
 class Analyzer
+
+  attr_reader :number_male_persons, :number_female_persons, :families_count, :average_children_per_family, 
+  :persons_with_vaid_date_fields, :count_persons_with_birthyear_set, :count_persons_with_birthyear_unset, 
+  :count_probably_missing_death_dates, :birth_occurrences_by_decade, :death_occurrences_by_decade, 
+  :alive_persons_by_decade, :ages, :average_age_males, :average_age_females, :average_age_of_male_at_marriage,
+  :average_age_of_female_at_marriage, :average_age_of_male_at_first_child, :average_age_of_female_at_first_child, 
+  :ten_most_common_lastnames, :ten_most_common_firstnames_males, :ten_most_common_firstnames_females
+
   def initialize persons, all_families, all_persons
     @persons = persons
+    puts "PERSONS: " + @persons.count.to_s
     @all_families = all_families
+    puts "ALL FAMILIES: " + @all_families.count.to_s
     @all_persons = all_persons
+    puts "ALL PERSONS: " + @all_persons.count.to_s
     @families = Array.new
-    get_family_ids.each do |family_id|
-      @families.push(get_family_by_id family_id)
+
+    puts "all_persons_hashmap"
+    @all_persons_hashmap = Hash.new
+    @all_persons.each do |person|
+      @all_persons_hashmap[person.id] = person
     end
+
+    puts "all_families_hashmap"
+    @all_families_hashmap = Hash.new
+    @all_families.each do |family|
+      @all_families_hashmap[family.id] = family
+    end
+
+    puts "get_family_ids.each"
+    get_family_ids.each do |family_id|
+      @families.push(@all_families_hashmap[family_id])
+    end
+
+    puts "number_male_persons"
+    @number_male_persons = get_males_count
+    puts "number_female_persons"
+    @number_female_persons = get_females_count
+
+    puts "families_count"
+    @families_count = get_family_ids.count
+    puts "average_children_per_family"
+    @average_children_per_family = get_average_children_per_family
+
+    puts "persons_with_vaid_date_fields"
+    @persons_with_vaid_date_fields = get_persons_with_valid_date_fields
+    puts "count_persons_with_birthyear_set"
+    @count_persons_with_birthyear_set = get_persons_with_birthyear_set.count
+    puts "count_persons_with_birthyear_unset"
+    @count_persons_with_birthyear_unset = @persons.count - @count_persons_with_birthyear_set
+    puts "count_probably_missing_death_dates"
+    @count_probably_missing_death_dates = get_count_of_probably_missing_death_dates
+
+    puts "birth_occurrences_by_decade"
+    @birth_occurrences_by_decade = get_birth_accurrences_by_decade @persons_with_vaid_date_fields
+    puts "death_occurrences_by_decade"
+    @death_occurrences_by_decade = get_death_accurrences_by_decade @persons_with_vaid_date_fields
+    puts "alive_persons_by_decade"
+    @alive_persons_by_decade = get_alive_persons_by_decade @persons_with_vaid_date_fields
+    puts "get_ages"
+    @ages = get_ages @persons_with_vaid_date_fields
+    puts "average_age_males"
+    @average_age_males = get_average_age_of("male", @persons_with_vaid_date_fields)
+    puts "average_age_females"
+    @average_age_females = get_average_age_of("female", @persons_with_vaid_date_fields)
+
+    puts "average_age_of_male_at_marriage"
+    @average_age_of_male_at_marriage = get_average_age_of_male_at_marriage
+    puts "average_age_of_female_at_marriage"
+    @average_age_of_female_at_marriage = get_average_age_of_female_at_marriage
+    puts "average_age_of_male_at_first_child"
+    @average_age_of_male_at_first_child = get_average_age_of_male_at_first_child
+    puts "average_age_of_female_at_first_child"
+    @average_age_of_female_at_first_child = get_average_age_of_female_at_first_child
+   
+    puts "ten_most_common_lastnames"
+    @ten_most_common_lastnames = get_ten_most_common_lastnames
+    puts "ten_most_common_firstnames_males"
+    @ten_most_common_firstnames_males = get_ten_most_common_firstnames_males
+    puts "ten_most_common_firstnames_females"
+    @ten_most_common_firstnames_females = get_ten_most_common_firstnames_females
   end
 
+  private
   def get_males_count
     males = 0
     @persons.each do |i|
@@ -29,7 +103,9 @@ class Analyzer
   def get_family_ids
     family_ids = Array.new
     @persons.each do |person|
-      if not person.child_in_family == "N/A" then family_ids.push(person.child_in_family) end
+      if not person.child_in_family == "N/A"
+        family_ids.push(person.child_in_family) 
+      end
       parent_in = person.parent_in_families
       if not parent_in == "N/A"
         parent_in.each do |family_id|
@@ -37,7 +113,8 @@ class Analyzer
         end
       end
     end
-    return family_ids.uniq!
+    family_ids = family_ids.uniq
+    return family_ids
   end
 
   def get_average_children_per_family
@@ -98,7 +175,9 @@ class Analyzer
   end
 
   def get_death_accurrences_by_decade persons
-    return get_diagram_data_array_for_decade(get_death_years(persons), get_first_relevant_year(persons), get_last_relevant_year(persons))
+    death_years = get_death_years(persons)
+    death_years.delete("N/A")
+    return get_diagram_data_array_for_decade(death_years, get_first_relevant_year(persons), get_last_relevant_year(persons))
   end
 
   def get_alive_persons_by_decade persons
@@ -115,10 +194,11 @@ class Analyzer
 
     persons.each do |person|
       birth_person = get_year person.date_birth
+      
       if not birth_person == "N/A"
         index = (birth_person - first_year) / 10 #find first relevant index for performance
         while true do
-          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+index*10) #this will be true, for first interval
+          if person_alive_at_interval?(person, first_year+index*10, (first_year+10)+(index*10)) #this will be true, for first interval
             diagram_data_array[index].value += 1
           else
             break #person died in this index, no need for checking greater indizes
@@ -181,7 +261,7 @@ class Analyzer
       year = get_year family.date_married
       if not year == "N/A"
         if not family.husband == "N/A"
-          husband = get_person_by_id family.husband
+          husband = @all_persons_hashmap[family.husband]
           husband_birth_year = get_year husband.date_birth
           if not husband_birth_year == "N/A" 
             age = year.to_i - husband_birth_year.to_i
@@ -203,7 +283,7 @@ class Analyzer
       year = get_year family.date_married
       if not year == "N/A"        
         if not family.wife == "N/A"
-          wife = get_person_by_id family.wife
+          wife = @all_persons_hashmap[family.wife]
           wife_birth_year = get_year wife.date_birth
           if not wife_birth_year == "N/A"
             age = year.to_i - wife_birth_year.to_i
@@ -224,7 +304,7 @@ class Analyzer
     @families.each do |family|
       years = Array.new
       family.children.each do |child_id|
-        child = get_person_by_id child_id
+        child = @all_persons_hashmap[child_id]
         if not child.date_birth == "N/A"
           birth_child = get_year child.date_birth
           if not birth_child == "N/A"
@@ -235,7 +315,7 @@ class Analyzer
       year = years.sort!.first #first child!
       if not year == "N/A"
         if not family.husband == "N/A"
-          husband = get_person_by_id family.husband
+          husband = @all_persons_hashmap[family.husband]
           husband_birth_year = get_year husband.date_birth
           if not husband_birth_year == "N/A" 
             age = year.to_i - husband_birth_year.to_i
@@ -256,7 +336,7 @@ class Analyzer
     @families.each do |family|
       years = Array.new
       family.children.each do |child_id|
-        child = get_person_by_id child_id
+        child = @all_persons_hashmap[child_id]
         if not child.date_birth == "N/A"
           birth_child = get_year child.date_birth
           if not birth_child == "N/A"
@@ -267,7 +347,7 @@ class Analyzer
       year = years.sort!.first #first child!
       if not year == "N/A"
         if not family.wife == "N/A"
-          wife = get_person_by_id family.wife
+          wife = @all_persons_hashmap[family.wife]
           wife_birth_year = get_year wife.date_birth
           if not wife_birth_year == "N/A" 
             age = year.to_i - wife_birth_year.to_i
@@ -299,6 +379,7 @@ class Analyzer
     end
 
     all_firstnames = get_diagram_data_array firstnames
+    if all_firstnames.count < 2 then return all_firstnames end
     return all_firstnames.sort! {|x,y| y.value <=> x.value}[0..9]
   end
 
@@ -309,6 +390,7 @@ class Analyzer
     end
 
     all_firstnames = get_diagram_data_array firstnames
+    #if all_firstnames.count < 2 then return all_firstnames end
     return all_firstnames.sort! {|x,y| y.value <=> x.value}[0..9]
   end
 
@@ -328,8 +410,6 @@ class Analyzer
     return locations
   end
 
-  private
-
   def get_family_by_id family_id
     @all_families.each do |family|
       if family.id == family_id
@@ -341,16 +421,21 @@ class Analyzer
 
   def get_year date
     d = GEDCOM::Date.safe_new( date )
-    if (not d.first.has_year?) || date == "N/A"
+    if not d.is_date? then date = "N/A" end
+    begin
+      if (not d.first.has_year?) || date == "N/A"
+        return "N/A"
+      else
+        return d.first.year
+      end
+    rescue
       return "N/A"
-    else
-      return d.first.year
     end
   end
 
   def get_diagram_data_array values
-    if values.count == 0 then return "N/A" end
     diagram_data_array = Array.new
+    if values.count == 0 then return diagram_data_array.push(DiagramData.new(0, 0)) end
     values.sort!
     while values.count > 0 do
       value = values.first
@@ -362,9 +447,10 @@ class Analyzer
   end
 
   def get_diagram_data_array_for_decade years, start_year, end_year
-    if years.count == 0 then return "N/A" end
-    years.sort!
     diagram_data_array = Array.new
+    if years.count == 0 then return diagram_data_array.push(DiagramData.new(0, 0)) end
+    years.sort!
+    
     actual_year = start_year
     last_year = end_year
 
@@ -413,9 +499,7 @@ class Analyzer
     death_years = Array.new
     persons.each do |person|
       year = get_year person.date_death
-      if not year == "N/A"
-        death_years.push(year)
-      end
+      death_years.push(year)
     end
     return death_years
   end
@@ -423,22 +507,25 @@ class Analyzer
   def person_alive_at_interval? person, from_year, to_year
     birth_year = get_year person.date_birth
     death_year = get_year person.date_death
-
+    if death_year == "N/A" then death_year = Time.new.year end
     if birth_year == "N/A" || death_year == "N/A" then return false end
     if birth_year <= to_year && death_year >= from_year then return true else return false end
   end
 
   def get_first_relevant_year persons
     first_year = get_birth_years(persons).sort!.first
-    death_years = get_death_years(persons).sort!
-    if first_year > death_years.first
-      first_year = death_years.first
+    death_years = get_death_years(persons)
+    if death_years.include? "N/A" then death_year = Time.new.year else death_year = death_years.sort!.first end
+    if death_year == "N/A" then death_year = Time.new.year end
+    if first_year > death_year
+      first_year = death_year
     end
     return first_year
   end
 
   def get_last_relevant_year persons
-    return get_death_years(persons).sort!.last
+    death_years = get_death_years(persons)
+    if death_years.include? "N/A" then return (Time.new.year + 1) else return death_years.sort!.last end
   end
 
   def get_person_by_id person_id
