@@ -26,6 +26,25 @@ body {
   vertical-align: middle;
 }
 
+#loading {
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 10000;
+}
+
+.loading-animation {
+  background-image: image-url("loading.gif");
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  position: fixed;
+}
+
 /* typography */
 
 h1 {

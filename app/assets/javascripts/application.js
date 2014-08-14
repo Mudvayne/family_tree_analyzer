@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require bootstrap
+//= require spin
 //= require_tree .
 //= require raphael
 //= require morris
