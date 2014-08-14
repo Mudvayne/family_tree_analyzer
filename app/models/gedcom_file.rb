@@ -3,7 +3,7 @@ require './lib/myGedcomParser.rb'
 
 class GedcomFile < ActiveRecord::Base
   belongs_to :user
-  validates_uniqueness_of :filename
+  validates_uniqueness_of :filename, scope: :user_id
   validate :parse_gedcom_file
 
   def self.create_zip_archive
