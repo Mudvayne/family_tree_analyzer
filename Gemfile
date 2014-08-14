@@ -55,6 +55,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'rubyzip', '~> 1.1.3'
 gem 'activerecord-session_store'
+gem 'dalli'
 
 group :production do
   gem 'pg'
