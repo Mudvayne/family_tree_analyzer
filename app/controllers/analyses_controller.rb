@@ -3,10 +3,11 @@ require './lib/analyzer'
 
 class AnalysesController < ApplicationController
   def analysis
-    @persons_for_analysis = session[:persons_for_analysis]
+    data_hash =  GedcomFile.get_data_hash params[:id]
+    @all_persons = data_hash[:all_persons]
+    @all_families = data_hash[:all_families]
+    @persons_for_analysis = session[:persons_for_analysis].map {|person_id| data_hash[:all_persons_hashmap][person_id] }
     puts "persons: " + @persons_for_analysis.count.to_s
-    @all_persons = session[:all_persons]
-    @all_families = session[:all_families]
 
 =begin
     ### dummy for testing

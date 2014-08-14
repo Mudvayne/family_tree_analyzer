@@ -44,4 +44,29 @@ class GedcomFile < ActiveRecord::Base
       return false
     end
   end
+
+  def self.get_data_hash gedcom_file_id
+    cache_key = "FAMILY_" + gedcom_file_id
+    Rails.cache.fetch(cache_key) do
+      parser = current_user.gedcom_files.find(gedcom_file_id).parse_gedcom_file
+      all_persons = parser.get_all_persons
+      all_persons_hashmap = Hash.new
+      all_persons.each do |person|
+        all_persons_hashmap[person.id] = person
+      end
+
+      all_families = parser.get_all_families
+      all_families_hashmap = Hash.new
+      all_families.each do |family|
+        all_families_hashmap[family.id] = family
+      end
+      
+      {
+        :all_persons => all_persons,
+        :all_persons_hashmap => all_persons_hashmap,
+        :all_families => all_families,
+        :all_families_hashmap => all_families_hashmap
+      }
+    end
+  end
 end

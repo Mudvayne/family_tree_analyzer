@@ -6,16 +6,14 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
-    session[:persons] = @persons
-    session[:persons_for_analysis] = @persons_for_analysis
-    session[:all_persons] = @all_persons
-    session[:all_families] = @all_families
+    session[:persons] = @persons.map { |person| person.id }
+    session[:persons_for_analysis] = @persons_for_analysis.map { |person| person.id }
     sort_lists
   end
 
   def update
-    @persons = session[:persons]
-    @persons_for_analysis = session[:persons_for_analysis]
+    @persons = session[:persons].map {|person_id| @all_persons_hashmap[person_id] }
+    @persons_for_analysis = session[:persons_for_analysis].map {|person_id| @all_persons_hashmap[person_id] }
 
     if params[:button] == "to_right"
       matched_persons = find_all_matches @persons
@@ -37,20 +35,20 @@ class FiltersController < ApplicationController
     end
     sort_lists
 
-    session[:persons] = @persons
-    session[:persons_for_analysis] = @persons_for_analysis
-    session[:all_persons] = @all_persons
-    session[:all_families] = @all_families
+    session[:persons] = @persons.map { |person| person.id }
+    session[:persons_for_analysis] = @persons_for_analysis.map { |person| person.id }
     
     render 'index'
   end
 
   def ajax_persons_not_for_analysis
-    ajax_pagination session[:persons], lambda{ |person| [person.firstname, person.lastname] }
+    ajax_pagination session[:persons].map {|person_id| @all_persons_hashmap[person_id] },
+                             lambda{ |person| [person.firstname, person.lastname] }
   end
 
   def ajax_persons_for_analysis
-    ajax_pagination session[:persons_for_analysis], lambda{ |person| [person.firstname, person.lastname] }
+    ajax_pagination session[:persons_for_analysis].map {|person_id| @all_persons_hashmap[person_id] },
+                             lambda{ |person| [person.firstname, person.lastname] }
   end
 
   def ajax_all_persons
@@ -97,28 +95,7 @@ class FiltersController < ApplicationController
   end
   
   def set_all_persons_and_families
-    cache_key = "FAMILY_" + params[:id]
-    persons_and_family_data = Rails.cache.fetch(cache_key) do
-      parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
-      all_persons = parser.get_all_persons
-      all_persons_hashmap = Hash.new
-      all_persons.each do |person|
-        all_persons_hashmap[person.id] = person
-      end
-
-      all_families = parser.get_all_families
-      all_families_hashmap = Hash.new
-      all_families.each do |family|
-        all_families_hashmap[family.id] = family
-      end
-      
-      {
-        :all_persons => all_persons,
-        :all_persons_hashmap => all_persons_hashmap,
-        :all_families => all_families,
-        :all_families_hashmap => all_families_hashmap
-      }
-    end
+    persons_and_family_data = GedcomFile.get_data_hash params[:id]
 
     @all_persons = persons_and_family_data[:all_persons]
     @all_persons_hashmap = persons_and_family_data[:all_persons_hashmap]
