@@ -4,6 +4,7 @@ FamilyTreeAnalyzer::Application.routes.draw do
   get '/filters/:id' => 'filters#index', as: :filter
   get '/filters/:id/persons_not_for_analysis' => 'filters#ajax_persons_not_for_analysis', as: :filter_persons_not_for_analysis
   get '/filters/:id/persons_for_analysis' => 'filters#ajax_persons_for_analysis', as: :filter_persons_for_analysis
+  get '/filters/:id/all_persons' => 'filters#ajax_all_persons', as: :filter_all_persons
   post '/filters/:id' => 'filters#update'
   get '/analysis/:id' => 'analyses#analysis', as: :analysis
   post '/upload' => 'static_pages#upload'

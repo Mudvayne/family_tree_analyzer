@@ -87,10 +87,11 @@
           <h4 class="modal-title">Select a person</h4>
         </div>
         <div class="modal-body">
-          <table id="persons-preview">
+          <table id="persons-preview" data-ajax-address="<%= filter_all_persons_path(params[:id]) %>" >
             <thead>
               <th>First name</th>
               <th>Last name</th>
+              <th>ID</th>
               <th>Birth date</th>
               <th>Death date</th>
               <th>Location birth</th>
@@ -99,22 +100,13 @@
             <tfoot>
               <th>First name</th>
               <th>Last name</th>
+              <th>ID</th>
               <th>Birth date</th>
               <th>Death date</th>
               <th>Location birth</th>
               <th>Location death</th>
             </tfoot>
             <tbody>
-              <% [].each do |person| #@all_persons %>
-                <tr data-person-id="<%= person.id %>">
-                  <td><%= person.firstname %></td>
-                  <td><%= person.lastname %></td>
-                  <td><%= person.date_birth %></td>
-                  <td><%= person.date_death %></td>
-                  <td><%= person.location_birth %></td>
-                  <td><%= person.location_death %></td>
-                </tr>
-              <% end %>
             </tbody>
           </table>
         </div>

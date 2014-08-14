@@ -16,7 +16,7 @@ gem 'devise'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 
-gem 'jquery-datatables-rails', '~> 2.1.10.0.3'
+gem 'jquery-datatables-rails', '~> 2.2.1'
 
 group :development, :test do
   gem 'sqlite3'

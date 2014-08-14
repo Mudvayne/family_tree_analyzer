@@ -1,3 +1,3 @@
 $(document).on("page:change", function() {
-  $(".data-table").DataTable();
+  $("#admin-data-table").DataTable();
 });

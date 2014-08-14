@@ -8,6 +8,8 @@ class FiltersController < ApplicationController
     @persons_for_analysis = Array.new(0)
     session[:persons] = @persons
     session[:persons_for_analysis] = @persons_for_analysis
+    session[:all_persons] = @all_persons
+    session[:all_families] = @all_families
     sort_lists
   end
 
@@ -44,15 +46,21 @@ class FiltersController < ApplicationController
   end
 
   def ajax_persons_not_for_analysis
-    ajax_pagination session[:persons]
+    ajax_pagination session[:persons], lambda{ |person| [person.firstname, person.lastname] }
   end
 
   def ajax_persons_for_analysis
-    ajax_pagination session[:persons_for_analysis]
+    ajax_pagination session[:persons_for_analysis], lambda{ |person| [person.firstname, person.lastname] }
+  end
+
+  def ajax_all_persons
+    ajax_pagination @all_persons, lambda{ |person| [person.firstname, person.lastname,
+                                                    person.id, person.date_birth, person.date_death,
+                                                    person.location_birth, person.location_death,] }
   end
 
   private
-  def ajax_pagination data_source
+  def ajax_pagination data_source, mapper
     start = params[:start].to_i
     length = params[:length].to_i
     if params[:search].nil? || params[:search][:value].nil?
@@ -61,17 +69,16 @@ class FiltersController < ApplicationController
       search = params[:search][:value]
     end
 
-    filtered_persons = data_source
-            .select { |person| (person.firstname + " " + person.lastname).include?(search) }
-
-    paginated_persons = filtered_persons
-            .slice(start, length)
-            .map { |person| [person.firstname, person.lastname] }
+    search_array = params[:columns].values.map { |col| col[:search][:value] }
+    paginated_persons = data_source
+            .map(&mapper)
+            .select { |person| person.any? { |attribute| attribute.include? search } }
+            .select { |person| person.each_with_index.map { |attribute, i| attribute.include? search_array[i] }.all? }
 
     render json: {
-      data: paginated_persons,
+      data: paginated_persons.slice(start, length),
       recordsTotal: data_source.count,
-      recordsFiltered: filtered_persons.count
+      recordsFiltered: paginated_persons.count
     }
   end
 
@@ -92,10 +99,6 @@ class FiltersController < ApplicationController
   def set_all_persons_and_families
     cache_key = "FAMILY_" + params[:id]
     persons_and_family_data = Rails.cache.fetch(cache_key) do
-      100.times do
-        puts "PARSE"
-      end
-
       parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
       all_persons = parser.get_all_persons
       all_persons_hashmap = Hash.new

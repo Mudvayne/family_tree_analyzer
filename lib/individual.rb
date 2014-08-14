@@ -42,6 +42,16 @@ class Individual
     end
   end
 
+  def ==(o)
+    @id == o.id
+  end
+  alias_method :eql?, :==
+
+  def hash
+    @id.hash ^ @name.hash ^ @date_death.hash
+  end
+
+
   def to_s
     string = 
     "Firstname: " + firstname + "; Lastname: " +lastname + "; Occupation: " + occupation + 
