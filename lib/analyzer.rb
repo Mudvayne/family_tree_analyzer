@@ -12,7 +12,7 @@ class Analyzer
 
   def initialize persons, all_families, all_persons
     @persons = persons
-    puts "PERSONS: " + @persons.count.to_s
+    puts "PERSON: " + @persons.count.to_s
     @all_families = all_families
     puts "ALL FAMILIES: " + @all_families.count.to_s
     @all_persons = all_persons
@@ -525,15 +525,10 @@ class Analyzer
 
   def get_last_relevant_year persons
     death_years = get_death_years(persons)
-    if death_years.include? "N/A" then return (Time.new.year + 1) else return death_years.sort!.last end
-  end
-
-  def get_person_by_id person_id
-    @all_persons.each do |person|
-      if person.id == person_id
-        return person
-      end
+    if death_years.include? "N/A" 
+      return (Time.new.year + 1) #found alive person
+    else
+      return death_years.sort!.last
     end
-    return "no such person"
   end
 end

@@ -13327,11 +13327,14 @@ return jQuery;
 
 
 
+$(document).on("page:change", function() {
+  $(".data-table").DataTable();
+});
 (function() {
 
 
 }).call(this);
-$(document).ready(function() {
+$(document).on("page:change", function() {
 	var allRadio = $(".filters input[type='radio']");
 	var textInputs = $(".filters input[type='text']");
 	var checkboxes = $(".filters input[type='checkbox']")
@@ -13361,17 +13364,37 @@ $(document).ready(function() {
 			$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
 	});
 
+	$("#persons-not-for-analysis").DataTable({
+		processing: true,
+		serverSide: true,
+		lengthChange: false,
+		ajax: {
+			url: $("#persons-not-for-analysis").data("ajax-address")
+		}
+	});
+
+	$("#persons-for-analysis").DataTable({
+		processing: true,
+		serverSide: true,
+		lengthChange: false,
+		ajax: {
+			url: $("#persons-for-analysis").data("ajax-address")
+		}
+	});
+
 	// DataTable
 	var table = $('#persons-preview').DataTable();
 
 	// Apply the search
-	table.columns().eq( 0 ).each( function ( colIdx ) {
-		$('input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
-				table.column( colIdx )
-							.search( this.value )
-							.draw();
+	if(table.length > 0) {
+		table.columns().eq( 0 ).each( function ( colIdx ) {
+			$('input', table.column( colIdx ).footer() ).on( 'keyup change', function () {
+					table.column( colIdx )
+								.search( this.value )
+								.draw();
+			});
 		});
-	});
+	}
 
 	var refreshGui = function() {
 			var hasSelected = $("#persons-preview .selected").length > 0;
@@ -13381,29 +13404,42 @@ $(document).ready(function() {
 				var selectedRow = $("#persons-preview .selected");
 				var firstname = selectedRow.children().eq(0).text();
 				var lastname = selectedRow.children().eq(1).text();
-				var selectionType = $("#select-all-decendents").is(":checked") ? "all" : "kekule " + kekuleNumber;
-				$("#descendent-filter-name").val(firstname + " " + lastname + " (" + selectionType + ")");
-				$("#select-descendents-apply").removeProp("disabled");
-				$("#descendent-filter-checked").prop("checked", "checked");
-				$("#descendent-filter-checked-input").val("on");
-				$("#descendence-person-id").val(selectedRow.data("person-id"));
+				var selectionType = $("#select-all-decendents").is(":checked") ? "all descendants"
+													: $("#select-all-ancestors").is(":checked")  ? "all ancestors"
+																																				: "Kekule " + kekuleNumber;
+
+				$("#relative-filter-name").val(firstname + " " + lastname + " (" + selectionType + ")");
+				$("#select-relatives-apply").removeProp("disabled");
+				$("#relative-filter-checked").prop("checked", "checked");
+				$("#relative-filter-checked-input").val("on");
+				$("#relative-person-id").val(selectedRow.data("person-id"));
 			} else {
 				// no one is selected anymore
-				$("#descendent-filter-name").val("");
-				$("#select-descendents-apply").prop("disabled", "disabled");
-				$("#descendent-filter-checked").removeProp("checked");
-				$("#descendent-filter-checked-input").val("off");
-				$("#descendence-person-id").val("");
+				$("#relative-filter-name").val("");
+				$("#select-relatives-apply").prop("disabled", "disabled");
+				$("#relative-filter-checked").removeProp("checked");
+				$("#relative-filter-checked-input").val("off");
+				$("#relative-person-id").val("");
 			}
 
 			if($("#select-all-decendents").is(":checked")) {
-				$("#relative-filter-type").val("all");
-				$("#select-by-kekule-number").val("");
-				$("#select-by-kekule-number").prop("disabled", "disabled");
+				$("#relative-filter-type").val("descendants");
+			} else if($("#select-all-ancestors").is(":checked")) {
+				$("#relative-filter-type").val("ancestors");
 			} else {
 				$("#relative-filter-type").val("kekule");
-				$("#descendence-kekule-number").val(kekuleNumber);
+				$("#relative-kekule-number").val(kekuleNumber);
 				$("#select-by-kekule-number").removeProp("disabled");
+
+				// validate selected kekule number
+				if(/^[1-9][0-9]*$/.test(kekuleNumber)) {
+					// TODO
+				}
+			}
+
+			if($("#select-kekule-relative").is(":not(:checked")) {
+				$("#select-by-kekule-number").val("");
+				$("#select-by-kekule-number").prop("disabled", "disabled");
 			}
 	}
 
@@ -13419,10 +13455,11 @@ $(document).ready(function() {
 	});
 
 	$("#select-all-decendents").change(refreshGui);
+	$("#select-all-ancestors").change(refreshGui);
 	$("#select-kekule-descendent").change(refreshGui);
 	$("#select-by-kekule-number").keyup(refreshGui);
 
-	$("#select-descendents-cancel").click(function() {
+	$("#select-relatives-cancel").click(function() {
 		table.$('.selected').click(); // click on the selected row to deselect it...
 	});
 });
@@ -13430,7 +13467,7 @@ $(document).ready(function() {
 
 
 }).call(this);
-$(document).ready(function() {
+$(document).on("page:change", function() {
 	
 	window.setTimeout(function() {
 		$(".alert").slideUp(300);
@@ -13440,17 +13477,25 @@ $(document).ready(function() {
 		var isEmpty = function(selector) {
 			return $(selector).val().trim() === "";
 		};
-		var areBothFilled = !isEmpty("#file") && !isEmpty("#family-name");
-		$("#upload").prop("disabled", !areBothFilled);
+		var isOneEmpty = isEmpty("#file") || isEmpty("#family-name");
+
+		console.log("#file", isEmpty("#file"))
+		console.log("#family-name", isEmpty("#family-name"))
+		console.log("isOneEmpty / disabled", isOneEmpty)
+
+		$("#upload").prop("disabled", isOneEmpty);
 	};
 
 	$("#family-name").keyup(enableIfNotEmpty);
 	$("#file").change(enableIfNotEmpty);
 });
-(function() {
-
-
-}).call(this);
+$(document).on("page:change", function() {
+  $("#gedcom-files-table").DataTable({
+    ordering: false,
+    pageLength: 5,
+    lengthMenu: [5, 10, 25, 50, 100]
+  });
+});
 // ┌────────────────────────────────────────────────────────────────────┐ \\
 // │ Raphaël 2.1.2 - JavaScript Vector Library                          │ \\
 // ├────────────────────────────────────────────────────────────────────┤ \\

@@ -28,6 +28,24 @@ $(document).on("page:change", function() {
 			$(this).html( '<input type="text" placeholder="Search '+title+'" />' );
 	});
 
+	$("#persons-not-for-analysis").DataTable({
+		processing: true,
+		serverSide: true,
+		lengthChange: false,
+		ajax: {
+			url: $("#persons-not-for-analysis").data("ajax-address")
+		}
+	});
+
+	$("#persons-for-analysis").DataTable({
+		processing: true,
+		serverSide: true,
+		lengthChange: false,
+		ajax: {
+			url: $("#persons-for-analysis").data("ajax-address")
+		}
+	});
+
 	// DataTable
 	var table = $('#persons-preview').DataTable();
 
@@ -79,7 +97,7 @@ $(document).on("page:change", function() {
 
 				// validate selected kekule number
 				if(/^[1-9][0-9]*$/.test(kekuleNumber)) {
-					
+					// TODO
 				}
 			}
 

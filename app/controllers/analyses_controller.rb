@@ -3,8 +3,6 @@ require './lib/analyzer'
 
 class AnalysesController < ApplicationController
   def analysis
-
-    parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
     @persons_for_analysis = session[:persons_for_analysis]
     puts "persons: " + @persons_for_analysis.count.to_s
     @all_persons = session[:all_persons]

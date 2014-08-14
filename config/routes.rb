@@ -2,6 +2,8 @@ FamilyTreeAnalyzer::Application.routes.draw do
   # match '/', to: 'static_pages#home', via: 'get'
   root 'static_pages#home'
   get '/filters/:id' => 'filters#index', as: :filter
+  get '/filters/:id/persons_not_for_analysis' => 'filters#ajax_persons_not_for_analysis', as: :filter_persons_not_for_analysis
+  get '/filters/:id/persons_for_analysis' => 'filters#ajax_persons_for_analysis', as: :filter_persons_for_analysis
   post '/filters/:id' => 'filters#update'
   get '/analysis/:id' => 'analyses#analysis', as: :analysis
   post '/upload' => 'static_pages#upload'

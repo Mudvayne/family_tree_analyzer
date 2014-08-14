@@ -50,6 +50,30 @@ p {
   line-height: 1.7em;
 }
 
+.data-table-condensed .dataTables_wrapper .dataTables_paginate,
+.data-table-condensed .dataTables_wrapper .dataTables_info {
+  font-size: 12px;
+  text-align: left;
+  float: none;
+  clear: both;
+}
+
+.data-table-condensed .dataTables_wrapper .dataTables_paginate .paginate_button {
+  padding: 0.4em;
+  min-width: 2.0em;
+}
+
+/*
+.data-table-condensed .dataTables_wrapper .paginate_button.previous {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.data-table-condensed .dataTables_wrapper .paginate_button.next {
+  padding-right: 0;
+  margin-right: 0;
+}
+*/
 
 /* header */
 

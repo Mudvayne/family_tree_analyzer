@@ -6,6 +6,6 @@ class GedcomFilesController < ApplicationController
   end
 
   def go_to_analysis
-    redirect_to filter_path(params[:id])
+    redirect_to filter_path(params[:id]), status: :found
   end
 end

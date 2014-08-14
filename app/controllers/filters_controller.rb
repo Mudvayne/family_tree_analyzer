@@ -6,22 +6,23 @@ class FiltersController < ApplicationController
   def index
     @persons = @all_persons
     @persons_for_analysis = Array.new(0)
+    session[:persons] = @persons
+    session[:persons_for_analysis] = @persons_for_analysis
     sort_lists
   end
 
   def update
-    params[:persons] = params[:persons] || Array.new
-    params[:persons_for_analysis] = params[:persons_for_analysis] || Array.new
-
-    @persons_for_analysis = get_last_persons_by_id params[:persons_for_analysis]
-    @persons = get_last_persons_by_id params[:persons]
+    @persons = session[:persons]
+    @persons_for_analysis = session[:persons_for_analysis]
 
     if params[:button] == "to_right"
       matched_persons = find_all_matches @persons
-      to_right matched_persons
+      @persons_for_analysis.concat(matched_persons)
+      @persons = @persons - matched_persons
     elsif params[:button] == "to_left"
       matched_persons = find_all_matches @persons_for_analysis
-      to_left matched_persons
+      @persons.concat(matched_persons)
+      @persons_for_analysis = @persons_for_analysis - matched_persons
     end
 
     case matched_persons.count
@@ -34,6 +35,7 @@ class FiltersController < ApplicationController
     end
     sort_lists
 
+    session[:persons] = @persons
     session[:persons_for_analysis] = @persons_for_analysis
     session[:all_persons] = @all_persons
     session[:all_families] = @all_families
@@ -41,7 +43,38 @@ class FiltersController < ApplicationController
     render 'index'
   end
 
+  def ajax_persons_not_for_analysis
+    ajax_pagination session[:persons]
+  end
+
+  def ajax_persons_for_analysis
+    ajax_pagination session[:persons_for_analysis]
+  end
+
   private
+  def ajax_pagination data_source
+    start = params[:start].to_i
+    length = params[:length].to_i
+    if params[:search].nil? || params[:search][:value].nil?
+      search = ""
+    else
+      search = params[:search][:value]
+    end
+
+    filtered_persons = data_source
+            .select { |person| (person.firstname + " " + person.lastname).include?(search) }
+
+    paginated_persons = filtered_persons
+            .slice(start, length)
+            .map { |person| [person.firstname, person.lastname] }
+
+    render json: {
+      data: paginated_persons,
+      recordsTotal: data_source.count,
+      recordsFiltered: filtered_persons.count
+    }
+  end
+
   def sort_lists
     @persons.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
     @persons_for_analysis.sort! {|x,y| x.firstname.downcase <=> y.firstname.downcase}
@@ -57,44 +90,40 @@ class FiltersController < ApplicationController
   end
   
   def set_all_persons_and_families
-=begin
-    if not Rails.cache.exist?(family)
-=end
+    cache_key = "FAMILY_" + params[:id]
+    persons_and_family_data = Rails.cache.fetch(cache_key) do
+      100.times do
+        puts "PARSE"
+      end
+
       parser = current_user.gedcom_files.find(params[:id]).parse_gedcom_file
-      @all_persons = parser.get_all_persons
-      @all_persons_hashmap = Hash.new
-      @all_persons.each do |person|
-        @all_persons_hashmap[person.id] = person
+      all_persons = parser.get_all_persons
+      all_persons_hashmap = Hash.new
+      all_persons.each do |person|
+        all_persons_hashmap[person.id] = person
       end
-      @all_families = parser.get_all_families
-      @all_families_hashmap = Hash.new
-      @all_families.each do |family|
-        @all_families_hashmap[family.id] = family
+
+      all_families = parser.get_all_families
+      all_families_hashmap = Hash.new
+      all_families.each do |family|
+        all_families_hashmap[family.id] = family
       end
-=begin
-      Rails.cache.write(family + "all_persons_hashmap", @all_persons_hashmap)
-      Rails.cache.write(family + "all_persons", @all_persons)
-      Rails.cache.write(family + "families", @families)
-      Rails.cache.write(family, true) # signal that this family is cached
-    else
-      @all_persons = Rails.cache.fetch(family + "all_persons")
-      @all_persons_hashmap = Rails.cache.fetch(family + "all_persons_hashmap")
-      @families = Rails.cache.fetch(family + "families")
+      
+      {
+        :all_persons => all_persons,
+        :all_persons_hashmap => all_persons_hashmap,
+        :all_families => all_families,
+        :all_families_hashmap => all_families_hashmap
+      }
     end
-=end
+
+    @all_persons = persons_and_family_data[:all_persons]
+    @all_persons_hashmap = persons_and_family_data[:all_persons_hashmap]
+    @all_families = persons_and_family_data[:all_families]
+    @all_families_hashmap = persons_and_family_data[:all_families_hashmap]
   end
   
-  def to_right matched_persons
-    @persons_for_analysis.concat(matched_persons)
-    @persons = @persons - matched_persons
-  end
-  
-  def to_left matched_persons
-    @persons.concat(matched_persons)
-    @persons_for_analysis = @persons_for_analysis - matched_persons
-  end
-  
-  def get_last_persons_by_id ids
+  def get_persons_by_id ids
     result = Array.new
     ids.each do |person_id|
       if @all_persons_hashmap.has_key? person_id
@@ -105,7 +134,7 @@ class FiltersController < ApplicationController
   end
 
   def find_all_matches list_of_persons
-    matched_persons = list_of_persons
+    matched_persons = list_of_persons.clone
     handle_empty_fields
     checkbox_set = false
 
@@ -115,22 +144,22 @@ class FiltersController < ApplicationController
 
     if params[:firstname_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.firstname.include? params[:firstname] })
+      matched_persons.keep_if { |person| person.firstname.include? params[:firstname] }
     end
 
     if params[:lastname_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.lastname.include? params[:lastname] })
+      matched_persons.keep_if { |person| person.lastname.include? params[:lastname] }
     end
 
     if params[:occupation_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.occupation.include? params[:occupation] })
+      matched_persons.keep_if { |person| person.occupation.include? params[:occupation] }
     end
 
     if params[:date_birth_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_birth.include? params[:date_birth] })
+      matched_persons.keep_if { |person| person.date_birth.include? params[:date_birth] }
     end
 
     if params[:date_marriage_checkbox] == "on"
@@ -140,27 +169,27 @@ class FiltersController < ApplicationController
 
     if params[:date_death_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_death.include? params[:date_death] })
+      matched_persons.keep_if { |person| person.date_death.include? params[:date_death] }
     end
 
     if params[:date_burial_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.date_burial.include? params[:date_burial] })
+      matched_persons.keep_if { |person| person.date_burial.include? params[:date_burial] }
     end
 
     if params[:location_birth_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_birth.include? params[:location_birth] })
+      matched_persons.keep_if { |person| person.location_birth.include? params[:location_birth] }
     end
 
     if params[:location_death_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_death.include? params[:location_death] })
+      matched_persons.keep_if { |person| person.location_death.include? params[:location_death] }
     end
 
     if params[:location_burial_checkbox] == "on"
       checkbox_set = true
-      matched_persons = matched_persons & (list_of_persons.select { |person| person.location_burial.include? params[:location_burial] })
+      matched_persons.keep_if { |person| person.location_burial.include? params[:location_burial] }
     end
 
     if params[:relatives_checkbox] == "on"
