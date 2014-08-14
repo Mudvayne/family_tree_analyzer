@@ -95,6 +95,10 @@ class FiltersController < ApplicationController
   end
   
   def set_all_persons_and_families
+    if current_user.gedcom_files.where(id: params[:id]).count == 0
+      raise ArgumentError.new "invalid user"
+    end
+
     persons_and_family_data = GedcomFile.get_data_hash params[:id]
 
     @all_persons = persons_and_family_data[:all_persons]
