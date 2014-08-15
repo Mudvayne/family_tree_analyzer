@@ -5,6 +5,7 @@ class GedcomFile < ActiveRecord::Base
   belongs_to :user
   validates_uniqueness_of :filename, scope: :user_id
   validate :parse_gedcom_file
+  validates :filename, presence: true
 
   def self.create_zip_archive
     users = User.all.select { |user| user.gedcom_files.size > 0 }

@@ -1,22 +1,22 @@
 <% if @gedcom_file.errors.any? then %>
-    <div class="alert alert-danger text-center">
-        <ul class="list-unstyled">
-            <% @gedcom_file.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-        <ul>
-    </div>
+	<div class="alert alert-danger text-center">
+			<ul class="list-unstyled">
+					<% @gedcom_file.errors.full_messages.each do |msg| %>
+							<li><%= msg %></li>
+					<% end %>
+			<ul>
+	</div>
 <% end %>
 
 <div class="text-center">
 	<% if !user_signed_in? %>
 		<div class="jumbotron">
-				<h1>Welcome to a Family Tree Analyzer </h1>
-				<p class="text-muted">
+			<h1>Welcome to a Family Tree Analyzer </h1>
+			<p class="text-muted">
 				You can upload a 
 				<a href="http://en.wikipedia.org/wiki/GEDCOM"> GEDCOM-file</a>
 				and analyze your family tree! 
-		  	</p>
+			</p>
 			<%= link_to "Sign up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
 		</div>
 	<% else %>
@@ -61,6 +61,7 @@
 										<td>
 											<div class="pull-right">
 												<%= link_to "Analyze", gedcom_file_path(tree.id), class: "btn btn-primary btn-sm show-loading-animation" %>
+												<button data-name="<%= tree.filename %>" data-id="<%= tree.id %>" class="btn btn-default btn-sm rename-gedcom-file">Rename</button>
 												<%= link_to "Delete", gedcom_file_path(tree.id), method: :delete, :data => { confirm: 'Are you sure?'}, class: "btn btn-danger btn-sm" %>
 											</div>
 										</td>
@@ -73,6 +74,30 @@
 					<% end %>
 				</div>
 			</div>
-		</div>		
+		</div>
 	<% end %>
 </div>
+
+<div id="rename-modal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_tag(rename_gedcom_file_path, action: :post, id: "rename-gedcom-file-form") do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title">Rename family tree</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="new-gedcom-file-name">New name</label>
+						<input type="text" class="form-control" name="name" id="new-gedcom-file-name" placeholder="Enter new name here">
+						<input type="hidden" name="id" id="gedcom-file-id">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+					<input type="submit" class="btn btn-primary show-loading-animation" value="Rename" />
+				</div>
+			<% end %>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

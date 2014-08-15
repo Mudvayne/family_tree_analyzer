@@ -1,6 +1,7 @@
 FamilyTreeAnalyzer::Application.routes.draw do
   # match '/', to: 'static_pages#home', via: 'get'
   root 'static_pages#home'
+  post '/rename_gedcom_file' => 'static_pages#rename'
   get '/filters/:id' => 'filters#index', as: :filter
   get '/filters/:id/persons_not_for_analysis' => 'filters#ajax_persons_not_for_analysis', as: :filter_persons_not_for_analysis
   get '/filters/:id/persons_for_analysis' => 'filters#ajax_persons_for_analysis', as: :filter_persons_for_analysis

@@ -21,6 +21,14 @@ class StaticPagesController < ApplicationController
 		end
 	end
 
+	def rename
+		@gedcom_file = current_user.gedcom_files.find params[:id]
+		@gedcom_file.filename = params[:name]
+		@gedcom_file.save
+		fill_trees
+		render 'home'
+	end
+
 	private
 	def post_params
 		params.require(:gedcomfile).permit(:filename, :data)
