@@ -286,7 +286,6 @@ class Analyzer
       if actual_year > last_relevant_year then actual_year = last_relevant_year end
     end
     persons.each do |person|
-      puts person.id
       birth_person = get_year person.date_birth
       if not birth_person == "N/A"
         index = (birth_person - last_relevant_year) / 10 #find first relevant index for performance
