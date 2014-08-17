@@ -63,9 +63,18 @@ puts "TIME NEEDED: " + (Time.new - time_before).to_s
 
 =end
 
-d = GEDCOM::Date.safe_new( "19.3.2009" )
-begin
-puts d.first.has_year?
-rescue 
-  puts "no year"
+parser = MyGedcomParser.new
+parser.parse './problem.ged'
+@all_persons = parser.get_all_persons
+@all_persons_hashmap = Hash.new
+@all_persons.each do |person|
+  @all_persons_hashmap[person.id] = person
+end
+@families = parser.get_all_families
+
+puts "persons: " + @all_persons.count.to_s
+puts "families: " + @families.count.to_s
+
+@all_persons.each do |person|
+  puts person.date_birth
 end

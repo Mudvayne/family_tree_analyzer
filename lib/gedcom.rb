@@ -95,6 +95,7 @@ module GEDCOM
     def parse_io(io)
       rs = detect_rs(io)
       io.each_line(rs) do |line|
+        line.force_encoding('iso-8859-1').encode('utf-8')
         level, tag, rest = line.chop.split( ' ', 3 )
         next if level.nil? or tag.nil?
         level = level.to_i
