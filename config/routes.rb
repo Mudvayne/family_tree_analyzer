@@ -24,6 +24,13 @@ FamilyTreeAnalyzer::Application.routes.draw do
     delete '/admin/gedcom/delete/:id' => 'admin#delete_gedcom_file', as: :delete_gedcom_file
   end
 
+  devise_scope :user do
+    get '/reset_password' => "passwordusers#new", :as => :reset_password
+    get '/new_password' => "passwordusers#edit", :as => :new_password
+    post '/send_email' => 'passwordusers#create', :as => :create_password
+    put '/change' =>  'passwordusers#update', :as => :update_password
+  end
+
   devise_for :users
 
   # The priority is based upon order of creation: first created -> highest priority.
