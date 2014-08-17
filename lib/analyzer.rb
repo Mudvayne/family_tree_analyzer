@@ -380,7 +380,22 @@ class Analyzer
       if (not d.first.has_year?) || date == "N/A"
         return "N/A"
       else
-        return d.first.year
+        year = d.first.year
+        #workaround for wrong date formats
+        if year == 0 #wrong format
+          year = date.split(".").last
+          begin
+            return year.to_i
+          rescue
+            year = date.split(" ").last
+            begin 
+              return year.to_i
+            rescue
+              return "N/A"
+            end
+          end
+        end
+        return year
       end
     rescue
       return "N/A"

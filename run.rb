@@ -3,6 +3,7 @@ require './lib/individual'
 require './lib/family'
 require './lib/diagramData'
 require './lib/gedcom_date.rb'
+require './test.rb'
 =begin
 tester = Test.new
 
@@ -75,6 +76,11 @@ end
 puts "persons: " + @all_persons.count.to_s
 puts "families: " + @families.count.to_s
 
-@all_persons.each do |person|
-  puts person.date_birth
-end
+tester = Test.new(@all_persons, @families, @all_persons)
+
+d = GEDCOM::Date.safe_new("10.10.1805?")
+puts d.to_s
+puts "is date? " + d.is_date?.to_s
+puts "has day? " + d.first.has_day?.to_s
+puts "has month? " + d.first.has_month?.to_s
+puts "has year? " + d.first.has_year?.to_s
