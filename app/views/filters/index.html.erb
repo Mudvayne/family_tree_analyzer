@@ -75,7 +75,9 @@
     <%= button_tag "«", value: "to_left", class: "btn btn-primary text-center btn-lg show-loading-animation" %>
     <%= button_tag "»", value: "to_right", class: "btn btn-primary text-center btn-lg show-loading-animation", style: "margin-left: 8px;" %>
     <div style="margin-top: 8px;">
-      <%= link_to "Analyze", analysis_path(params[:id]), class: "btn btn-primary btn-lg show-loading-animation" %>
+      <% if @persons_for_analysis.count > 0 %>
+        <%= link_to "Analyze", analysis_path(params[:id]), class: "btn btn-primary btn-lg show-loading-animation" %>
+      <% end %>
     </div>
   </div>
 

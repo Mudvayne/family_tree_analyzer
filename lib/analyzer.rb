@@ -139,10 +139,10 @@ class Analyzer
   end
 
   def calculate_data_depending_on_subset_of_persons persons, families
-    @birth_occurrences_by_decade = Array.new
-    @death_occurrences_by_decade = Array.new
-    @alive_persons_by_decade = Array.new
-    @ages = Array.new
+    @birth_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
+    @death_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
+    @alive_persons_by_decade = Array.new.push(DiagramData.new(0, 0))
+    @ages = Array.new.push(DiagramData.new(0, 0))
     @average_age_males = 0
     @average_age_females = 0
     @average_age_of_male_at_marriage = 0
@@ -187,148 +187,156 @@ class Analyzer
       end
     end
 
-    husbands = 0
-    wifes = 0
-    ages_husbands = 0
-    ages_wifes = 0
+    #first relevant year
+    first_relevant_year = birth_years.sort.first
+    if not first_relevant_year == nil #if nil -> further calculations impossible
 
-    age_at_first_child_male = 0
-    age_at_first_child_female = 0
-    fathers = 0
-    mothers = 0
+      @birth_occurrences_by_decade = Array.new
+      @death_occurrences_by_decade = Array.new
+      @alive_persons_by_decade = Array.new
+      @ages = Array.new
 
-    @families.each do |family|
-      #average ages at marriage
-      year = get_year family.date_married
-      if not year == "N/A"
+      if death_years.include? "N/A" then death_year = Time.new.year else death_year = death_years.sort.first end
+      if first_relevant_year > death_year
+        first_relevant_year = death_year
+      end
+
+      #last relevant year
+      if death_years.include? "N/A" 
+        last_relevant_year = Time.new.year + 1
+      else
+        last_relevant_year = death_years.sort.last
+      end
+
+      husbands = 0
+      wifes = 0
+      ages_husbands = 0
+      ages_wifes = 0
+
+      age_at_first_child_male = 0
+      age_at_first_child_female = 0
+      fathers = 0
+      mothers = 0
+
+      @families.each do |family|
+        #average ages at marriage
+        year = get_year family.date_married
+        if not year == "N/A"
+          if not family.husband == "N/A"
+            husband = @all_persons_hashmap[family.husband]
+            husband_birth_year = get_year husband.date_birth
+            if not husband_birth_year == "N/A" 
+              age = year.to_i - husband_birth_year.to_i
+              if age > -1
+                ages_husbands += age
+                husbands += 1
+              end
+            end
+          end
+          if not family.wife == "N/A"
+            wife = @all_persons_hashmap[family.wife]
+            wife_birth_year = get_year wife.date_birth
+            if not wife_birth_year == "N/A"
+              age = year.to_i - wife_birth_year.to_i
+              if age > -1
+                ages_wifes += age
+                wifes += 1
+              end
+            end
+          end
+        end
+
+        #average age at first child
+        child_birth_years = Array.new
+        family.children.each do |child_id|
+          child = @all_persons_hashmap[child_id]
+          if not child.date_birth == "N/A"
+            birth_child = get_year child.date_birth
+            if not birth_child == "N/A"
+              child_birth_years.push(birth_child)
+            end
+          end
+        end
+        first_child_birth_year = child_birth_years.sort!.first #first child!
+
         if not family.husband == "N/A"
           husband = @all_persons_hashmap[family.husband]
           husband_birth_year = get_year husband.date_birth
           if not husband_birth_year == "N/A" 
-            age = year.to_i - husband_birth_year.to_i
-            if age > -1
-              ages_husbands += age
-              husbands += 1
+            age = first_child_birth_year.to_i - husband_birth_year.to_i
+            if age > 11 && age <= 100 #plausible age for fatherhood
+              age_at_first_child_male += age
+              fathers += 1
             end
           end
         end
         if not family.wife == "N/A"
           wife = @all_persons_hashmap[family.wife]
           wife_birth_year = get_year wife.date_birth
-          if not wife_birth_year == "N/A"
-            age = year.to_i - wife_birth_year.to_i
-            if age > -1
-              ages_wifes += age
-              wifes += 1
+          if not wife_birth_year == "N/A" 
+            age = first_child_birth_year.to_i - wife_birth_year.to_i
+            if age > 11 && age <= 55 #plausible age for motherhood
+              age_at_first_child_female += age
+              mothers += 1
             end
           end
         end
+      end 
+
+      puts "ALIVE PERSONS BY DECADE"
+      start_time = Time.new
+      # alive persons by decade
+      actual_year = first_relevant_year
+      while actual_year < last_relevant_year do
+        @alive_persons_by_decade.push(DiagramData.new(actual_year.to_s + " - " + (actual_year + 10).to_s, 0))
+        actual_year += 10
+        if actual_year > last_relevant_year then actual_year = last_relevant_year end
       end
+      persons.each do |person|
+        birth_person = get_year person.date_birth
+        if not birth_person == "N/A"
+          index = (birth_person - last_relevant_year) / 10 #find first relevant index for performance
+          while true do
+            if person_alive_at_interval?(person, last_relevant_year+index*10, (last_relevant_year+10)+(index*10)) #this will be true, for first interval
+              @alive_persons_by_decade[index].value += 1
+            else
+              break #person died in this index, no need for checking greater indizes
+            end
+            index += 1
+          end
+        end
+      end
+      puts "DONE. TIME NEEDED: " + (Time.new - start_time).to_s
+
+      #birth_occurrences_by_decade
+      @birth_occurrences_by_decade = get_diagram_data_array_for_decade(birth_years, first_relevant_year, last_relevant_year)
+
+      #death_occurrences_by_decade
+      @death_occurrences_by_decade = get_diagram_data_array_for_decade(death_years-Array.new.push("N/A"), first_relevant_year, last_relevant_year)
+
+      #ages
+      ages.sort!
+      oldest = ages.last
+      actual_year = 0
+      while actual_year <= oldest do
+        size_before = ages.count
+        ages.delete(actual_year)
+        @ages.push(DiagramData.new(actual_year, size_before - ages.count))
+        actual_year += 1
+      end
+
+      #average ages
+      if males > 0 then @average_age_males = ages_males / males end
+      if females > 0 then @average_age_females = ages_females / females end 
+
+      #average ages at marriage
+      if husbands > 0 then @average_age_of_male_at_marriage = ages_husbands / husbands end
+      if wifes > 0 then @average_age_of_female_at_marriage = ages_wifes / wifes end
 
       #average age at first child
-      child_birth_years = Array.new
-      family.children.each do |child_id|
-        child = @all_persons_hashmap[child_id]
-        if not child.date_birth == "N/A"
-          birth_child = get_year child.date_birth
-          if not birth_child == "N/A"
-            child_birth_years.push(birth_child)
-          end
-        end
-      end
-      first_child_birth_year = child_birth_years.sort!.first #first child!
-
-      if not family.husband == "N/A"
-        husband = @all_persons_hashmap[family.husband]
-        husband_birth_year = get_year husband.date_birth
-        if not husband_birth_year == "N/A" 
-          age = first_child_birth_year.to_i - husband_birth_year.to_i
-          if age > 11 && age <= 100 #plausible age for fatherhood
-            age_at_first_child_male += age
-            fathers += 1
-          end
-        end
-      end
-      if not family.wife == "N/A"
-        wife = @all_persons_hashmap[family.wife]
-        wife_birth_year = get_year wife.date_birth
-        if not wife_birth_year == "N/A" 
-          age = first_child_birth_year.to_i - wife_birth_year.to_i
-          if age > 11 && age <= 55 #plausible age for motherhood
-            age_at_first_child_female += age
-            mothers += 1
-          end
-        end
-      end
-    end 
-
-    #first relevant year
-    first_relevant_year = birth_years.sort.first
-    if death_years.include? "N/A" then death_year = Time.new.year else death_year = death_years.sort.first end
-    if first_relevant_year > death_year
-      first_relevant_year = death_year
+      @average_age_of_male_at_first_child = age_at_first_child_male / fathers
+      @average_age_of_female_at_first_child = age_at_first_child_female / mothers
     end
-
-    #last relevant year
-    if death_years.include? "N/A" 
-      last_relevant_year = Time.new.year + 1
-    else
-      last_relevant_year = death_years.sort.last
-    end
-
-    puts "ALIVE PERSONS BY DECADE"
-    start_time = Time.new
-    # alive persons by decade
-    actual_year = first_relevant_year
-    while actual_year < last_relevant_year do
-      @alive_persons_by_decade.push(DiagramData.new(actual_year.to_s + " - " + (actual_year + 10).to_s, 0))
-      actual_year += 10
-      if actual_year > last_relevant_year then actual_year = last_relevant_year end
-    end
-    persons.each do |person|
-      birth_person = get_year person.date_birth
-      if not birth_person == "N/A"
-        index = (birth_person - last_relevant_year) / 10 #find first relevant index for performance
-        while true do
-          if person_alive_at_interval?(person, last_relevant_year+index*10, (last_relevant_year+10)+(index*10)) #this will be true, for first interval
-            @alive_persons_by_decade[index].value += 1
-          else
-            break #person died in this index, no need for checking greater indizes
-          end
-          index += 1
-        end
-      end
-    end
-    puts "DONE. TIME NEEDED: " + (Time.new - start_time).to_s
-
-    #birth_occurrences_by_decade
-    @birth_occurrences_by_decade = get_diagram_data_array_for_decade(birth_years, first_relevant_year, last_relevant_year)
-
-    #death_occurrences_by_decade
-    @death_occurrences_by_decade = get_diagram_data_array_for_decade(death_years-Array.new.push("N/A"), first_relevant_year, last_relevant_year)
-
-    #ages
-    ages.sort!
-    oldest = ages.last
-    actual_year = 0
-    while actual_year <= oldest do
-      size_before = ages.count
-      ages.delete(actual_year)
-      @ages.push(DiagramData.new(actual_year, size_before - ages.count))
-      actual_year += 1
-    end
-
-    #average ages
-    if males > 0 then @average_age_males = ages_males / males end
-    if females > 0 then @average_age_females = ages_females / females end 
-
-    #average ages at marriage
-    if husbands > 0 then @average_age_of_male_at_marriage = ages_husbands / husbands end
-    if wifes > 0 then @average_age_of_female_at_marriage = ages_wifes / wifes end
-
-    #average age at first child
-    @average_age_of_male_at_first_child = age_at_first_child_male / fathers
-    @average_age_of_female_at_first_child = age_at_first_child_female / mothers
   end
 
   private
