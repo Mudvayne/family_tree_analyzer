@@ -138,9 +138,12 @@ class Test
     @birth_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @death_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @alive_persons_by_decade = Array.new.push(DiagramData.new(0, 0))
-    @ages = Array.new.push(DiagramData.new(0, 0))
-    @average_age_males = 0
-    @average_age_females = 0
+    @ages_all = Array.new.push(DiagramData.new(0, 0))
+    @average_age_males_all = 0
+    @average_age_females_all = 0
+    @ages_deceased = Array.new.push(DiagramData.new(0, 0))
+    @average_age_males_deceased = 0
+    @average_age_females_deceased = 0
     @average_age_of_male_at_marriage = 0
     @average_age_of_female_at_marriage = 0
     @average_age_of_male_at_first_child = 0
@@ -150,6 +153,7 @@ class Test
     death_years = Array.new
 
     ages = Array.new
+
     males = 0
     females = 0
     ages_males = 0
@@ -333,6 +337,17 @@ class Test
       @average_age_of_male_at_first_child = age_at_first_child_male / fathers
       @average_age_of_female_at_first_child = age_at_first_child_female / mothers
     end
+  end
+
+  def get_living_period_estimation
+    incomplete = @all_persons - @persons_with_vaid_date_fields
+
+    birthyear_set = incomplete.select {|person| not (get_year person.date_birth) == "N/A"}
+
+    birthyear_set.each do |i|
+      puts i.id + " " + i.date_birth
+    end
+
   end
 
   private

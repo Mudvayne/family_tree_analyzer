@@ -39,11 +39,23 @@
   <h2> Alive persons by decade </h2>
   <div id="alive_by_decade_areachart" style="height: 250px;"></div> 
 
-  <h2> Age distribution </h2>
-  <div id="age_barchart" style="height: 250px;"></div>
+  <h2> Age distribution of alive persons</h2>
+  <div id="age_alive_barchart" style="height: 250px;"></div>
+
+  <h2> Age distribution of deceased persons</h2>
+  <div id="age_deceased_barchart" style="height: 250px;"></div>
 
   <h2> Average age by gender <h2>
-  <div id="age_average_barchart" style="height: 250px;"></div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3> Alive persons </h3>
+      <div id="age_average_alive_barchart" style="height: 250px;"></div>
+    </div>
+    <div class="col-md-6">
+      <h3> Deceased persons </h3>
+      <div id="age_average_deceased_barchart" style="height: 250px;"></div> 
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-6">
@@ -53,17 +65,6 @@
     <div class="col-md-6">
       <h2> Average age at first child </h2>
       <div id="average_age_at_first_child_barchart" style="height: 250px;"></div> 
-    </div>
-  </div>
-</div>
-
-<div class="jumbotron">
-  <div class="row">
-    <div class="col-md-6">
-      <h2> Places of birth </h2>
-    </div>
-    <div class="col-md-6">
-      <h2> Places of death</h2>
     </div>
   </div>
 </div>
@@ -97,7 +98,7 @@
     ykeys: 'a',
     labels: 'Children'
   });
-  
+
   Morris.Donut({
     element: 'valid_donut',
     data: [
@@ -159,15 +160,51 @@
   });
 
   Morris.Bar({
-    element: 'age_average_barchart',
+    element: 'age_alive_barchart',
     data: [
-      { y: 'males', a: <%= @average_age_males %>},
-      { y: 'females', a: <%= @average_age_females %>},
+      <% @ages_alive.each do |age| %>
+      { y: '<%= age.label %>', a: <%= age.value %> },
+      <%end%>
     ],
     xkey: 'y',
     ykeys: 'a',
     labels: 'Age'
   });
+
+  Morris.Bar({
+    element: 'age_average_alive_barchart',
+    data: [
+      { y: 'males', a: <%= @average_age_males_alive %>},
+      { y: 'females', a: <%= @average_age_females_alive %>},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
+  Morris.Bar({
+    element: 'age_deceased_barchart',
+    data: [
+      <% @ages_deceased.each do |age| %>
+      { y: '<%= age.label %>', a: <%= age.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
+  Morris.Bar({
+    element: 'age_average_deceased_barchart',
+    data: [
+      { y: 'males', a: <%= @average_age_males_deceased %>},
+      { y: 'females', a: <%= @average_age_females_deceased %>},
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Age'
+  });
+
 
   Morris.Bar({
     element: 'average_age_at_marriage_barchart',
@@ -185,18 +222,6 @@
     data: [
       { y: 'males', a: <%= @average_age_of_male_at_first_child %>},
       { y: 'females', a: <%= @average_age_of_female_at_first_child %>},
-    ],
-    xkey: 'y',
-    ykeys: 'a',
-    labels: 'Age'
-  });
-
-  Morris.Bar({
-    element: 'age_barchart',
-    data: [
-      <% @ages.each do |age| %>
-      { y: '<%= age.label %>', a: <%= age.value %> },
-      <%end%>
     ],
     xkey: 'y',
     ykeys: 'a',

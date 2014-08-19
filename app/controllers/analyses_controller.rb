@@ -35,9 +35,12 @@ class AnalysesController < ApplicationController
     @birth_occurrences_by_decade = analyzer.birth_occurrences_by_decade
     @death_occurrences_by_decade = analyzer.death_occurrences_by_decade
     @alive_persons_by_decade = analyzer.alive_persons_by_decade
-    @ages = analyzer.ages
-    @average_age_males = analyzer.average_age_males
-    @average_age_females = analyzer.average_age_females
+    @ages_alive = analyzer.ages_alive
+    @average_age_males_alive = analyzer.average_age_males_alive
+    @average_age_females_alive = analyzer.average_age_females_alive
+    @ages_deceased = analyzer.ages_deceased
+    @average_age_males_deceased = analyzer.average_age_males_deceased
+    @average_age_females_deceased = analyzer.average_age_females_deceased
 
     @average_age_of_male_at_marriage = analyzer.average_age_of_male_at_marriage
     @average_age_of_female_at_marriage = analyzer.average_age_of_female_at_marriage

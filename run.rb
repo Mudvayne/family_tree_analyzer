@@ -65,12 +65,8 @@ puts "TIME NEEDED: " + (Time.new - time_before).to_s
 =end
 
 parser = MyGedcomParser.new
-parser.parse './problem.ged'
+parser.parse '/media/sf_Gemeinsamer_Ordner/royal.ged'
 @all_persons = parser.get_all_persons
-@all_persons_hashmap = Hash.new
-@all_persons.each do |person|
-  @all_persons_hashmap[person.id] = person
-end
 @families = parser.get_all_families
 
 puts "persons: " + @all_persons.count.to_s
@@ -78,9 +74,5 @@ puts "families: " + @families.count.to_s
 
 tester = Test.new(@all_persons, @families, @all_persons)
 
-d = GEDCOM::Date.safe_new("10.10.1805?")
-puts d.to_s
-puts "is date? " + d.is_date?.to_s
-puts "has day? " + d.first.has_day?.to_s
-puts "has month? " + d.first.has_month?.to_s
-puts "has year? " + d.first.has_year?.to_s
+tester.get_living_period_estimation
+

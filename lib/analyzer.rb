@@ -6,7 +6,8 @@ class Analyzer
   attr_reader :number_male_persons, :number_female_persons, :families_count, :average_children_per_family, 
   :persons_with_vaid_date_fields, :count_persons_with_birthyear_set, :count_persons_with_birthyear_unset, 
   :count_probably_missing_death_dates, :birth_occurrences_by_decade, :death_occurrences_by_decade, 
-  :alive_persons_by_decade, :ages, :average_age_males, :average_age_females, :average_age_of_male_at_marriage,
+  :alive_persons_by_decade, :ages_alive, :average_age_males_alive, :average_age_females_alive, 
+  :ages_deceased, :average_age_males_deceased, :average_age_females_deceased, :average_age_of_male_at_marriage,
   :average_age_of_female_at_marriage, :average_age_of_male_at_first_child, :average_age_of_female_at_first_child, 
   :ten_most_common_lastnames, :ten_most_common_firstnames_males, :ten_most_common_firstnames_females
 
@@ -14,33 +15,24 @@ class Analyzer
     start = Time.new
 
     @persons = persons
-    puts "PERSON: " + @persons.count.to_s
     @all_families = all_families
-    puts "ALL FAMILIES: " + @all_families.count.to_s
     @all_persons = all_persons
-    puts "ALL PERSONS: " + @all_persons.count.to_s
     @families = Array.new
-
-    puts "all_persons_hashmap"
     @all_persons_hashmap = Hash.new
     @all_persons.each do |person|
       @all_persons_hashmap[person.id] = person
     end
-
-    puts "all_families_hashmap"
     @all_families_hashmap = Hash.new
     @all_families.each do |family|
       @all_families_hashmap[family.id] = family
     end
-
-    puts "get_family_ids.each"
     get_family_ids.each do |family_id|
       @families.push(@all_families_hashmap[family_id])
     end
 
-    puts "calculate_data_with_all_persons"
+    puts "calculate data depending on all persons"
     calculate_data_depending_on_all_persons
-    puts "calculate_data_with_subset_of_persons"
+    puts "calculate data depending on subset of persons"
     calculate_data_depending_on_subset_of_persons(@persons_with_vaid_date_fields, @families)
 
     puts "DONE. TIME NEEDED: " + (Time.new - start).to_s
@@ -142,9 +134,12 @@ class Analyzer
     @birth_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @death_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @alive_persons_by_decade = Array.new.push(DiagramData.new(0, 0))
-    @ages = Array.new.push(DiagramData.new(0, 0))
-    @average_age_males = 0
-    @average_age_females = 0
+    @ages_alive = Array.new.push(DiagramData.new(0, 0))
+    @average_age_males_alive = 0
+    @average_age_females_alive = 0
+    @ages_deceased = Array.new.push(DiagramData.new(0, 0))
+    @average_age_males_deceased = 0
+    @average_age_females_deceased = 0
     @average_age_of_male_at_marriage = 0
     @average_age_of_female_at_marriage = 0
     @average_age_of_male_at_first_child = 0
@@ -153,11 +148,17 @@ class Analyzer
     birth_years = Array.new
     death_years = Array.new
 
-    ages = Array.new
-    males = 0
-    females = 0
-    ages_males = 0
-    ages_females = 0
+    ages_alive = Array.new
+    males_alive = 0
+    females_alive = 0
+    ages_males_alive = 0
+    ages_females_alive = 0
+
+    ages_deceased = Array.new
+    males_deceased = 0
+    females_deceased = 0
+    ages_males_deceased= 0
+    ages_females_deceased = 0
 
     persons.each do |person|
 
@@ -172,17 +173,26 @@ class Analyzer
 
       #ages
       age = get_age person
-      if not age == "N/A"
-        ages.push(age)
 
+      if get_year(person.date_death) == "N/A" #alive
+        ages_alive.push(age)
         if person.gender == "M" || person.gender == "m"
-          males += 1
-          ages_males += age 
+          males_alive += 1
+          ages_males_alive += age 
         end
-
         if person.gender == "F" || person.gender == "f"
-          females += 1
-          ages_females += age
+          females_alive += 1
+          ages_females_alive += age
+        end
+      else #deceased
+        ages_deceased.push(age)
+        if person.gender == "M" || person.gender == "m"
+          males_deceased += 1
+          ages_males_deceased += age 
+        end
+        if person.gender == "F" || person.gender == "f"
+          females_deceased += 1
+          ages_females_deceased += age
         end
       end
     end
@@ -194,7 +204,7 @@ class Analyzer
       @birth_occurrences_by_decade = Array.new
       @death_occurrences_by_decade = Array.new
       @alive_persons_by_decade = Array.new
-      @ages = Array.new
+      @ages_alive = Array.new
 
       if death_years.include? "N/A" then death_year = Time.new.year else death_year = death_years.sort.first end
       if first_relevant_year > death_year
@@ -283,7 +293,7 @@ class Analyzer
         end
       end 
 
-      puts "ALIVE PERSONS BY DECADE"
+      puts "ALIVE PERSONS BY DECADE START"
       start_time = Time.new
       # alive persons by decade
       actual_year = first_relevant_year
@@ -315,19 +325,32 @@ class Analyzer
       @death_occurrences_by_decade = get_diagram_data_array_for_decade(death_years-Array.new.push("N/A"), first_relevant_year, last_relevant_year)
 
       #ages
-      ages.sort!
-      oldest = ages.last
+      ages_alive.sort!
+      oldest = ages_alive.last
       actual_year = 0
       while actual_year <= oldest do
-        size_before = ages.count
-        ages.delete(actual_year)
-        @ages.push(DiagramData.new(actual_year, size_before - ages.count))
+        size_before = ages_alive.count
+        ages_alive.delete(actual_year)
+        @ages_alive.push(DiagramData.new(actual_year, size_before - ages_alive.count))
+        actual_year += 1
+      end
+
+      ages_deceased.sort!
+      oldest = ages_deceased.last
+      actual_year = 0
+      while actual_year <= oldest do
+        size_before = ages_deceased.count
+        ages_deceased.delete(actual_year)
+        @ages_deceased.push(DiagramData.new(actual_year, size_before - ages_deceased.count))
         actual_year += 1
       end
 
       #average ages
-      if males > 0 then @average_age_males = ages_males / males end
-      if females > 0 then @average_age_females = ages_females / females end 
+      if males_alive > 0 then @average_age_males_alive = ages_males_alive / males_alive end
+      if females_alive > 0 then @average_age_females_alive = ages_females_alive / females_alive end 
+
+      if males_deceased > 0 then @average_age_males_deceased = ages_males_deceased / males_deceased end
+      if females_deceased > 0 then @average_age_females_deceased = ages_females_deceased / females_deceased end 
 
       #average ages at marriage
       if husbands > 0 then @average_age_of_male_at_marriage = ages_husbands / husbands end
