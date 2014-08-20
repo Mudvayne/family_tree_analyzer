@@ -1,12 +1,13 @@
 require './lib/diagramData'
 require './lib/gedcom_date.rb'
+require './lib/individual.rb'
 
 class Analyzer
 
   attr_reader :number_male_persons, :number_female_persons, :families_count, :average_children_per_family, 
-  :persons_with_vaid_date_fields, :count_persons_with_birthyear_set, :count_persons_with_birthyear_unset, 
-  :count_probably_missing_death_dates, :birth_occurrences_by_decade, :death_occurrences_by_decade, 
-  :alive_persons_by_decade, :ages_alive, :average_age_males_alive, :average_age_females_alive, 
+  :persons_with_valid_date_fields, :count_missing_birth_dates, :count_probably_missing_death_dates, :count_nothing_set, 
+  :count_both_set_but_incorrect, :birth_occurrences_by_decade, :death_occurrences_by_decade, 
+  :alive_persons_by_decade, :guessed_dates, :living_period_estimation_of_invalid_data, :ages_alive, :average_age_males_alive, :average_age_females_alive, 
   :ages_deceased, :average_age_males_deceased, :average_age_females_deceased, :average_age_of_male_at_marriage,
   :average_age_of_female_at_marriage, :average_age_of_male_at_first_child, :average_age_of_female_at_first_child, 
   :ten_most_common_lastnames, :ten_most_common_firstnames_males, :ten_most_common_firstnames_females
@@ -29,24 +30,18 @@ class Analyzer
     get_family_ids.each do |family_id|
       @families.push(@all_families_hashmap[family_id])
     end
-
-    puts "calculate data depending on all persons"
     calculate_data_depending_on_all_persons
-    puts "calculate data depending on subset of persons"
-    calculate_data_depending_on_subset_of_persons(@persons_with_vaid_date_fields, @families)
-
-    puts "DONE. TIME NEEDED: " + (Time.new - start).to_s
+    calculate_data_depending_on_subset_of_persons(@persons_with_valid_date_fields, @families)
   end
 
   def calculate_data_depending_on_all_persons
+    puts "CALCULATIONS ALL PERSONS"
     @number_male_persons = 0
     @number_female_persons = 0
     @families_count = @families.count
     @average_children_per_family = 0
-    @persons_with_vaid_date_fields = Array.new
-    @count_persons_with_birthyear_set = 0
-    @count_persons_with_birthyear_unset = 0
-    @count_probably_missing_death_dates = 0
+    @persons_with_valid_date_fields = Array.new
+
     @ten_most_common_lastnames = Array.new.push(DiagramData.new(0, 0))
     @ten_most_common_firstnames_males = Array.new.push(DiagramData.new(0, 0))
     @ten_most_common_firstnames_females = Array.new.push(DiagramData.new(0, 0))
@@ -82,28 +77,12 @@ class Analyzer
       if not date_birth == "N/A"
         if not date_death == "N/A"
           if date_death >= date_birth
-            @persons_with_vaid_date_fields.push(person)
+            @persons_with_valid_date_fields.push(person)
           end
         else
           if not (Time.new.year - date_birth) > 110
-            @persons_with_vaid_date_fields.push(person)
+            @persons_with_valid_date_fields.push(person)
           end
-        end
-      end
-
-      #persons with birth year set/unset
-      if not person.date_birth == "N/A"
-        @count_persons_with_birthyear_set+=1
-      else
-        @count_persons_with_birthyear_unset+=1
-      end
-
-      #count persons with probably missing death date
-      if date_birth == "N/A" && date_death == "N/A"
-         @count_probably_missing_death_dates += 1
-      elsif (not date_birth == "N/A") && person.date_birth == "N/A" 
-        if Time.new.year - date_birth > 110 
-          @count_probably_missing_death_dates += 1 
         end
       end
 
@@ -131,9 +110,11 @@ class Analyzer
   end
 
   def calculate_data_depending_on_subset_of_persons persons, families
+    
     @birth_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @death_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @alive_persons_by_decade = Array.new.push(DiagramData.new(0, 0))
+    @living_period_estimation_of_invalid_data = Array.new.push(DiagramData.new(0, 0))
     @ages_alive = Array.new.push(DiagramData.new(0, 0))
     @average_age_males_alive = 0
     @average_age_females_alive = 0
@@ -144,6 +125,11 @@ class Analyzer
     @average_age_of_female_at_marriage = 0
     @average_age_of_male_at_first_child = 0
     @average_age_of_female_at_first_child = 0
+    @count_probably_missing_death_dates = 0
+    @count_missing_birth_dates = 0
+    @count_nothing_set = 0
+    @count_both_set_but_incorrect = 0
+    @guessed_dates = 0
 
     birth_years = Array.new
     death_years = Array.new
@@ -160,6 +146,8 @@ class Analyzer
     ages_males_deceased= 0
     ages_females_deceased = 0
 
+    puts "PERSONS EACH"
+    start_time = Time.new
     persons.each do |person|
 
       birth_year = get_year person.date_birth
@@ -196,6 +184,7 @@ class Analyzer
         end
       end
     end
+    puts "needed: " + (Time.new - start_time).to_s
 
     #first relevant year
     first_relevant_year = birth_years.sort.first
@@ -204,6 +193,7 @@ class Analyzer
       @birth_occurrences_by_decade = Array.new
       @death_occurrences_by_decade = Array.new
       @alive_persons_by_decade = Array.new
+      @living_period_estimation_of_invalid_data = Array.new
       @ages_alive = Array.new
 
       if death_years.include? "N/A" then death_year = Time.new.year else death_year = death_years.sort.first end
@@ -228,6 +218,8 @@ class Analyzer
       fathers = 0
       mothers = 0
 
+      puts "FAMILIES EACH"
+      start_time = Time.new
       @families.each do |family|
         #average ages at marriage
         year = get_year family.date_married
@@ -292,22 +284,24 @@ class Analyzer
           end
         end
       end 
+      puts "needed: " + (Time.new - start_time).to_s
 
-      puts "ALIVE PERSONS BY DECADE START"
-      start_time = Time.new
+      puts "ALIVE PERSONS BY DECADE"
+      start_time = Time.new 
       # alive persons by decade
       actual_year = first_relevant_year
       while actual_year < last_relevant_year do
-        @alive_persons_by_decade.push(DiagramData.new(actual_year.to_s + " - " + (actual_year + 10).to_s, 0))
+        to_year = actual_year + 10
+        @alive_persons_by_decade.push(DiagramData.new(actual_year.to_s + " - " + to_year.to_s, 0))
         actual_year += 10
-        if actual_year > last_relevant_year then actual_year = last_relevant_year end
       end
+
       persons.each do |person|
         birth_person = get_year person.date_birth
         if not birth_person == "N/A"
-          index = (birth_person - last_relevant_year) / 10 #find first relevant index for performance
+          index = (birth_person - first_relevant_year) / 10 #find first relevant index for performance
           while true do
-            if person_alive_at_interval?(person, last_relevant_year+index*10, (last_relevant_year+10)+(index*10)) #this will be true, for first interval
+            if person_alive_at_interval?(person, first_relevant_year+index*10, (first_relevant_year+10)+(index*10)) #this will be true, for first interval
               @alive_persons_by_decade[index].value += 1
             else
               break #person died in this index, no need for checking greater indizes
@@ -316,7 +310,7 @@ class Analyzer
           end
         end
       end
-      puts "DONE. TIME NEEDED: " + (Time.new - start_time).to_s
+      puts "needed: " + (Time.new - start_time).to_s
 
       #birth_occurrences_by_decade
       @birth_occurrences_by_decade = get_diagram_data_array_for_decade(birth_years, first_relevant_year, last_relevant_year)
@@ -325,25 +319,29 @@ class Analyzer
       @death_occurrences_by_decade = get_diagram_data_array_for_decade(death_years-Array.new.push("N/A"), first_relevant_year, last_relevant_year)
 
       #ages
-      ages_alive.sort!
-      oldest = ages_alive.last
-      actual_year = 0
-      while actual_year <= oldest do
-        size_before = ages_alive.count
-        ages_alive.delete(actual_year)
-        @ages_alive.push(DiagramData.new(actual_year, size_before - ages_alive.count))
-        actual_year += 1
-      end
+      if ages_alive.count > 0
+        ages_alive.sort!
+        oldest = ages_alive.last
+        actual_year = 0
+        while actual_year <= oldest do
+          size_before = ages_alive.count
+          ages_alive.delete(actual_year)
+          @ages_alive.push(DiagramData.new(actual_year, size_before - ages_alive.count))
+          actual_year += 1
+        end
+      else @ages_alive.push(DiagramData.new(0, 0)) end
 
-      ages_deceased.sort!
-      oldest = ages_deceased.last
-      actual_year = 0
-      while actual_year <= oldest do
-        size_before = ages_deceased.count
-        ages_deceased.delete(actual_year)
-        @ages_deceased.push(DiagramData.new(actual_year, size_before - ages_deceased.count))
-        actual_year += 1
-      end
+      if ages_deceased.count > 0 
+        ages_deceased.sort!
+        oldest = ages_deceased.last
+        actual_year = 0
+        while actual_year <= oldest do
+          size_before = ages_deceased.count
+          ages_deceased.delete(actual_year)
+          @ages_deceased.push(DiagramData.new(actual_year, size_before - ages_deceased.count))
+          actual_year += 1
+        end
+      else @ages_deceased.push(DiagramData.new(0, 0)) end
 
       #average ages
       if males_alive > 0 then @average_age_males_alive = ages_males_alive / males_alive end
@@ -357,8 +355,98 @@ class Analyzer
       if wifes > 0 then @average_age_of_female_at_marriage = ages_wifes / wifes end
 
       #average age at first child
-      @average_age_of_male_at_first_child = age_at_first_child_male / fathers
-      @average_age_of_female_at_first_child = age_at_first_child_female / mothers
+      @average_age_of_male_at_first_child = age_at_first_child_male / fathers || 0
+      @average_age_of_female_at_first_child = age_at_first_child_female / mothers || 0
+
+      #living period estimation of invalid data
+      puts "LIVING PERIOD ESTIMATIION OF INVALID DATA START"
+      start_time = Time.new
+
+      living_period_estimation_of_invalid_data = Array.new
+
+      incomplete_tmp = @persons - @persons_with_valid_date_fields
+
+      incomplete = Array.new
+      incomplete_tmp.each do |person| #write on copy only
+        incomplete.push(Individual.new(person.id, nil, person.name, nil, person.date_birth, person.date_death, person.date_burial, nil, nil, nil, person.parent_in_families, person.child_in_family))
+      end
+
+      if incomplete.count > 0 
+
+        birthyear_set = incomplete.select {|person| (not get_year(person.date_birth) == "N/A") && (get_year(person.date_death) == "N/A")}
+        deathyear_set = incomplete.select {|person| (not get_year(person.date_death) == "N/A") && (get_year(person.date_birth) == "N/A")}
+        nothing_set = incomplete.select {|person| (get_year(person.date_birth) == "N/A") && (get_year(person.date_death) == "N/A")}
+        both_set_but_wrong = incomplete.select {|person| (not get_year(person.date_birth) == "N/A") && (not get_year(person.date_death) == "N/A")}
+
+        @count_probably_missing_death_dates = birthyear_set.count
+        @count_missing_birth_dates = deathyear_set.count
+        @count_nothing_set = nothing_set.count
+        @count_both_set_but_incorrect = both_set_but_wrong.count
+
+        guessed_dates_persons = Array.new
+
+        birthyear_set.each do |person|
+          if person.gender == "m" || person.gender == "M" 
+            person.date_death = (get_year(person.date_birth) + @average_age_males_deceased).to_s
+          else
+            person.date_death = (get_year(person.date_birth) + @average_age_females_deceased).to_s
+          end
+        end
+        guessed_dates_persons += birthyear_set
+
+        deathyear_set.each do |person|
+            if person.gender == "m" || person.gender == "M" 
+            person.date_birth = (get_year(person.date_death) - @average_age_males_deceased).to_s
+          else
+            person.date_birth = (get_year(person.date_death) - @average_age_females_deceased).to_s
+          end
+        end
+        guessed_dates_persons += deathyear_set
+
+        persons_for_deeper_estimation = nothing_set + both_set_but_wrong
+
+        persons_for_deeper_estimation.each do |person|
+          if calculate_likely_dates person
+            guessed_dates_persons.push person
+          end
+        end
+
+        @guessed_dates = guessed_dates_persons.count
+
+        birth_years_guessed_persons = Array.new
+        death_years_guessed_persons = Array.new
+        guessed_dates_persons.each do |person|
+          birth_years_guessed_persons.push(get_year(person.date_birth))
+          death_years_guessed_persons.push(get_year(person.date_death))
+        end
+        first_relevant_year_guessed = birth_years_guessed_persons.sort.first
+        last_relevant_year_guessed = death_years_guessed_persons.sort.last + 10
+        if last_relevant_year_guessed > Time.new.year then last_relevant_year_guessed = Time.new.year end
+
+        actual_year = first_relevant_year_guessed
+        count = 0
+        while actual_year < last_relevant_year_guessed do
+          to_year = actual_year + 10
+          @living_period_estimation_of_invalid_data.push(DiagramData.new(actual_year.to_s + " - " + to_year.to_s, 0))
+          actual_year += 10
+        end
+        guessed_dates_persons.each do |person|
+          birth_person = get_year(person.date_birth)
+          index = (birth_person - first_relevant_year_guessed) / 10 #find first relevant index for performance
+          while true do
+            if person_alive_at_interval?(person, first_relevant_year_guessed+index*10, (first_relevant_year_guessed+10)+(index*10)) #this will be true, for first interval
+              begin #if guessed death date > last_relevant_year_guessed
+                @living_period_estimation_of_invalid_data[index].value += 1
+              rescue
+              end
+            else
+              break #person died in this index, no need for checking greater indizes
+            end
+            index += 1
+          end
+        end
+      end
+      puts "needed: " + (Time.new - start_time).to_s
     end
   end
 
@@ -482,5 +570,165 @@ class Analyzer
     if death_year == "N/A" then death_year = Time.new.year end
     if birth_year == "N/A" || death_year == "N/A" then return false end
     if birth_year <= to_year && death_year >= from_year then return true else return false end
+  end
+
+  def calculate_likely_dates person
+    siblings = get_siblings(person)
+    if not siblings == "N/A"
+      siblings.each do |sibling|
+        if has_valid_date_fields? sibling
+          person.date_birth = sibling.date_birth
+          if person.gender == "m" || person.gender == "M"
+            person.date_death = (get_year(person.date_birth) + @average_age_males_deceased).to_s
+          else
+            person.date_death = (get_year(person.date_birth) + @average_age_females_deceased).to_s
+          end
+          #puts person.firstname + " " + person.lastname + " DATES: " + person.date_birth.to_s + " " + person.date_death.to_s + " BY SIBLING: " + sibling.firstname + " " + sibling.lastname + " DATES: " + sibling.date_birth.to_s + " - " + sibling.date_death.to_s
+          return true
+        end
+      end
+    end
+
+    partners = get_partners(person)
+    if not partners == "N/A"
+      partners.each do |partner|
+        if has_valid_date_fields? partner
+          person.date_birth = partner.date_birth
+          if person.gender == "m" || person.gender == "M"
+            person.date_death = (get_year(person.date_birth) + @average_age_males_deceased).to_s
+          else
+            person.date_death = (get_year(person.date_birth) + @average_age_females_deceased).to_s
+          end
+          #puts person.firstname + " " + person.lastname + " DATES: " + person.date_birth.to_s + " " + person.date_death.to_s + " BY PARTNER: " + partner.firstname + " " + partner.lastname + " DATES: " + partner.date_birth.to_s + " - " + partner.date_death.to_s
+          return true
+        end
+      end
+    end
+
+    parents = get_parents(person)
+    if not parents == "N/A"
+      parents.each do |parent|
+        if has_valid_date_fields? parent
+          if parent.gender == "m" || parent.gender == "M"
+            person.date_birth = (get_year(parent.date_birth) + @average_age_of_male_at_first_child).to_s
+          else
+            person.date_birth = (get_year(parent.date_birth) + @average_age_of_female_at_first_child).to_s
+          end
+          if person.gender == "m" || person.gender == "M"
+            person.date_death = (get_year(person.date_birth) + @average_age_males_deceased).to_s
+          else
+            person.date_death = (get_year(person.date_birth) + @average_age_females_deceased).to_s
+          end
+          #puts person.firstname + " " + person.lastname + " DATES: " + person.date_birth.to_s + " " + person.date_death.to_s + " BY PARENT: " + parent.firstname + " " + parent.lastname + " DATES: " + parent.date_birth.to_s + " - " + parent.date_death.to_s
+          return true
+        end
+      end
+    end
+    children = get_children(person)
+    if not children == "N/A"
+      children.each do |child|
+        if has_valid_date_fields? child
+          if person.gender == "m" || person.gender == "M"
+            person.date_birth = (get_year(child.date_birth) + @average_age_of_male_at_first_child).to_s
+            person.date_death = (get_year(person.date_birth) + @average_age_males_deceased).to_s
+          else
+            person.date_birth = (get_year(child.date_birth) + @average_age_of_female_at_first_child).to_s
+            person.date_death = (get_year(person.date_birth) + @average_age_females_deceased).to_s
+          end
+          #puts person.firstname + " " + person.lastname + " DATES: " + person.date_birth.to_s + " " + person.date_death.to_s + " BY CHILD: " + child.firstname + " " + child.lastname + " DATES: " + child.date_birth.to_s + " - " + child.date_death.to_s
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  def get_siblings person
+    if not person.child_in_family == "N/A"
+      family_id = person.child_in_family
+      sibling_ids = @all_families_hashmap[family_id].children
+      if not sibling_ids == "N/A"
+        siblings = Array.new
+        sibling_ids.each do |id|
+          siblings.push(@all_persons_hashmap[id])
+        end
+        return siblings
+      end
+    end
+    return "N/A"
+  end
+
+  def get_partners person
+    if not person.parent_in_families == "N/A"
+      partner_ids = Array.new
+      person.parent_in_families.each do |family_id|
+        if person.gender == "m" || person.gender == "M"
+          if not @all_families_hashmap[family_id].wife == "N/A"
+            partner_ids.push(@all_families_hashmap[family_id].wife)
+          end
+        else
+          if not @all_families_hashmap[family_id].husband == "N/A"
+            partner_ids.push(@all_families_hashmap[family_id].husband)
+          end
+        end
+      end
+      if partner_ids.count > 0
+        partners = Array.new
+        partner_ids.each do |partner_id|
+          partners.push(@all_persons_hashmap[partner_id])
+        end
+        return partners
+      end
+    end
+    return "N/A"
+  end
+
+  def get_parents person
+    if not person.child_in_family == "N/A"
+      family_id = person.child_in_family
+      mother_id = @all_families_hashmap[family_id].wife
+      father_id = @all_families_hashmap[family_id].husband
+      if not (mother_id == "N/A" && father_id == "N/A")
+        parents = Array.new
+        if not mother_id == "N/A" then parents.push(@all_persons_hashmap[mother_id]) end
+        if not father_id == "N/A" then parents.push(@all_persons_hashmap[father_id]) end
+        return parents
+      end
+    end
+    return "N/A"
+  end
+
+  def get_children person
+    if not person.parent_in_families == "N/A"
+      children_ids = Array.new
+      person.parent_in_families.each do |family_id|
+        children_ids += @all_families_hashmap[family_id].children
+      end
+      if children_ids.count > 0
+        children = Array.new
+        children_ids.each do |child_id|
+          children.push(@all_persons_hashmap[child_id])
+        end
+        return children
+      end
+    end
+    return "N/A"
+  end
+
+  def has_valid_date_fields? person
+    birth_year = get_year person.date_birth
+    death_year = get_year person.date_death
+    if not birth_year == "N/A"
+      if not death_year == "N/A"
+        if death_year >= birth_year
+          return true
+        end
+      else
+        if not (Time.new.year - birth_year) > 110
+          return true
+        end
+      end
+    end
+    return false
   end
 end

@@ -27,10 +27,13 @@ class AnalysesController < ApplicationController
     @families_count = analyzer.families_count
     @average_children_per_family = analyzer.average_children_per_family
 
-    @persons_with_vaid_date_fields = analyzer.persons_with_vaid_date_fields
-    @count_persons_with_birthyear_set = analyzer.count_persons_with_birthyear_set
-    @count_persons_with_birthyear_unset = analyzer.count_persons_with_birthyear_unset
+    @persons_with_valid_date_fields = analyzer.persons_with_valid_date_fields
+    @count_missing_birth_dates = analyzer.count_missing_birth_dates
     @count_probably_missing_death_dates = analyzer.count_probably_missing_death_dates
+    @count_nothing_set = analyzer.count_nothing_set
+    @count_both_set_but_incorrect = analyzer.count_both_set_but_incorrect
+    @guessed_dates = analyzer.guessed_dates
+    @living_period_estimation_of_invalid_data = analyzer.living_period_estimation_of_invalid_data
 
     @birth_occurrences_by_decade = analyzer.birth_occurrences_by_decade
     @death_occurrences_by_decade = analyzer.death_occurrences_by_decade

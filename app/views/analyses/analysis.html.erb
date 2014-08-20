@@ -16,20 +16,20 @@
 <div class="jumbotron">
   <h2> Completeness of date fields for date analyses </h2>
   <div class="row">
-    <div class="col-md-4">
-      <h3> Birth-year set? </h3>
-      <div id="birthyear_set_donut" style="height: 250px;"></div>
+    <div class="col-md-6">
+      <h3> Missing or incorrect data </h3>
+      <div id="missing_data_donut" style="height: 250px;"></div>
     </div>
-    <div class="col-md-4">
-      <h3> Missing death-year? (likely) </h3>
-      <div id="missing_deathdate_donut" style="height: 250px;"></div>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <h3> Resulting in: used entities </h3>
       <div id="valid_donut" style="height: 250px;"></div>
     </div>
   </div>
+  <h3> When people with invalid data have probably lived? (Guessed: <%= @guessed_dates %>) </h3>
+  <div id="living_period_estimation_of_invalid_data_areachart" style="height: 250px;"></div> 
+</div>
 
+<div class="jumbotron">
   <h2> Births by decade </h2>
   <div id="birth_barchart" style="height: 250px;"></div>
 
@@ -102,25 +102,31 @@
   Morris.Donut({
     element: 'valid_donut',
     data: [
-      {label: "used", value: <%= @persons_with_vaid_date_fields.count %>},
-      {label: "not used", value: <%= (@persons_for_analysis.count - @persons_with_vaid_date_fields.count) %>},
+      {label: "used", value: <%= @persons_with_valid_date_fields.count %>},
+      {label: "not used", value: <%= (@persons_for_analysis.count - @persons_with_valid_date_fields.count) %>},
     ]
   });
 
   Morris.Donut({
-    element: 'birthyear_set_donut',
+    element: 'missing_data_donut',
     data: [
-      {label: "set", value: <%= @count_persons_with_birthyear_set %>},
-      {label: "not set", value: <%= @count_persons_with_birthyear_unset %>},
+      {label: "only birthyear", value: <%= @count_probably_missing_death_dates %>},
+      {label: "only deathyear", value: <%= @count_missing_birth_dates %>},
+      {label: "no dates", value: <%= @count_nothing_set %>},
+      {label: "incorrect dates", value: <%= @count_both_set_but_incorrect %>},
     ]
-  });
+  });  
 
-  Morris.Donut({
-    element: 'missing_deathdate_donut',
+  Morris.Area({
+    element: 'living_period_estimation_of_invalid_data_areachart',
     data: [
-      {label: "not missing", value: <%= (@persons_for_analysis.count - @count_probably_missing_death_dates) %>},
-      {label: "missing", value: <%= @count_probably_missing_death_dates %>},
-    ]
+      <% @living_period_estimation_of_invalid_data.each do |i| %>
+      { y: '<%= i.label %>', a: <%= i.value %> },
+      <%end%>
+    ],
+    xkey: 'y',
+    ykeys: 'a',
+    labels: 'Alive persons'
   });
 
   Morris.Bar({

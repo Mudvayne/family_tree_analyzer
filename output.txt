@@ -1,954 +1,469 @@
-persons: 1553
-families: 689
-PERSON: 1553
-ALL FAMILIES: 689
-ALL PERSONS: 1553
-all_persons_hashmap
-all_families_hashmap
-get_family_ids.each
-calculate_data_with_all_persons
-calculate_data_with_subset_of_persons
-@I1@ 1937
-@I2@ 1940
-@I3@ 1905
-@I4@ 1903
-@I6@ 1883
-@I7@ 1853
-@I8@ 1857
-@I9@ 1879
-@I11@ 1844
-@I12@ 1841
-@I13@ 1797
-@I14@ 1802
-@I15@ 1761
-@I16@ 1763
-@I17@ 1820
-@I18@ 1820
-@I19@ 1776
-@I20@ 1783
-@I23@ 1770
-@I25@ 1743
-@I26@ 1748
-@I29@ 1824
-@I30@ 1827
-@I31@ 1795
-@I32@ 1789
-@I37@ 1773
-@I38@ 1784
-@I39@ 1820
-@I40@ 1819
-@I41@ 1782
-@I42@ 1779
-@I44@ 1779
-@I46@ 1747
-@I52@ 1870
-@I54@ 1873
-@I55@ 1878
-@I56@ 1880
-@I60@ 1827
-@I64@ 1835
-@I65@ 1836
-@I66@ 1837
-@I67@ 1839
-@I69@ 1842
-@I70@ 1790
-@I71@ 1791
-@I73@ 1801
-@I78@ 1695
-@I83@ 1668
-@I84@ 1672
-@I85@ 1697
-@I89@ 1713
-@I90@ 1626
-@I98@ 1665
-@I99@ 1811
-@I105@ 1604
-@I108@ 1900
-@I110@ 1843
-@I111@ 1842
-@I113@ 1808
-@I115@ 1825
-@I117@ 1819
-@I120@ 1738
-@I121@ 1744
-@I130@ 1741
-@I135@ 1665
-@I136@ 1672
-@I137@ 1699
-@I138@ 1703
-@I139@ 1645
-@I145@ 1639
-@I149@ 1821
-@I150@ 1822
-@I151@ 1824
-@I152@ 1826
-@I153@ 1827
-@I154@ 1829
-@I155@ 1831
-@I158@ 1769
-@I159@ 1771
-@I160@ 1775
-@I161@ 1778
-@I162@ 1781
-@I163@ 1783
-@I165@ 1795
-@I166@ 1799
-@I167@ 1711
-@I169@ 1918
-@I174@ 1792
-@I175@ 1795
-@I178@ 1851
-@I179@ 1852
-@I180@ 1809
-@I181@ 1815
-@I182@ 1812
-@I183@ 1809
-@I184@ 1815
-@I185@ 1809
-@I186@ 1788
-@I188@ 1783
-@I189@ 1785
-@I190@ 1785
-@I191@ 1783
-@I194@ 1781
-@I195@ 1787
-@I196@ 1779
-@I197@ 1767
-@I199@ 1854
-@I203@ 1823
-@I204@ 1812
-@I210@ 1859
-@I211@ 1860
-@I213@ 1904
-@I215@ 1893
-@I218@ 1902
-@I219@ 1872
-@I221@ 1895
-@I223@ 1920
-@I224@ 1921
-@I225@ 1925
-@I226@ 1928
-@I228@ 1727
-@I235@ 1756
-@I236@ 1757
-@I237@ 1684
-@I241@ 1714
-@I246@ 1678
-@I252@ 1899
-@I254@ 1907
-@I255@ 1910
-@I256@ 1913
-@I257@ 1834
-@I258@ 1833
-@I263@ 1757
-@I264@ 1760
-@I268@ 1672
-@I269@ 1693
-@I272@ 1698
-@I273@ 1694
-@I274@ 1696
-@I275@ 1755
-@I276@ 1763
-@I277@ 1640
-@I281@ 1675
-@I282@ 1639
-@I286@ 1939
-@I287@ 1935
-@I288@ 1933
-@I289@ 1945
-@I295@ 1714
-@I297@ 1700
-@I298@ 1705
-@I299@ 1734
-@I300@ 1740
-@I301@ 1732
-@I302@ 1673
-@I304@ 1609
-@I306@ 1669
-@I308@ 1671
-@I312@ 1697
-@I313@ 1714
-@I315@ 1701
-@I321@ 1643
-@I326@ 1772
-@I327@ 1779
-@I328@ 1785
-@I329@ 1790
-@I330@ 1791
-@I331@ 1793
-@I333@ 1766
-@I334@ 1767
-@I337@ 1741
-@I338@ 1746
-@I340@ 1748
-@I341@ 1750
-@I342@ 1753
-@I343@ 1685
-@I344@ 1677
-@I346@ 1713
-@I347@ 1715
-@I348@ 1718
-@I349@ 1721
-@I351@ 1656
-@I352@ 1654
-@I353@ 1677
-@I354@ 1680
-@I355@ 1681
-@I356@ 1682
-@I357@ 1688
-@I358@ 1689
-@I359@ 1693
-@I361@ 1633
-@I363@ 1652
-@I364@ 1654
-@I368@ 1608
-@I373@ 1576
-@I375@ 1609
-@I376@ 1611
-@I377@ 1613
-@I379@ 1617
-@I380@ 1618
-@I383@ 1548
-@I385@ 1575
-@I388@ 1508
-@I390@ 1550
-@I391@ 1555
-@I393@ 1468
-@I394@ 1505
-@I396@ 1510
-@I397@ 1515
-@I398@ 1523
-@I399@ 1525
-@I402@ 1380
-@I405@ 1934
-@I406@ 1940
-@I408@ 1906
-@I409@ 1937
-@I418@ 1907
-@I419@ 1910
-@I420@ 1913
-@I430@ 1615
-@I443@ 1685
-@I449@ 1672
-@I456@ 1715
-@I462@ 1726
-@I465@ 1734
-@I471@ 1737
-@I474@ 1705
-@I478@ 1718
-@I479@ 1696
-@I480@ 1726
-@I483@ 1746
-@I484@ 1746
-@I487@ 0
-@I488@ 1732
-@I489@ 1738
-@I493@ 1762
-@I495@ 1768
-@I500@ 1765
-@I501@ 1766
-@I505@ 1785
-@I506@ 1788
-@I509@ 1773
-@I512@ 1786
-@I514@ 1780
-@I515@ 1779
-@I518@ 1789
-@I521@ 1794
-@I522@ 1797
-@I533@ 1799
-@I534@ 1800
-@I535@ 1801
-@I539@ 0
-@I540@ 1811
-@I541@ 1816
-@I542@ 1819
-@I543@ 1807
-@I546@ 1819
-@I550@ 1813
-@I551@ 1814
-@I554@ 1862
-@I562@ 1840
-@I563@ 1843
-@I564@ 1846
-@I565@ 1846
-@I568@ 1853
-@I578@ 1856
-@I596@ 1878
-@I607@ 1905
-@I608@ 1907
-@I609@ 1908
-@I610@ 1911
-@I613@ 1910
-@I614@ 1913
-@I615@ 1915
-@I616@ 1913
-@I620@ 1936
-@I621@ 1921
-@I622@ 1961
-@I623@ 1962
-@I624@ 1991
-@I630@ 1612
-@I633@ 1649
-@I634@ 1643
-@I635@ 1674
-@I637@ 1696
-@I639@ 1724
-@I640@ 1700
-@I641@ 1757
-@I642@ 1755
-@I643@ 1753
-@I649@ 1792
-@I650@ 1785
-@I651@ 1813
-@I652@ 1819
-@I653@ 1843
-@I654@ 1840
-@I655@ 1878
-@I656@ 1876
-@I657@ 1848
-@I658@ 1854
-@I659@ 1853
-@I660@ 1854
-@I661@ 1863
-@I662@ 1860
-@I668@ 1896
-@I669@ 1816
-@I670@ 1816
-@I671@ 1842
-@I672@ 1840
-@I673@ 1853
-@I674@ 1853
-@I677@ 1859
-@I678@ 1847
-@I679@ 1909
-@I680@ 1905
-@I682@ 1904
-@I683@ 1821
-@I684@ 1821
-@I685@ 1852
-@I686@ 1853
-@I687@ 1886
-@I688@ 1884
-@I689@ 1911
-@I690@ 1907
-@I694@ 1823
-@I695@ 1850
-@I696@ 1845
-@I697@ 1875
-@I698@ 1866
-@I699@ 1853
-@I700@ 1851
-@I701@ 1857
-@I702@ 1862
-@I703@ 1866
-@I704@ 1795
-@I705@ 1803
-@I708@ 1871
-@I709@ 1869
-@I712@ 1701
-@I713@ 1710
-@I717@ 1676
-@I720@ 1706
-@I722@ 1727
-@I723@ 1731
-@I724@ 1753
-@I726@ 1776
-@I727@ 1780
-@I734@ 1755
-@I735@ 1761
-@I736@ 1762
-@I738@ 1793
-@I739@ 1818
-@I740@ 1814
-@I741@ 1820
-@I742@ 1840
-@I746@ 1776
-@I747@ 1767
-@I748@ 1795
-@I749@ 1802
-@I750@ 1830
-@I751@ 1832
-@I752@ 1799
-@I753@ 1799
-@I754@ 1824
-@I756@ 1854
-@I757@ 1848
-@I762@ 1806
-@I763@ 1803
-@I764@ 1831
-@I766@ 1833
-@I767@ 1833
-@I768@ 1841
-@I769@ 1845
-@I771@ 1840
-@I772@ 1871
-@I773@ 1865
-@I774@ 1729
-@I775@ 1741
-@I776@ 1767
-@I777@ 1759
-@I778@ 1794
-@I779@ 1792
-@I780@ 1821
-@I781@ 1815
-@I782@ 1851
-@I783@ 1857
-@I785@ 1848
-@I786@ 1826
-@I787@ 1824
-@I788@ 1858
-@I791@ 1876
-@I792@ 1829
-@I793@ 1829
-@I794@ 1868
-@I795@ 1868
-@I796@ 1835
-@I797@ 1839
-@I798@ 1872
-@I799@ 1872
-@I802@ 1760
-@I803@ 1763
-@I805@ 1782
-@I806@ 1821
-@I809@ 1788
-@I810@ 1796
-@I811@ 1825
-@I812@ 1826
-@I813@ 1848
-@I814@ 1847
-@I816@ 1884
-@I820@ 1853
-@I821@ 1851
-@I822@ 1885
-@I823@ 1885
-@I824@ 1857
-@I825@ 1863
-@I826@ 1868
-@I828@ 1739
-@I829@ 1744
-@I831@ 1824
-@I832@ 1831
-@I833@ 1817
-@I836@ 1861
-@I837@ 1864
-@I838@ 1890
-@I839@ 1891
-@I840@ 1891
-@I841@ 1893
-@I842@ 1894
-@I845@ 1899
-@I847@ 1862
-@I848@ 1864
-@I849@ 1910
-@I850@ 1907
-@I851@ 1904
-@I852@ 1906
-@I853@ 1867
-@I854@ 1877
-@I862@ 1737
-@I863@ 1739
-@I864@ 1769
-@I865@ 1779
-@I866@ 1804
-@I867@ 1802
-@I869@ 1834
-@I871@ 1842
-@I872@ 1845
-@I873@ 1872
-@I874@ 1871
-@I877@ 1907
-@I878@ 1909
-@I879@ 1743
-@I880@ 1730
-@I881@ 1754
-@I889@ 1823
-@I891@ 1867
-@I896@ 1806
-@I897@ 1813
-@I898@ 1813
-@I899@ 1843
-@I901@ 1824
-@I902@ 1745
-@I903@ 1753
-@I904@ 1782
-@I905@ 1783
-@I906@ 1807
-@I907@ 1813
-@I908@ 1846
-@I909@ 1844
-@I911@ 1821
-@I912@ 1823
-@I913@ 1859
-@I914@ 1866
-@I915@ 1786
-@I916@ 1787
-@I917@ 1811
-@I918@ 1806
-@I919@ 1818
-@I920@ 1809
-@I921@ 1849
-@I922@ 1846
-@I923@ 1885
-@I924@ 1823
-@I925@ 1824
-@I926@ 1791
-@I927@ 1789
-@I930@ 1819
-@I932@ 1825
-@I933@ 1824
-@I934@ 1856
-@I935@ 1851
-@I936@ 1746
-@I937@ 1738
-@I938@ 1752
-@I939@ 1749
-@I940@ 1783
-@I941@ 1780
-@I942@ 1812
-@I943@ 1811
-@I944@ 1841
-@I945@ 1842
-@I946@ 1842
-@I947@ 1840
-@I948@ 1871
-@I949@ 1870
-@I950@ 1877
-@I951@ 1878
-@I952@ 1879
-@I953@ 1879
-@I955@ 1844
-@I956@ 1821
-@I957@ 1821
-@I958@ 1848
-@I959@ 1853
-@I960@ 1883
-@I962@ 1905
-@I963@ 1906
-@I964@ 1914
-@I965@ 1853
-@I968@ 1783
-@I969@ 1682
-@I972@ 1687
-@I976@ 1712
-@I977@ 1704
-@I978@ 1736
-@I980@ 1769
-@I981@ 1765
-@I982@ 1795
-@I983@ 1798
-@I984@ 1830
-@I985@ 1830
-@I986@ 1858
-@I987@ 1879
-@I988@ 1831
-@I989@ 1835
-@I992@ 1833
-@I993@ 1824
-@I996@ 1837
-@I997@ 1833
-@I999@ 1865
-@I1000@ 1838
-@I1001@ 1823
-@I1004@ 1912
-@I1005@ 1923
-@I1006@ 1919
-@I1008@ 1799
-@I1009@ 1794
-@I1010@ 1823
-@I1011@ 1817
-@I1012@ 1826
-@I1013@ 1821
-@I1015@ 1859
-@I1016@ 1827
-@I1017@ 1825
-@I1018@ 1863
-@I1019@ 1860
-@I1020@ 1890
-@I1021@ 1892
-@I1026@ 1907
-@I1027@ 1906
-@I1030@ 1831
-@I1032@ 1836
-@I1033@ 1839
-@I1036@ 1839
-@I1037@ 1835
-@I1042@ 1802
-@I1043@ 1806
-@I1049@ 1774
-@I1050@ 1764
-@I1051@ 1804
-@I1052@ 1792
-@I1055@ 1834
-@I1059@ 1845
-@I1060@ 1843
-@I1061@ 1873
-@I1064@ 1875
-@I1066@ 1810
-@I1069@ 1808
-@I1070@ 1806
-@I1071@ 1838
-@I1072@ 1839
-@I1073@ 1866
-@I1074@ 1860
-@I1075@ 1842
-@I1076@ 1837
-@I1079@ 1843
-@I1080@ 1839
-@I1084@ 1845
-@I1085@ 1776
-@I1086@ 1779
-@I1087@ 1806
-@I1088@ 1812
-@I1089@ 1808
-@I1090@ 1802
-@I1091@ 1835
-@I1092@ 1843
-@I1093@ 1869
-@I1094@ 1865
-@I1097@ 1692
-@I1099@ 1703
-@I1100@ 1716
-@I1101@ 1721
-@I1102@ 1749
-@I1104@ 1774
-@I1105@ 1775
-@I1106@ 1785
-@I1107@ 1781
-@I1108@ 1813
-@I1109@ 1819
-@I1111@ 1850
-@I1112@ 1849
-@I1117@ 1787
-@I1119@ 1789
-@I1120@ 1789
-@I1121@ 1793
-@I1122@ 1812
-@I1123@ 1818
-@I1124@ 1838
-@I1128@ 1857
-@I1134@ 1821
-@I1135@ 1817
-@I1136@ 1853
-@I1138@ 1823
-@I1141@ 1754
-@I1142@ 1758
-@I1144@ 1790
-@I1145@ 1731
-@I1146@ 1736
-@I1150@ 1779
-@I1151@ 1813
-@I1152@ 1816
-@I1153@ 1856
-@I1154@ 1845
-@I1155@ 1818
-@I1156@ 1823
-@I1158@ 1841
-@I1159@ 1850
-@I1165@ 1825
-@I1166@ 1861
-@I1167@ 1814
-@I1168@ 1814
-@I1171@ 1826
-@I1172@ 1787
-@I1173@ 1789
-@I1174@ 1796
-@I1175@ 1820
-@I1176@ 1829
-@I1177@ 1850
-@I1178@ 1855
-@I1179@ 1853
-@I1180@ 1853
-@I1181@ 1855
-@I1182@ 1855
-@I1185@ 1859
-@I1186@ 1867
-@I1190@ 1826
-@I1193@ 1733
-@I1194@ 1732
-@I1195@ 1768
-@I1196@ 1768
-@I1197@ 1795
-@I1198@ 1790
-@I1199@ 1805
-@I1200@ 1797
-@I1201@ 1825
-@I1202@ 1830
-@I1203@ 1854
-@I1204@ 1853
-@I1205@ 1800
-@I1206@ 1801
-@I1209@ 1837
-@I1210@ 1836
-@I1212@ 1872
-@I1213@ 1900
-@I1217@ 1802
-@I1218@ 1802
-@I1219@ 1840
-@I1220@ 1840
-@I1226@ 1807
-@I1227@ 1805
-@I1228@ 1821
-@I1229@ 1844
-@I1230@ 1840
-@I1231@ 1773
-@I1233@ 1804
-@I1234@ 1805
-@I1235@ 1832
-@I1236@ 1821
-@I1237@ 1870
-@I1238@ 1873
-@I1239@ 1836
-@I1240@ 1776
-@I1241@ 1780
-@I1247@ 1697
-@I1248@ 1723
-@I1249@ 1725
-@I1250@ 1755
-@I1251@ 1753
-@I1252@ 1780
-@I1253@ 1788
-@I1254@ 1787
-@I1261@ 1745
-@I1265@ 1798
-@I1266@ 1824
-@I1267@ 1827
-@I1268@ 1859
-@I1269@ 1843
-@I1272@ 1803
-@I1273@ 1831
-@I1274@ 1832
-@I1280@ 1723
-@I1281@ 1723
-@I1287@ 1739
-@I1288@ 1724
-@I1289@ 1758
-@I1291@ 1795
-@I1293@ 1823
-@I1294@ 1835
-@I1295@ 1864
-@I1296@ 1864
-@I1297@ 1834
-@I1298@ 1831
-@I1299@ 1868
-@I1300@ 1871
-@I1303@ 1904
-@I1304@ 1904
-@I1305@ 1908
-@I1313@ 1762
-@I1314@ 1756
-@I1315@ 1785
-@I1316@ 1788
-@I1317@ 1779
-@I1318@ 1816
-@I1319@ 1811
-@I1322@ 1797
-@I1324@ 1835
-@I1325@ 1834
-@I1326@ 1871
-@I1327@ 1873
-@I1328@ 1763
-@I1329@ 1759
-@I1330@ 1796
-@I1331@ 1800
-@I1332@ 1823
-@I1333@ 1819
-@I1334@ 1847
-@I1336@ 1849
-@I1338@ 1765
-@I1339@ 1775
-@I1343@ 1612
-@I1349@ 1700
-@I1351@ 1732
-@I1353@ 1769
-@I1355@ 1796
-@I1356@ 1801
-@I1357@ 1801
-@I1358@ 1835
-@I1359@ 1734
-@I1362@ 1728
-@I1363@ 1717
-@I1364@ 1750
-@I1365@ 1757
-@I1366@ 1781
-@I1369@ 1759
-@I1370@ 1766
-@I1371@ 1790
-@I1372@ 1793
-@I1373@ 1795
-@I1374@ 1817
-@I1375@ 1826
-@I1376@ 1856
-@I1377@ 1857
-@I1383@ 1798
-@I1384@ 1793
-@I1387@ 1823
-@I1388@ 1826
-@I1389@ 1822
-@I1392@ 1752
-@I1393@ 1776
-@I1394@ 1783
-@I1395@ 1828
-@I1396@ 1865
-@I1397@ 1872
-@I1398@ 1867
-@I1399@ 1870
-@I1400@ 1811
-@I1401@ 1807
-@I1402@ 1736
-@I1403@ 1737
-@I1404@ 1756
-@I1405@ 1762
-@I1406@ 1766
-@I1408@ 1777
-@I1409@ 1806
-@I1410@ 1815
-@I1411@ 1811
-@I1412@ 1768
-@I1413@ 1773
-@I1414@ 1796
-@I1415@ 1798
-@I1418@ 1831
-@I1419@ 1824
-@I1421@ 1861
-@I1422@ 1834
-@I1423@ 1841
-@I1424@ 1866
-@I1426@ 1800
-@I1427@ 1773
-@I1428@ 1774
-@I1431@ 1774
-@I1432@ 1780
-@I1433@ 1810
-@I1434@ 1810
-@I1435@ 1838
-@I1436@ 1841
-@I1437@ 1870
-@I1439@ 1821
-@I1440@ 1825
-@I1441@ 1822
-@I1443@ 1719
-@I1444@ 1741
-@I1445@ 1746
-@I1446@ 1777
-@I1449@ 1782
-@I1450@ 1777
-@I1452@ 1812
-@I1453@ 1812
-@I1454@ 1815
-@I1457@ 1832
-@I1458@ 1837
-@I1459@ 1788
-@I1460@ 1745
-@I1461@ 1736
-@I1462@ 1773
-@I1463@ 1760
-@I1464@ 1763
-@I1465@ 1788
-@I1466@ 1787
-@I1467@ 1819
-@I1468@ 1821
-@I1469@ 1798
-@I1470@ 1803
-@I1471@ 1836
-@I1472@ 1834
-@I1474@ 1868
-@I1480@ 1669
-@I1489@ 1761
-@I1491@ 1801
-@I1492@ 1822
-@I1493@ 1817
-@I1494@ 1760
-@I1495@ 1764
-@I1496@ 1785
-@I1497@ 1780
-@I1498@ 1808
-@I1499@ 1805
-@I1503@ 1834
-@I1504@ 1829
-@I1509@ 1849
-@I1510@ 1850
-@I1511@ 1809
-@I1512@ 1812
-@I1513@ 1814
-@I1514@ 1817
-@I1515@ 1838
-@I1516@ 1836
-@I1517@ 1817
-@I1518@ 1820
-@I1519@ 1792
-@I1520@ 1786
-@I1521@ 1791
-@I1522@ 1816
-@I1523@ 1816
-@I1524@ 1819
-@I1525@ 1817
-@I1526@ 1851
-@I1527@ 1848
-@I1528@ 1861
-@I1530@ 1795
-@I1531@ 1787
-@I1532@ 1821
-@I1533@ 1755
-@I1534@ 1760
-@I1536@ 1787
-@I1537@ 1783
-@I1538@ 1829
-@I1539@ 1825
-@I1540@ 1796
-@I1541@ 1797
-@I1542@ 1823
-@I1543@ 1811
-@I1544@ 1857
-@I1545@ 1859
-@I1546@ 1825
-@I1547@ 1828
-@I1550@ 1837
-@I1551@ 1837
-@I1552@ 1876
-@I1553@ 1867
-@I1557@ 1735
-@I1558@ 1769
-@I1561@ 1687
-@I1563@ 1694
-@I1564@ 1715
-@I1565@ 1714
-@I1566@ 1752
-@I1567@ 1745
-@I1568@ 1771
-@I1569@ 1782
-@I1570@ 1775
-@I1587@ 1727
-@I1588@ 1707
-@I1589@ 1730
-@I1590@ 1773
-@I1591@ 1768
-@I1593@ 1730
-@I1595@ 1738
-@I1597@ 1764
-@I1598@ 1792
-@I1600@ 1736
-@I1601@ 1736
-@I1602@ 1748
-@I1603@ 1765
-@I1605@ 1805
-@I1606@ 1808
-@I1607@ 1808
-@I1608@ 1812
-@I1611@ 1853
-@I1612@ 1852
-@I1614@ 1879
-@I1618@ 1695
-@I1619@ 1724
-@I1621@ 1733
-@I1622@ 1739
-@I1623@ 1770
-@I1624@ 1776
-@I1625@ 1799
-@I1626@ 1800
-@I1627@ 1827
-@I1628@ 1826
-@I1630@ 1870
-ALIVE PERSONS BY DECADE
-DONE. TIME NEEDED: 0.614369081
-DONE. TIME NEEDED: 1.230777158
+=> Booting WEBrick
+=> Rails 4.1.4 application starting in development on http://0.0.0.0:3000
+=> Run `rails server -h` for more startup options
+=> Notice: server is listening on all interfaces (0.0.0.0). Consider using 127.0.0.1 (--binding option)
+=> Ctrl-C to shutdown server
+
+
+Started GET "/" for 127.0.0.1 at 2014-08-20 12:44:25 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by StaticPagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ?  [["user_id", 5]]
+  [1m[36mGedcomFile Load (289.2ms)[0m  [1mSELECT "gedcom_files".* FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ?  ORDER BY "gedcom_files"."filename" ASC[0m  [["user_id", 5]]
+  Rendered static_pages/home.html.erb within layouts/application (303.3ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (1.0ms)
+  Rendered layouts/_flash_messages.html.erb (0.4ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 584ms (Views: 207.1ms | ActiveRecord: 290.8ms)
+
+
+Started GET "/gedcom_file/20" for 127.0.0.1 at 2014-08-20 12:44:30 +0200
+Processing by GedcomFilesController#go_to_analysis as HTML
+  Parameters: {"id"=>"20"}
+Redirected to http://localhost:3000/filters/20
+Completed 302 Found in 9ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/filters/20" for 127.0.0.1 at 2014-08-20 12:44:30 +0200
+Processing by FiltersController#index as HTML
+  Parameters: {"id"=>"20"}
+  [1m[35mUser Load (1.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20[0m  [["user_id", 5]]
+  Rendered filters/index.html.erb within layouts/application (3.9ms)
+  Rendered layouts/_shim.html.erb (0.3ms)
+  Rendered layouts/_header.html.erb (3.1ms)
+  Rendered layouts/_flash_messages.html.erb (0.3ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 443ms (Views: 29.4ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/filters/20/persons_not_for_analysis?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531466687" for 127.0.0.1 at 2014-08-20 12:44:30 +0200
+Processing by FiltersController#ajax_persons_not_for_analysis as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531466687", "id"=>"20"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (1.4ms)[0m  [1mSELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20[0m  [["user_id", 5]]
+Completed 200 OK in 91ms (Views: 0.3ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/filters/20/persons_for_analysis?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531466688" for 127.0.0.1 at 2014-08-20 12:44:31 +0200
+Processing by FiltersController#ajax_persons_for_analysis as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531466688", "id"=>"20"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20  [["user_id", 5]]
+Completed 200 OK in 85ms (Views: 0.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/filters/20/all_persons?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=2&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=3&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=4&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=5&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=true&columns%5B5%5D%5Borderable%5D=true&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=6&columns%5B6%5D%5Bname%5D=&columns%5B6%5D%5Bsearchable%5D=true&columns%5B6%5D%5Borderable%5D=true&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531466689" for 127.0.0.1 at 2014-08-20 12:44:31 +0200
+Processing by FiltersController#ajax_all_persons as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "2"=>{"data"=>"2", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "3"=>{"data"=>"3", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "4"=>{"data"=>"4", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "5"=>{"data"=>"5", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "6"=>{"data"=>"6", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531466689", "id"=>"20"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20[0m  [["user_id", 5]]
+Completed 200 OK in 147ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/filters/20" for 127.0.0.1 at 2014-08-20 12:44:32 +0200
+Processing by FiltersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"1yx/fEdpQh9+ibMecRZHsIOTVFKHw3nUIY7k1svg9ps=", "all_radiobox"=>"on", "firstname"=>"", "lastname"=>"", "occupation"=>"", "location_birth"=>"", "location_death"=>"", "location_burial"=>"", "date_birth"=>"", "date_marriage"=>"", "date_death"=>"", "date_burial"=>"", "relatives_checkbox"=>"off", "relative_person_id"=>"", "relative_filter_type"=>"", "relative_kekule_number"=>"", "button"=>"to_right", "id"=>"20"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20  [["user_id", 5]]
+  Rendered filters/index.html.erb within layouts/application (4.3ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  Rendered layouts/_header.html.erb (0.3ms)
+  Rendered layouts/_flash_messages.html.erb (0.0ms)
+  Rendered layouts/_footer.html.erb (0.1ms)
+Completed 200 OK in 548ms (Views: 26.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/filters/20/persons_not_for_analysis?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531473727" for 127.0.0.1 at 2014-08-20 12:44:34 +0200
+Processing by FiltersController#ajax_persons_not_for_analysis as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531473727", "id"=>"20"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20  [["user_id", 5]]
+Completed 200 OK in 81ms (Views: 0.1ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/filters/20/persons_for_analysis?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531473728" for 127.0.0.1 at 2014-08-20 12:44:34 +0200
+Processing by FiltersController#ajax_persons_for_analysis as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531473728", "id"=>"20"}
+  [1m[35mUser Load (0.3ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20[0m  [["user_id", 5]]
+Completed 200 OK in 79ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/filters/20/all_persons?draw=1&columns%5B0%5D%5Bdata%5D=0&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=1&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=2&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=true&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B3%5D%5Bdata%5D=3&columns%5B3%5D%5Bname%5D=&columns%5B3%5D%5Bsearchable%5D=true&columns%5B3%5D%5Borderable%5D=true&columns%5B3%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B3%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B4%5D%5Bdata%5D=4&columns%5B4%5D%5Bname%5D=&columns%5B4%5D%5Bsearchable%5D=true&columns%5B4%5D%5Borderable%5D=true&columns%5B4%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B4%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B5%5D%5Bdata%5D=5&columns%5B5%5D%5Bname%5D=&columns%5B5%5D%5Bsearchable%5D=true&columns%5B5%5D%5Borderable%5D=true&columns%5B5%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B5%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B6%5D%5Bdata%5D=6&columns%5B6%5D%5Bname%5D=&columns%5B6%5D%5Bsearchable%5D=true&columns%5B6%5D%5Borderable%5D=true&columns%5B6%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B6%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=10&search%5Bvalue%5D=&search%5Bregex%5D=false&_=1408531473729" for 127.0.0.1 at 2014-08-20 12:44:34 +0200
+Processing by FiltersController#ajax_all_persons as JSON
+  Parameters: {"draw"=>"1", "columns"=>{"0"=>{"data"=>"0", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "1"=>{"data"=>"1", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "2"=>{"data"=>"2", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "3"=>{"data"=>"3", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "4"=>{"data"=>"4", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "5"=>{"data"=>"5", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}, "6"=>{"data"=>"6", "name"=>"", "searchable"=>"true", "orderable"=>"true", "search"=>{"value"=>"", "regex"=>"false"}}}, "order"=>{"0"=>{"column"=>"0", "dir"=>"asc"}}, "start"=>"0", "length"=>"10", "search"=>{"value"=>"", "regex"=>"false"}, "_"=>"1408531473729", "id"=>"20"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "gedcom_files"  WHERE "gedcom_files"."user_id" = ? AND "gedcom_files"."id" = 20  [["user_id", 5]]
+Completed 200 OK in 118ms (Views: 0.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/analysis/20" for 127.0.0.1 at 2014-08-20 12:44:35 +0200
+Processing by AnalysesController#analysis as HTML
+  Parameters: {"id"=>"20"}
+persons: 3010
+DONE. TIME NEEDED: 1.950309651
+LIVING PERIOD ESTIMATIION OF INVALID DATA START
+3010
+1589
+INCOMPLETE: 1421
+5sons 1dau N/A DATES: 1239 1292 BY PARENT: Eleanor N/A DATES: 1215 - 13 APR 1275
+Adelaide N/A DATES: 795 848 BY SIBLING: Lothar I N/A DATES: 795 - 855
+Adelaide Judith N/A DATES: 846 899 BY PARTNER: Louis II the Stammerer N/A DATES: 846 - 879
+Adeliza a nun N/A DATES: 1054 1107 BY SIBLING: Robert Curthose N/A DATES: 1054 - 10 FEB 1134
+Adolphe of Luxembourg N/A DATES: 9 JUL 1836 1889 BY SIBLING: Sophia N/A DATES: 9 JUL 1836 - 30 DEC 1913
+Agatha N/A DATES: 1054 1107 BY SIBLING: Robert Curthose N/A DATES: 1054 - 10 FEB 1134
+Alexander N/A DATES: 1347 1400 BY PARENT: Robert II N/A DATES: 1316 - 1390
+Alexander (Sachie) McCorquodale DATES: 1953 2006 BY CHILD: Raine of Dartmouth McCorquodale DATES: SEP 1929 - N/A
+Alexandra Morton DATES: 1953 2006 BY PARTNER: Henry Lascelles DATES: 1953 - N/A
+Alexandra of Hanover N/A DATES: 1955 2008 BY PARTNER: Andreas N/A DATES: 1955 - N/A
+Alfonso IV d'Este DATES: 1682 1735 BY CHILD: Mary Beatrice of Modena N/A DATES: 25 SEP 1658 - 7 MAY 1718
+Alice Scholastica DATES: 1928 1981 BY PARTNER: Tomislav of Yugoslavia N/A DATES: 1928 - N/A
+Alice Montague DATES: 1920 1973 BY CHILD: Bessiewallis Warfield DATES: 1896 - 24 APR 1986
+Alice de Toledo DATES: 1967 2020 BY CHILD: Silvia Renate Sommerlath DATES: 23 DEC 1943 - N/A
+Alice (Itayls) Hayles DATES: 1 JUN 1300 1353 BY PARTNER: Thomas of Brotherton N/A DATES: 1 JUN 1300 - AUG 1338
+Anna Leopoldovna of Brunswick N/A DATES: 1764 1817 BY CHILD: Ivan VI Romanov DATES: 1740 - 1741
+Anna of Montenegro Princess N/A DATES: 1861 1914 BY PARTNER: Francis Joseph N/A DATES: 1861 - 1924
+Anne Volkonska DATES: 1632 1685 BY CHILD: Eudoxia Streshniev DATES: 1608 - 1645
+Anne Beauchamp DATES: 1480 1533 BY CHILD: Anne Nevill DATES: 11 JUN 1456 - 16 MAR 1485
+Anne of Cleves N/A DATES: 1391 1444 BY PARTNER: Charles of Orleans N/A DATES: 1391 - 1465
+Anne of Gloucester N/A DATES: 1386 1439 BY PARENT: Thomas of Woodstock N/A DATES: 7 JAN 1355 - 15 SEP 1396/1397
+Anne of Kiev N/A DATES: APR 1008 1061 BY PARTNER: Henry I N/A DATES: APR 1008 - 4 AUG 1060
+Ansgarde of Burgundy N/A DATES: 846 899 BY PARTNER: Louis II the Stammerer N/A DATES: 846 - 879
+Antoine de Bourbon of France N/A DATES: 1577 1630 BY CHILD: Henry IV the Great N/A DATES: 13 DEC 1553 - 14 MAY 1610
+Antoinette N/A DATES: 1784 1837 BY SIBLING: Ernest I of Saxe-Coburg- Saalfeld N/A DATES: 1784 - 29 JAN 1844
+Archibald Douglas DATES: 1539 1592 BY CHILD: Margaret Douglas DATES: 1515 - 1578
+Athelstan N/A DATES: 849 902 BY SIBLING: Alfred the Great N/A DATES: 849 - 899
+Auckland L. of Rolvenden Geddes DATES: 1937 1990 BY CHILD: Margaret Campbell-Geddes DATES: 1913 - N/A
+Augusta of Bavaria N/A DATES: 1831 1884 BY CHILD: Josephine de Beauharnais DATES: 14 MAR 1807 - 7 JUN 1876
+Ayesha Makim DATES: 1981 2034 BY PARENT: Jane Louisa Ferguson DATES: 26 AUG 1957 - N/A
+Baldwin N/A DATES: 1130/1131 1183 BY SIBLING: Eustace of Boulongne N/A DATES: 1130/1131 - 10 AUG 1153
+Beatrice N/A DATES: 17 JUN 1264 1317 BY SIBLING: Eleanor N/A DATES: 17 JUN 1264 - 12 OCT 1297
+Bertha of Toulouse N/A DATES: 777 830 BY PARTNER: Pepin N/A DATES: 777 - 810
+Berthe N/A DATES: 777 830 BY SIBLING: Pepin N/A DATES: 777 - 810
+Bertrada de Montfort N/A DATES: 1052 1105 BY PARTNER: Philip I the Fair N/A DATES: 1052 - 29 JUL 1108
+Caroline Dewar DATES: 1929 1982 BY PARTNER: James George Alexander Carnegie DATES: 1929 - N/A
+Caroline of Zweibrucken N/A DATES: 1775 1828 BY CHILD: Frederica of Hesse- Darmstadt N/A DATES: 16 OCT 1751 - 25 FEB 1805
+Catherine Grey DATES: OCT 1537 1590 BY SIBLING: Jane Grey DATES: OCT 1537 - 12 FEB 1554
+Catherine N/A DATES: 3 DEC 1368 1421 BY SIBLING: Charles VI the Beloved N/A DATES: 3 DEC 1368 - 22 OCT 1422
+Catherine of Brandenburg -Kustrin N/A DATES: 1599 1652 BY CHILD: Anne Catherine N/A DATES: 26 JUN 1575 - 29 MAR 1612
+Celle N/A DATES: 1690 1743 BY CHILD: Sophia Dorothea of Celle N/A DATES: 10 SEP 1666 - 13 NOV 1726
+Chantal Hochuli DATES: 1954 2007 BY PARTNER: Ernest Augustus of Hanover Hanover DATES: 1954 - N/A
+Charles Augustus Haraldsen DATES: 1961 2014 BY CHILD: Sonja Haraldsen DATES: 1937 - N/A
+Charles II N/A DATES: 1312 1365 BY CHILD: Charles I N/A DATES: 1288 - 1342
+Charles Louis Frederick N/A DATES: 1768 1821 BY CHILD: (Sophia) Charlotte N/A DATES: 19 MAY 1744 - 17 NOV 1818
+Charles of Anjou N/A DATES: 25 APR 1214 1267 BY SIBLING: Louis IX (St. Louis) N/A DATES: 25 APR 1214 - 25 AUG 1270
+Charles of Brunswick- Wolfenbuttel N/A DATES: 1792 1845 BY CHILD: Caroline Amelia of Brunswick N/A DATES: 1768 - 1821
+Charles of Fulkila Munck DATES: 1882 1935 BY CHILD: Ebba of Fulkila Munck DATES: 1858 - 1946
+Charles of Mecklenburg- Strelitz N/A DATES: 1802 1855 BY CHILD: Frederica of Mecklenburg- Strelitz N/A DATES: 2 MAR 1778 - 29 JUN 1841
+Charles of Valois N/A DATES: 1518 1571 BY CHILD: Francis I N/A DATES: 12 SEP 1494 - 31 MAR 1547
+Child #3 N/A DATES: 1889 1942 BY SIBLING: Waldemar N/A DATES: 1889 - 1945
+Child 2 N/A DATES: 30 NOV 1906 1959 BY SIBLING: Marina of Greece N/A DATES: 30 NOV 1906 - 1968
+Child 3 N/A DATES: 30 NOV 1906 1959 BY SIBLING: Marina of Greece N/A DATES: 30 NOV 1906 - 1968
+Child 5 N/A DATES: 19 JUL 1890 1943 BY SIBLING: George II Oldenburg DATES: 19 JUL 1890 - 1 APR 1947
+Christina of Hesse N/A DATES: 1929 1982 BY PARTNER: Andrej of Yugoslavia N/A DATES: 1929 - N/A
+Claude N/A DATES: 1539 1592 BY CHILD: Mary of Guise N/A DATES: 1515 - 1560
+Claus von Amsberg DATES: 1950 2003 BY CHILD: Claus von Amsberg DATES: 6 SEP 1926 - N/A
+Constance N/A DATES: 1372 1425 BY PARENT: Edmund of Langley N/A DATES: 5 JUN 1341 - 1 AUG 1402
+Constance of Toulouse N/A DATES: 1130/1131 1183 BY PARTNER: Eustace of Boulongne N/A DATES: 1130/1131 - 10 AUG 1153
+Constantine Lambrino DATES: 1922 1975 BY CHILD: Joana Maria Valentina Lambrino DATES: 3 OCT 1898 - 11 MAR 1953
+Dau. 1 N/A DATES: 1874 1927 BY PARENT: George FitzGeorge DATES: 1843 - 1907
+Dau. 1 N/A DATES: 1944 1997 BY PARENT: Brigid Guinness DATES: 1920 - N/A
+Dau. 1 N/A DATES: 1881 1934 BY PARENT: Elisabeth of Anhalt N/A DATES: 1857 - 1933
+Dau. 1 N/A DATES: 1944 1997 BY PARENT: Magdalene Reuss DATES: 1920 - N/A
+Dau. 1 N/A DATES: 1931 1984 BY PARENT: Dorothea von Salviati DATES: 1907 - 1972
+Dau. 2 N/A DATES: 1944 1997 BY PARENT: Brigid Guinness DATES: 1920 - N/A
+Dau. 2 N/A DATES: 1874 1927 BY PARENT: George FitzGeorge DATES: 1843 - 1907
+Dau. 2 N/A DATES: 1944 1997 BY PARENT: Magdalene Reuss DATES: 1920 - N/A
+Dau. 2 N/A DATES: 1881 1934 BY PARENT: Elisabeth of Anhalt N/A DATES: 1857 - 1933
+Dau. 2 N/A DATES: 1931 1984 BY PARENT: Dorothea von Salviati DATES: 1907 - 1972
+Dau. 2 N/A DATES: 1939 1992 BY SIBLING: Friedrich Wilhelm of Prussia N/A DATES: 1939 - N/A
+Dau. 3 N/A DATES: 1939 1992 BY SIBLING: Friedrich Wilhelm of Prussia N/A DATES: 1939 - N/A
+Daughter N/A DATES: 895 948 BY SIBLING: Athelstan N/A DATES: 895 - 940
+Daughter N/A DATES: 1977 2030 BY PARENT: Christian Sigismund of Prussia N/A DATES: 1946 - N/A
+Daughter 1 N/A DATES: 1858 1911 BY SIBLING: Rudolf N/A DATES: 1858 - 1889
+Daughter 2 N/A DATES: 1858 1911 BY SIBLING: Rudolf N/A DATES: 1858 - 1889
+Daughter Stillborn N/A DATES: 15 OCT 1795 1848 BY SIBLING: Frederick William IV N/A DATES: 15 OCT 1795 - 2 JAN 1861
+David Gill DATES: 1857 1910 BY CHILD: Alexander Ogston Gill DATES: 1833 - 1908
+David of Rothesay N/A DATES: 1394 1447 BY SIBLING: James I N/A DATES: 1394 - 1437
+Desideria N/A DATES: 2 APR  742 795 BY PARTNER: Charlemagne N/A DATES: 2 APR  742 - 814
+Don Carlos N/A DATES: 1558 1611 BY PARENT: Philip II N/A DATES: 21 MAY 1527 - 13 SEP 1598
+Don Jamie N/A DATES: 1907 1960 BY SIBLING: Alphonso of Cavadonga N/A DATES: 1907 - 1938
+Dona Maria da Gloria N/A DATES: 1945 1998 BY PARTNER: Alexander N/A DATES: 1945 - N/A
+Donata of Castell- Rudenhausen N/A DATES: 1944 1997 BY PARTNER: Louis Ferdinand of Prussia N/A DATES: 1944 - 1977
+Ecgwyn N/A DATES: 919 972 BY CHILD: Athelstan N/A DATES: 895 - 940
+Edburh N/A DATES: 939 992 BY SIBLING: Edmund I the Elder N/A DATES: 939 - 946
+Edgiva N/A DATES: 963 1016 BY CHILD: Edmund I the Elder N/A DATES: 939 - 946
+Edgiva N/A DATES: 939 992 BY SIBLING: Edmund I the Elder N/A DATES: 939 - 946
+Edred N/A DATES: 939 992 BY SIBLING: Edmund I the Elder N/A DATES: 939 - 946
+Edward Hyde DATES: 1661 1714 BY CHILD: Anne Hyde DATES: 12 MAR 1637/1638 - 31 MAR 1671
+Edward N/A DATES: 1331 1384 BY PARENT: Thomas of Brotherton N/A DATES: 1 JUN 1300 - AUG 1338
+Edward N/A DATES: 1614 1667 BY SIBLING: Frederick Henry N/A DATES: 1614 - 1629
+Edward the Martyr N/A DATES: 975 1028 BY PARENT: Edgar the Peaceful N/A DATES: 944 - 975
+Edwy N/A DATES: 944 997 BY SIBLING: Edgar the Peaceful N/A DATES: 944 - 975
+Ehrengard von Reden DATES: 1939 1992 BY PARTNER: Friedrich Wilhelm of Prussia N/A DATES: 1939 - N/A
+Eight children N/A DATES: 1938 1991 BY PARENT: Sophia N/A DATES: 1914 - N/A
+Eilika of Oldenberg N/A DATES: 1926 1979 BY PARTNER: Emich of Leiningen N/A DATES: 1926 - N/A
+Eleanor of Neuburg N/A DATES: 1640 1693 BY PARTNER: Leopold I N/A DATES: 1640 - 5 MAY 1705
+Elfrida N/A DATES: 880 933 BY PARENT: Alfred the Great N/A DATES: 849 - 899
+Elisabeth of Austria N/A DATES: 1873 1926 BY CHILD: Maria Theresa N/A DATES: 2 JUL 1849 - 3 FEB 1919
+Elizabeth N/A DATES: 23 AUG 1754 1807 BY SIBLING: Louis XVI N/A DATES: 23 AUG 1754 - 1815
+Elizabeth N/A DATES: 1477 1530 BY SIBLING: James Hamilton DATES: 1477 - 1529
+Elizabeth N/A DATES: 30 NOV 1906 1959 BY SIBLING: Marina of Greece N/A DATES: 30 NOV 1906 - 1968
+Elizabeth of Rowallan Mure DATES: 1316 1369 BY PARTNER: Robert II N/A DATES: 1316 - 1390
+Elizabeth of Saxe- Hildburghausen Albertin DATES: 1768 1821 BY CHILD: (Sophia) Charlotte N/A DATES: 19 MAY 1744 - 17 NOV 1818
+Erling Lorentzen DATES: 1992 2045 BY CHILD: Ragnhild Alexandra Lorentzen DATES: 1968 - N/A
+Ernest Augustus N/A DATES: 28 MAY 1660 1713 BY SIBLING: George I Hanover DATES: 28 MAY 1660 - 11 JUN 1727
+Erwin Stein DATES: 1950 2003 BY CHILD: Marion (Maria) Donata Stein DATES: 1926 - N/A
+Ethelfleda N/A DATES: 944 997 BY PARTNER: Edgar the Peaceful N/A DATES: 944 - 975
+Ethelfleda of Domerham N/A DATES: 939 992 BY PARTNER: Edmund I the Elder N/A DATES: 939 - 946
+Ethelgiva of Shaftesbury N/A DATES: 880 933 BY PARENT: Alfred the Great N/A DATES: 849 - 899
+Eugene of Leuchtenberg de Beauharnais DATES: 1831 1884 BY CHILD: Josephine de Beauharnais DATES: 14 MAR 1807 - 7 JUN 1876
+Euphemia of Ross N/A DATES: 1316 1369 BY PARTNER: Robert II N/A DATES: 1316 - 1390
+Euphrosine Alcaz DATES: 1922 1975 BY CHILD: Joana Maria Valentina Lambrino DATES: 3 OCT 1898 - 11 MAR 1953
+Felix Krzesinski N/A DATES: 1896 1949 BY CHILD: Mathilde (Maria) Krzesinska DATES: 1872 - 1971
+Ferdinand of Austria-Este N/A DATES: 1873 1926 BY CHILD: Maria Theresa N/A DATES: 2 JUL 1849 - 3 FEB 1919
+Five children N/A DATES: 1929 1982 BY PARENT: Margarita Mountbatten DATES: 1905 - 1981
+Five children N/A DATES: 1948 2001 BY PARENT: Patricia Mountbatten DATES: 1924 - N/A
+Four Children N/A DATES: 1930 1983 BY PARENT: Theodora Mountbatten DATES: 1906 - 1960
+Francesco I of Tuscany Italy N/A DATES: 1597 1650 BY CHILD: Marie de' Medici DATES: 1573 - 1642
+Franz Wilhelm of Prussia N/A DATES: 2005 2058 BY CHILD: George of Russia N/A DATES: 1981 - N/A
+Frederica of Hesse- Darmstadt N/A DATES: 1802 1855 BY CHILD: Frederica of Mecklenburg- Strelitz N/A DATES: 2 MAR 1778 - 29 JUN 1841
+Frederick Charles of Prussia N/A DATES: 1884 1937 BY CHILD: Louise Margaret of Prussia N/A DATES: 25 JUN 1860 - 14 MAR 1917
+Frederick Francis II of Mecklengb-Sch N/A DATES: 1878 1931 BY CHILD: Marie Pavlovna DATES: 1854 - 1920
+Frederick I N/A DATES: 1680 1733 BY SIBLING: Louise N/A DATES: 1680 - 1705
+Frederick II of Saxe-Gotha N/A DATES: 1743 1796 BY CHILD: Augusta of Saxe-Gotha N/A DATES: 30 NOV 1719 - 8 FEB 1772
+Fredericka Ann Duhrrson DATES: 1953 2006 BY PARTNER: James Lascelles DATES: 1953 - N/A
+Friedrich Wilhelm of Nassau-Weilb N/A DATES: 1767 1820 BY PARENT: Caroline N/A DATES: 1743 - 1787
+George N/A DATES: 28 APR 1442 1495 BY SIBLING: Edward IV N/A DATES: 28 APR 1442 - 9 APR 1483
+George Karageorgeovitch DATES: 1888 1941 BY SIBLING: Alexander I of Yugoslavia N/A DATES: 1888 - 1934
+George Bagration- Mukhranski N/A DATES: 1938 1991 BY CHILD: Leonide Bagration- Moukhransky N/A DATES: 1914 - N/A
+George I of Saxe- Meiningen N/A DATES: 1816 1869 BY CHILD: Adelaide Louisa Theresa N/A DATES: 13 AUG 1792 - 2 DEC 1849
+George of Milford Haven N/A DATES: 1950 2003 BY PARENT: David of Milford Haven Mountbatten DATES: 1919 - 14 APR 1970
+Gosta von dem Bussche- DATES: 1950 2003 BY CHILD: Claus von Amsberg DATES: 6 SEP 1926 - N/A
+Gustavus Adolphus of Stolberg-Ged. N/A DATES: 1776 1829 BY CHILD: Louise Maximilienne Caroline N/A DATES: 10 SEP 1752 - 29 JAN 1824
+Haakon Lorentzen DATES: 1968 2021 BY SIBLING: Ragnhild Alexandra Lorentzen DATES: 1968 - N/A
+Hedwige N/A DATES: 893 946 BY SIBLING: Louis III the Child N/A DATES: 893 - 911
+Heinrich Kasimir of Nassau-Dietz N/A DATES: 1710 1763 BY CHILD: John William of Orange Friso DATES: 1686 - 1711
+Henrietta Mildred Hodgson DATES: 1857 1910 BY CHILD: Frances Dora Smith DATES: 1833 - 1922
+Henriette N/A DATES: 1767 1820 BY PARENT: Caroline N/A DATES: 1743 - 1787
+Henriette Amalie N/A DATES: 1710 1763 BY CHILD: John William of Orange Friso DATES: 1686 - 1711
+Henry N/A DATES: 1276 1329 BY PARENT: Edmund Crouchback of Leicester N/A DATES: 16 JAN 1245 - 5 JUN 1296
+Henry N/A DATES: 17 JUN 1239 1292 BY SIBLING: Edward I (Longshanks) N/A DATES: 17 JUN 1239 - 7 JUL 1307
+Herleva N/A DATES: 1051 1104 BY CHILD: William I the Conqueror N/A DATES: 1027/1028 - 7 SEP 1087
+Himiltude N/A DATES: 2 APR  742 795 BY PARTNER: Charlemagne N/A DATES: 2 APR  742 - 814
+Hugh McCorquodale DATES: 1961 2014 BY CHILD: Ian McCorquodale DATES: 11 OCT 1937 - N/A
+Hugh the Great of Vermandois N/A DATES: 1039 1092 BY PARENT: Henry I N/A DATES: APR 1008 - 4 AUG 1060
+Humphrey of Buckingham N/A DATES: 1386 1439 BY PARENT: Thomas of Woodstock N/A DATES: 7 JAN 1355 - 15 SEP 1396/1397
+Ingeborg Lorentzen DATES: 1968 2021 BY SIBLING: Ragnhild Alexandra Lorentzen DATES: 1968 - N/A
+Irmengard N/A DATES: 795 848 BY PARTNER: Lothar I N/A DATES: 795 - 855
+Irmengard of Hesbain N/A DATES: 778 831 BY PARTNER: Louis I the Pious of Aquitaine N/A DATES: 778 - 840
+Isabel Nevill DATES: 11 JUN 1456 1509 BY SIBLING: Anne Nevill DATES: 11 JUN 1456 - 16 MAR 1485
+Isabel N/A DATES: 1386 1439 BY PARENT: Thomas of Woodstock N/A DATES: 7 JAN 1355 - 15 SEP 1396/1397
+Isabel de Beaumont DATES: 1365 1418 BY CHILD: Blanche of Lancaster N/A DATES: 1341 - 12 SEP 1369
+Isabella of Portugal N/A DATES: 1405 1458 BY PARTNER: John II (Juan II) N/A DATES: 1405 - 1454
+Isobel of Mar N/A DATES: 1274 1327 BY PARTNER: Robert I Bruce DATES: 1274 - 1329
+Ivan Romanov DATES: 1662 1715 BY SIBLING: Feodor III (Theodore) Romanov DATES: 1662 - 1682
+Ivar N/A DATES: 1950 2003 BY PARENT: David of Milford Haven Mountbatten DATES: 1919 - 14 APR 1970
+Jacqueline of Holland N/A DATES: SEP 1390 1443 BY PARTNER: Humphrey of Gloucester N/A DATES: SEP 1390 - 23 FEB 1447
+Jacquetta of Luxembourg N/A DATES: 20 JUN 1389 1442 BY PARTNER: John N/A DATES: 20 JUN 1389 - 15 SEP 1435
+James Louis Sobieski DATES: 1655 1708 BY PARENT: John III Sobieski DATES: 9 JUN 1624 - 17 JUN 1696
+Janet Beaton DATES: 1477 1530 BY PARTNER: James Hamilton DATES: 1477 - 1529
+Janet Bryce DATES: 1919 1972 BY PARTNER: David of Milford Haven Mountbatten DATES: 1919 - 14 APR 1970
+Jean N/A DATES: 1347 1400 BY PARENT: Robert II N/A DATES: 1316 - 1390
+Jeanne d'Albret of France N/A DATES: 1577 1630 BY CHILD: Henry IV the Great N/A DATES: 13 DEC 1553 - 14 MAY 1610
+Joachim Frederick of Brandenburg N/A DATES: 1599 1652 BY CHILD: Anne Catherine N/A DATES: 26 JUN 1575 - 29 MAR 1612
+Joan N/A DATES: 1386 1439 BY PARENT: Thomas of Woodstock N/A DATES: 7 JAN 1355 - 15 SEP 1396/1397
+Joan Beaufort N/A DATES: 1374 1427 BY PARENT: Catherine Swynford Roet DATES: 1350 - 10 MAY 1403
+Joan of Burgundy N/A DATES: 1293 1346 BY PARTNER: Philip VI of Valois N/A DATES: 1293 - 22 AUG 1350
+Joan of Valois N/A DATES: 1293 1346 BY SIBLING: Philip VI of Valois N/A DATES: 1293 - 22 AUG 1350
+Joanna of Austria N/A DATES: 1597 1650 BY CHILD: Marie de' Medici DATES: 1573 - 1642
+John N/A DATES: 17 JUN 1239 1292 BY SIBLING: Edward I (Longshanks) N/A DATES: 17 JUN 1239 - 7 JUL 1307
+John Work DATES: 1843 1896 BY CHILD: Frank Work DATES: 1819 - 1911
+John N/A DATES: 1451 1504 BY SIBLING: James III N/A DATES: 1451 - 1488
+John Stewart DATES: 1540 1593 BY CHILD: Matthew Stuart DATES: 1516 - 1571
+John Stuart DATES: 1516 1569 BY SIBLING: Matthew Stuart DATES: 1516 - 1571
+John Loisinger DATES: 1889 1942 BY CHILD: Johanna Loisinger DATES: 1865 - 1951
+John Kreuger DATES: 2009 2062 BY CHILD: Michael Kreuger DATES: 1985 - N/A
+John Ferguson DATES: 1891 1944 BY CHILD: Algernon Francis Ferguson DATES: 1867 - 1943
+John Emery DATES: 1928 1981 BY CHILD: Audrey Emery DATES: 1904 - N/A
+John Andrew Ferguson DATES: 1931 1984 BY SIBLING: Ronald Ivor Ferguson DATES: 1931 - N/A
+John Frederick of Brandenburg- N/A DATES: 1707 1760 BY CHILD: Caroline of Ansbach N/A DATES: 1683 - 1737
+John III N/A DATES: 1539 1592 BY CHILD: Anne of Cleves N/A DATES: 22 SEP 1515 - 17 JUL 1557
+John of Brandenburg N/A DATES: 1454 1507 BY CHILD: Dorothea N/A DATES: 1430 - 1495
+Judith N/A DATES: 846 899 BY SIBLING: Louis II the Stammerer N/A DATES: 846 - 879
+Judith of Bavaria N/A DATES: 778 831 BY PARTNER: Louis I the Pious of Aquitaine N/A DATES: 778 - 840
+Julia Rawlinson DATES: 29 FEB 1964 2017 BY PARTNER: James Robert Bruce Ogilvy DATES: 29 FEB 1964 - N/A
+Julie Bayliss DATES: 1955 2008 BY PARTNER: Jeremy Lascelles DATES: 1955 - N/A
+Julie N/A DATES: 1784 1837 BY SIBLING: Ernest I of Saxe-Coburg- Saalfeld N/A DATES: 1784 - 29 JAN 1844
+Jutta Jorn DATES: 1939 1992 BY PARTNER: Michael of Prussia N/A DATES: 1939 - N/A
+Karl Bauscher DATES: 1987 2040 BY CHILD: Ulf Bauscher DATES: 1963 - N/A
+Karl Ferdinand N/A DATES: 1882 1935 BY CHILD: Maria Cristina of Austria N/A DATES: 1858 - 1929
+Karl Friedrich of Baden N/A DATES: 1734 1787 BY PARENT: Charlotte Amalia N/A DATES: 1710 - 1777
+Karl Ludwig N/A DATES: 1829 1882 BY PARENT: Sophie (twin) Wittelsbach DATES: 1805 - 1872
+Karl Ludwig of Baden N/A DATES: 1800 1853 BY CHILD: Caroline of Baden N/A DATES: 13 JUL 1776 - 13 NOV 1841
+Karl of Baden N/A DATES: 13 JUL 1776 1829 BY SIBLING: Caroline of Baden N/A DATES: 13 JUL 1776 - 13 NOV 1841
+Katherine N/A DATES: 1379 1432 BY PARTNER: Henry III N/A DATES: 1379 - 1406
+Kathryn N/A DATES: 1913 1966 BY PARENT: Fenella Stuart-Forbes Trefusis Hepburn DATES: 1889 - 1966
+Kitty N/A DATES: 1988 2041 BY PARENT: Victoria Lockwood DATES: 1964 - N/A
+Laura Mortinozzi DATES: 1682 1735 BY CHILD: Mary Beatrice of Modena N/A DATES: 25 SEP 1658 - 7 MAY 1718
+Linda Bonney DATES: 1928 1981 BY PARTNER: Tomislav of Yugoslavia N/A DATES: 1928 - N/A
+Louisa Eleonora of Hohenlohe- N/A DATES: 1816 1869 BY CHILD: Adelaide Louisa Theresa N/A DATES: 13 AUG 1792 - 2 DEC 1849
+Louise Adelaide de Penthievre N/A DATES: 1797 1850 BY CHILD: Louis Philippe I N/A DATES: 1773 - 1850
+Louise of Thurn and Taxis N/A DATES: 1843 1896 BY PARTNER: Frederick Hohenzollern DATES: 1843 - 1904
+Lucy Lindsay-Hogg DATES: 7 MAR 1930 1983 BY PARTNER: Anthony Charles Robert Armstrong-Jones DATES: 7 MAR 1930 - N/A
+Ludwig IX of Hesse- Darmstadt N/A DATES: 1775 1828 BY CHILD: Frederica of Hesse- Darmstadt N/A DATES: 16 OCT 1751 - 25 FEB 1805
+Ludwig of Wurttemberg N/A DATES: 1828 1881 BY CHILD: Alexander of Wurttemberg N/A DATES: 1804 - 1885
+Luiza Maria de Guzman DATES: 1605 1658 BY PARTNER: John IV the Fortunate N/A DATES: 1605 - 1656
+Magdalena Augusta of Anhalt-Zerbst N/A DATES: 1743 1796 BY CHILD: Augusta of Saxe-Gotha N/A DATES: 30 NOV 1719 - 8 FEB 1772
+Margaret N/A DATES: 28 APR 1442 1495 BY SIBLING: Edward IV N/A DATES: 28 APR 1442 - 9 APR 1483
+Margaret Messenger DATES: 1950 2003 BY PARTNER: David Lascelles DATES: 1950 - N/A
+Margaret Douglas DATES: 1515 1568 BY PARTNER: James Hamilton DATES: 1515 - 1575
+Margaret Beauchamp DATES: 1403 1456 BY PARTNER: John Beaufort DATES: 1403 - 1444
+Margaret Beaufort DATES: 1401 1454 BY SIBLING: Henry Beaufort DATES: 1401 - 1418
+Margaret of Carrick N/A DATES: 1298 1351 BY CHILD: Robert I Bruce DATES: 1274 - 1329
+Margaret of Navarre N/A DATES: 12 SEP 1494 1547 BY SIBLING: Francis I N/A DATES: 12 SEP 1494 - 31 MAR 1547
+Margarite of Hohenloche- Ochringen N/A DATES: 1952 2005 BY PARTNER: Karl N/A DATES: 1952 - N/A
+Margrethe of Denmark N/A DATES: 1947 2000 BY CHILD: Anne of Bourbon-Parma N/A DATES: 18 SEP 1923 - N/A
+Maria Argyropoulos DATES: 1920 1973 BY CHILD: Aspasia Manos DATES: 4 SEP 1896 - 7 AUG 1972
+Maria N/A DATES: 1804 1857 BY SIBLING: Alexander of Wurttemberg N/A DATES: 1804 - 1885
+Maria N/A DATES: 1601 1654 BY SIBLING: Anne of Austria N/A DATES: 1601 - 1666
+Maria Anna of Anhalt N/A DATES: 1884 1937 BY CHILD: Louise Margaret of Prussia N/A DATES: 25 JUN 1860 - 14 MAR 1917
+Maria Antonia N/A DATES: 1675 1728 BY PARENT: Margaret Teresa N/A DATES: 1651 - 1673
+Maria of Portugal N/A DATES: 21 MAY 1527 1580 BY PARTNER: Philip II N/A DATES: 21 MAY 1527 - 13 SEP 1598
+Mariana of Austria N/A DATES: 1640 1693 BY SIBLING: Leopold I N/A DATES: 1640 - 5 MAY 1705
+Marie N/A DATES: 1858 1911 BY PARTNER: Valdemar N/A DATES: 1858 - 1939
+Marie de Bourbon N/A DATES: 1608 1661 BY PARTNER: Gaston N/A DATES: 1608 - 1660
+Marie of Julich N/A DATES: 1539 1592 BY CHILD: Anne of Cleves N/A DATES: 22 SEP 1515 - 17 JUL 1557
+Marie of Schwarzburg- Rudolstadt N/A DATES: 1823 1876 BY PARTNER: Frederick Francis II of Mecklenburg- N/A DATES: 1823 - 1883
+Marie-Josephe de Saxe N/A DATES: 1778 1831 BY CHILD: Louis XVI N/A DATES: 23 AUG 1754 - 1815
+Martha y Altazurra Rocafort DATES: 1907 1960 BY PARTNER: Alphonso of Cavadonga N/A DATES: 1907 - 1938
+Mary N/A DATES: 1451 1504 BY SIBLING: James III N/A DATES: 1451 - 1488
+Mary Carpenter DATES: 1773 1826 BY PARTNER: Thomas Lyon-Bowes DATES: 1773 - 1846
+Mary de Ros N/A DATES: 1 JUN 1300 1353 BY PARTNER: Thomas of Brotherton N/A DATES: 1 JUN 1300 - AUG 1338
+Mary of Coucy N/A DATES: 1198 1251 BY PARTNER: Alexander II N/A DATES: 1198 - 1249
+Mary of Scotland N/A DATES: 1078 1131 BY SIBLING: Alexander I the Fierce N/A DATES: 1078 - 1124
+Matilda N/A DATES: 1130/1131 1183 BY SIBLING: Eustace of Boulongne N/A DATES: 1130/1131 - 10 AUG 1153
+Matilda N/A DATES: 1054 1107 BY SIBLING: Robert Curthose N/A DATES: 1054 - 10 FEB 1134
+Matilda of Germany N/A DATES: APR 1008 1061 BY PARTNER: Henry I N/A DATES: APR 1008 - 4 AUG 1060
+Maurice of Saxe- Altenburg N/A DATES: 1889 1942 BY CHILD: Elizabeth N/A DATES: 1865 - 1929
+Maximilian Joseph N/A DATES: 1855 1908 BY CHILD: Ludwig N/A DATES: 1831 - 1920
+Michael of Portugal N/A DATES: 1881 1934 BY CHILD: Maria Josepha of Portugal N/A DATES: 1857 - 1943
+Mitsi N/A DATES: 1929 1982 BY PARTNER: Andrej of Yugoslavia N/A DATES: 1929 - N/A
+N/A Oldenburg DATES: 1965 2018 BY SIBLING: Alexia Oldenburg DATES: 1965 - N/A
+N/A Unknown DATES: 1282 1335 BY CHILD: Sancho IV N/A DATES: 1258 - 1296
+N/A Cartland DATES: 3 JAN 1907 1960 BY SIBLING: Ronald Cartland DATES: 3 JAN 1907 - 30 MAY 1940
+N/A Oldenburg DATES: 1965 2018 BY SIBLING: Alexia Oldenburg DATES: 1965 - N/A
+N/A Legge DATES: 1953 2006 BY PARENT: Raine of Dartmouth McCorquodale DATES: SEP 1929 - N/A
+N/A Legge DATES: 1953 2006 BY PARENT: Raine of Dartmouth McCorquodale DATES: SEP 1929 - N/A
+N/A Schmith DATES: 1947 2000 BY PARENT: Patricia Tuckwell DATES: 1923 - N/A
+N/A Legge DATES: 1953 2006 BY PARENT: Raine of Dartmouth McCorquodale DATES: SEP 1929 - N/A
+N/A Legge DATES: 1953 2006 BY PARENT: Raine of Dartmouth McCorquodale DATES: SEP 1929 - N/A
+Nina zu Reventlow N/A DATES: 1946 1999 BY PARTNER: Christian Sigismund of Prussia N/A DATES: 1946 - N/A
+Norissa N/A DATES: 1913 1966 BY PARENT: Fenella Stuart-Forbes Trefusis Hepburn DATES: 1889 - 1966
+Oda of Bavaria N/A DATES: 917 970 BY CHILD: Louis III the Child N/A DATES: 893 - 911
+of Dalhousie XIII N/A DATES: 1905 1958 BY CHILD: Alexander Ramsay DATES: 1881 - 1972
+of Lodesborough N/A DATES: 1914 1967 BY CHILD: Irene Denison DATES: 1890 - 16 JUL 1956
+of Mount Temple N/A DATES: 1925 1978 BY CHILD: Edwina Ashley DATES: 1901 - 1960
+of Schomberg N/A DATES: 1712 1765 BY CHILD: Frederica of Holdernesse N/A DATES: 1688 - 1751
+Olga N/A DATES: 30 NOV 1906 1959 BY SIBLING: Marina of Greece N/A DATES: 30 NOV 1906 - 1968
+Olga N/A DATES: 2 AUG 1868 1921 BY SIBLING: Constantine I Oldenburg DATES: 2 AUG 1868 - NOV 1936
+Other issue N/A DATES: 7 SEP 1817 1870 BY SIBLING: Louise of Hesse-Cassel N/A DATES: 7 SEP 1817 - 29 SEP 1898
+Paul Romanov DATES: 1928 1981 BY PARENT: Audrey Emery DATES: 1904 - N/A
+Paul Mowatt DATES: 2014 2067 BY CHILD: N/A Mowatt DATES: 26 MAY 1990 - N/A
+Payne of Guienne Roet DATES: 1374 1427 BY CHILD: Catherine Swynford Roet DATES: 1350 - 10 MAY 1403
+Peter Phillips DATES: 1972 2025 BY CHILD: Mark Anthony Peter Phillips DATES: 22 SEP 1948 - N/A
+Peter I N/A DATES: 1905 1958 BY CHILD: Helen N/A DATES: 1881 - 1962
+Petros Manos DATES: 1920 1973 BY CHILD: Aspasia Manos DATES: 4 SEP 1896 - 7 AUG 1972
+Philip Hurepel DATES: 1196 1249 BY PARENT: Philip II Augustus N/A DATES: 21 AUG 1165 - 14 JUL 1223
+Philip Bender DATES: 1881 1934 BY CHILD: Josephine of Lichtenberg N/A DATES: 1857 - 1952
+Raymond of Provence Berenger DATES: 1245 1298 BY CHILD: Margaret of Provence N/A DATES: 1221 - 1295
+Rene N/A DATES: 1453 1506 BY CHILD: Margaret of Anjou N/A DATES: 23 MAR 1429 - 25 AUG 1482
+Rene of Bourbon-Parma N/A DATES: 1947 2000 BY CHILD: Anne of Bourbon-Parma N/A DATES: 18 SEP 1923 - N/A
+Richard N/A DATES: 1054 1107 BY SIBLING: Robert Curthose N/A DATES: 1054 - 10 FEB 1134
+Richard N/A DATES: 17 JUN 1239 1292 BY SIBLING: Edward I (Longshanks) N/A DATES: 17 JUN 1239 - 7 JUL 1307
+Robert N/A DATES: 1347 1400 BY PARENT: Robert II N/A DATES: 1316 - 1390
+Robert N/A DATES: 25 APR 1214 1267 BY SIBLING: Louis IX (St. Louis) N/A DATES: 25 APR 1214 - 25 AUG 1270
+Robert N/A DATES: 1007 1060 BY SIBLING: Hugh N/A DATES: 1007 - 1025
+Robert III N/A DATES: 1347 1400 BY PARENT: Robert II N/A DATES: 1316 - 1390
+Robin Medforth-Mills DATES: 2009 2062 BY CHILD: Nicholas Medforth-Mills DATES: 1985 - N/A
+Robin Alexander N/A DATES: 1944 1997 BY PARENT: Iris Mountbatten DATES: 1920 - N/A
+Roger II N/A DATES: 1144 1197 BY CHILD: William I N/A DATES: 1120 - 1166
+Roland Bonaparte DATES: 1906 1959 BY CHILD: Mary N/A DATES: 1882 - 1962
+Romaine N/A DATES: 1919 1972 BY PARTNER: David of Milford Haven Mountbatten DATES: 1919 - 14 APR 1970
+Rosa Baring DATES: 1843 1896 BY PARTNER: George FitzGeorge DATES: 1843 - 1907
+Sancho III N/A DATES: 1179 1232 BY CHILD: Alfonso VIII N/A DATES: 1155 - 1214
+Sancho VI N/A DATES: 1187 1240 BY CHILD: Berengaria of Navarre N/A DATES: 1163 - 1230
+Sarah Boude DATES: 1843 1896 BY CHILD: Frank Work DATES: 1819 - 1911
+Sarah Ogston DATES: 1857 1910 BY CHILD: Alexander Ogston Gill DATES: 1833 - 1908
+Seamus Makim DATES: 1981 2034 BY PARENT: Jane Louisa Ferguson DATES: 26 AUG 1957 - N/A
+Son Hohenzollern DATES: 1922 1975 BY PARENT: Joana Maria Valentina Lambrino DATES: 3 OCT 1898 - 11 MAR 1953
+Son (stillborn) N/A DATES: 1685 1738 BY SIBLING: Frederick Augustus N/A DATES: 1685 - 1686
+Son 1 N/A DATES: 1944 1997 BY PARENT: Brigid Guinness DATES: 1920 - N/A
+Son 1 N/A DATES: 1874 1927 BY PARENT: George FitzGeorge DATES: 1843 - 1907
+Son 1 N/A DATES: 1881 1934 BY PARENT: Elisabeth of Anhalt N/A DATES: 1857 - 1933
+Son 2 N/A DATES: 1944 1997 BY PARENT: Brigid Guinness DATES: 1920 - N/A
+Son 2 N/A DATES: 1881 1934 BY PARENT: Elisabeth of Anhalt N/A DATES: 1857 - 1933
+Son 2 N/A DATES: 1899 1952 BY SIBLING: Helena N/A DATES: 1899 - 1969
+Son 2 N/A DATES: 1906 1959 BY SIBLING: May Cambridge N/A DATES: 1906 - N/A
+Son 3 N/A DATES: 1944 1997 BY PARENT: Brigid Guinness DATES: 1920 - N/A
+Son Stillborn N/A DATES: 1770 1823 BY SIBLING: Frederick William III N/A DATES: 1770 - 1840
+Sophia Romanov DATES: 1662 1715 BY SIBLING: Feodor III (Theodore) Romanov DATES: 1662 - 1682
+Sophie N/A DATES: 1784 1837 BY SIBLING: Ernest I of Saxe-Coburg- Saalfeld N/A DATES: 1784 - 29 JAN 1844
+Sophie N/A DATES: 1950 2003 BY CHILD: Marion (Maria) Donata Stein DATES: 1926 - N/A
+St. Elgiva N/A DATES: 939 992 BY PARTNER: Edmund I the Elder N/A DATES: 939 - 946
+Stanislaw Leczinski DATES: 1727 1780 BY CHILD: Maria of Poland Leczinska DATES: 1703 - 1768
+Susan Deptford DATES: 1931 1984 BY PARTNER: Ronald Ivor Ferguson DATES: 1931 - N/A
+Sybil N/A DATES: 1078 1131 BY PARTNER: Alexander I the Fierce N/A DATES: 1078 - 1124
+Sybilla N/A DATES: 1054 1107 BY PARTNER: Robert Curthose N/A DATES: 1054 - 10 FEB 1134
+Sylvana Tomaselli DATES: 26 JUN 1962 2015 BY PARTNER: George Philip of St. Andrews Windsor DATES: 26 JUN 1962 - N/A
+Teackle Wallis Warfield DATES: 1920 1973 BY CHILD: Bessiewallis Warfield DATES: 1896 - 24 APR 1986
+Thomas Seymour DATES: 1572 1625 BY CHILD: Daughter Seymour DATES: 29 AUG 1548 - 5 SEP 1548
+Thomas N/A DATES: 1276 1329 BY PARENT: Edmund Crouchback of Leicester N/A DATES: 16 JAN 1245 - 5 JUN 1296
+Thomas Beaufort DATES: 1374 1427 BY PARENT: Catherine Swynford Roet DATES: 1350 - 10 MAY 1403
+Two Children N/A DATES: 1953 2006 BY PARENT: Pamela Mountbatten DATES: 1929 - N/A
+Unknown N/A DATES: 1764 1817 BY CHILD: Ivan VI Romanov DATES: 1740 - 1741
+Unknown N/A DATES: 1666 1719 BY PARTNER: Ivan V Romanov DATES: 1666 - 1696
+Unknown N/A DATES: 1662 1715 BY PARTNER: Feodor III (Theodore) Romanov DATES: 1662 - 1682
+Unknown N/A DATES: 1540 1593 BY CHILD: Matthew Stuart DATES: 1516 - 1571
+Unknown N/A DATES: 1690 1743 BY PARTNER: Alexis Romanov DATES: 1690 - 1718
+Unknown N/A DATES: 1860 1913 BY CHILD: Sophia N/A DATES: 9 JUL 1836 - 30 DEC 1913
+Unknown N/A DATES: 1800 1853 BY CHILD: Caroline of Baden N/A DATES: 13 JUL 1776 - 13 NOV 1841
+Unknown N/A DATES: 1882 1935 BY CHILD: Maria Cristina of Austria N/A DATES: 1858 - 1929
+Ursula N/A DATES: 28 APR 1442 1495 BY SIBLING: Edward IV N/A DATES: 28 APR 1442 - 9 APR 1483
+Valerian Karnovich DATES: 1890 1943 BY CHILD: Olga Karnovich DATES: 1866 - 1929
+Victoria of Schleswig- Holstein N/A DATES: 1884 1937 BY PARTNER: Charles Edward N/A DATES: 1884 - 1954
+Walter Sommerlath DATES: 1967 2020 BY CHILD: Silvia Renate Sommerlath DATES: 23 DEC 1943 - N/A
+Walter N/A DATES: 1347 1400 BY PARENT: Robert II N/A DATES: 1316 - 1390
+Waltraud Freydag DATES: 1939 1992 BY PARTNER: Friedrich Wilhelm of Prussia N/A DATES: 1939 - N/A
+Wilhelm of Nassau N/A DATES: 1860 1913 BY CHILD: Sophia N/A DATES: 9 JUL 1836 - 30 DEC 1913
+Willaim I the Lion N/A DATES: 1222 1275 BY CHILD: Alexander II N/A DATES: 1198 - 1249
+William Worsley DATES: 1957 2010 BY CHILD: Katharine Worsley DATES: 1933 - N/A
+William Fellowes DATES: 1965 2018 BY CHILD: Robert Fellowes DATES: 1941 - N/A
+William N/A DATES: 17 JUN 1239 1292 BY SIBLING: Edward I (Longshanks) N/A DATES: 17 JUN 1239 - 7 JUL 1307
+William IX of Hesse-Cassel N/A DATES: 1747 1800 BY SIBLING: Frederick of Hesse-Cassel N/A DATES: 1747 - 1837
+William of Hainault N/A DATES: 1335 1388 BY CHILD: Philippa of Hainault N/A DATES: 24 JUN 1311 - 14 AUG 1369
+William of Hatfield N/A DATES: 15 JUN 1330 1383 BY SIBLING: Edward N/A DATES: 15 JUN 1330 - 8 JUN 1376
+William of Pembroke Marshal DATES: 1224 1277 BY CHILD: Isabella Marshal DATES: 9 OCT 1200 - 15 JAN 1240
+William of Prussia N/A DATES: 1839 1892 BY CHILD: Elizabeth of Prussia N/A DATES: 1815 - 1885
+Yekaterina of Mecklenburg N/A DATES: 1693 1746 BY SIBLING: Anna Ioannovna Romanov DATES: 1693 - 1740
+Yelizaveta Alekseyevna of Baden N/A DATES: 1777 1830 BY PARTNER: Alexander I Romanov DATES: 1777 - 1825
+Yevdokiya Lopukhina N/A DATES: 1672 1725 BY PARTNER: Peter I the Great Romanov DATES: 1672 - 1725
+Yolande N/A DATES: 1241 1294 BY PARTNER: Alexander III N/A DATES: 1241 - 1286
+Yolande of Aragon N/A DATES: 1428 1481 BY CHILD: Mary of Anjou N/A DATES: 1404 - 1463
+Zorka of Montenegro N/A DATES: 1912 1965 BY CHILD: Alexander I of Yugoslavia N/A DATES: 1888 - 1934
+Henry Brand DATES: 1845 1898 BY PARENT: Henry Brand DATES: 1814 - 1892
+HITS!!! 346
+first_relevant_year_guessed: 742
+last_relevant_year_guessed: 2077
+DONE. TIME NEEDED: 1.721070222
+  Rendered analyses/analysis.html.erb within layouts/application (15.3ms)
+  Rendered layouts/_shim.html.erb (0.0ms)
+  [1m[35mUser Load (0.2ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."id" = 5  ORDER BY "users"."id" ASC LIMIT 1
+  Rendered layouts/_header.html.erb (4.8ms)
+  Rendered layouts/_flash_messages.html.erb (0.2ms)
+  Rendered layouts/_footer.html.erb (0.3ms)
+Completed 200 OK in 5960ms (Views: 58.8ms | ActiveRecord: 0.5ms)
+Exiting
