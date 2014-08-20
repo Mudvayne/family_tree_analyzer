@@ -25,7 +25,7 @@
       <div id="valid_donut" style="height: 250px;"></div>
     </div>
   </div>
-  <h3> When people with invalid data have probably lived? (Guessed: <%= @guessed_dates %>) </h3>
+  <h3> When people with invalid data have probably lived? (Guessed: <%= @guessed_dates %> of <%= (@persons_for_analysis.count - @persons_with_valid_date_fields.count) %>) </h3>
   <div id="living_period_estimation_of_invalid_data_areachart" style="height: 250px;"></div> 
 </div>
 

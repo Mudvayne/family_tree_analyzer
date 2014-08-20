@@ -13,8 +13,9 @@ class Analyzer
   :ten_most_common_lastnames, :ten_most_common_firstnames_males, :ten_most_common_firstnames_females
 
   def initialize persons, all_families, all_persons
-    start = Time.new
-
+    puts "START"
+    start_time = Time.new
+ 
     @persons = persons
     @all_families = all_families
     @all_persons = all_persons
@@ -32,6 +33,7 @@ class Analyzer
     end
     calculate_data_depending_on_all_persons
     calculate_data_depending_on_subset_of_persons(@persons_with_valid_date_fields, @families)
+    puts "needed total: " + (Time.new - start_time).to_s
   end
 
   def calculate_data_depending_on_all_persons
@@ -50,6 +52,8 @@ class Analyzer
     firstnames_male = Array.new
     firstnames_female = Array.new
 
+    puts "PERSONS EACH"
+    start_time = Time.new
     @persons.each do |person|
 
       date_birth = get_year person.date_birth
@@ -89,28 +93,27 @@ class Analyzer
       #most common lastnames
       if not person.lastname == "N/A" then lastnames.push(person.lastname) end
     end
+    puts "needed: " + (Time.new - start_time).to_s
 
-    #initialisation counting variables
+    puts "REST"
+    start_time = Time.new
+    #average children per family
     all_children = 0.to_f
     @families.each do |family|
       #average children per family
       all_children += family.children.count
     end
-
-    #average children per family
     @average_children_per_family = all_children / @families_count
 
     #names
     @ten_most_common_lastnames = get_diagram_data_array(lastnames).sort! {|x,y| y.value <=> x.value}[0..9]
     @ten_most_common_firstnames_males = get_diagram_data_array(firstnames_male).sort! {|x,y| y.value <=> x.value}[0..9]
     @ten_most_common_firstnames_females = get_diagram_data_array(firstnames_female).sort! {|x,y| y.value <=> x.value}[0..9]
-
-    all_lastnames = get_diagram_data_array lastnames
-    return all_lastnames.sort! {|x,y| y.value <=> x.value}[0..9]
+    puts "needed: " + (Time.new - start_time).to_s
   end
 
   def calculate_data_depending_on_subset_of_persons persons, families
-    
+    puts "CALCULATIONS SUBSET OF PERSONS"
     @birth_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @death_occurrences_by_decade = Array.new.push(DiagramData.new(0, 0))
     @alive_persons_by_decade = Array.new.push(DiagramData.new(0, 0))
