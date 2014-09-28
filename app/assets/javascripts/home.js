@@ -46,4 +46,3 @@ $(document).on("page:change", function() {
 		$(target).show();
 	})
 });
-

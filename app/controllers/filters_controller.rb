@@ -259,7 +259,7 @@ class FiltersController < ApplicationController
     person = @all_persons_hashmap[person_id]
     if not person.child_in_family == nil
       family = @all_families_hashmap[person.child_in_family]
-      if not family == "no such family"
+      if not family == nil #no FAMC-field
         if (not ancestor_ids.include? family.husband) && (not family.husband == "N/A")
           ancestor_ids.push(family.husband)
           find_all_ancestors(family.husband,ancestor_ids)
@@ -268,6 +268,8 @@ class FiltersController < ApplicationController
           ancestor_ids.push(family.wife)
           find_all_ancestors(family.wife, ancestor_ids)
         end
+      else
+        puts  "WHAT: " + person.id
       end
     end
     return ancestor_ids
